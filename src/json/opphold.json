@@ -1,0 +1,32 @@
+{
+  "questions": [
+    {
+      "label": "Informasjonsopphold",
+      "value": "informasjon"
+    },
+    {
+      "label": "Vurderingsopphold",
+      "value": "vurdering"
+    },
+    {
+      "label": "Rehabilitering",
+      "value": "rehabilitering"
+    },
+    {
+      "label": "Rehabilitering etter raskt funksjonstap",
+      "value": "rehabiliteringRaskt"
+    },
+    {
+      "label": "Rehabilitering etter gradvis funksjonstap",
+      "value": "rehabiliteringGradvis"
+    },
+    {
+      "label": "Tilbud til voksne pårørende i tilknytning til rehabiliteringsoppholdet",
+      "value": "voksnePårørende"
+    },
+    {
+      "label": "Tilbud til barn pårørende i tilknytning til rehabiliteringsoppholdet",
+      "value": "barnPårørende"
+    }
+  ]
+}

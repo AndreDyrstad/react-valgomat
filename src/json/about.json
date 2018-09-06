@@ -1,0 +1,20 @@
+{
+  "questions": [
+    {
+      "label": "Navn på institusjon/rehabiliteringsavdeling",
+      "value": "navn"
+    },
+    {
+      "label": "Nettadresse",
+      "value": "nettadresse"
+    },
+    {
+      "label": "Telefonnummer",
+      "value": "telefonnummer"
+    },
+    {
+      "label": "Kontaktinformasjon til den som fyller ut skjemaet (email)",
+      "value": "kontaktinformasjon"
+    }
+  ]
+}

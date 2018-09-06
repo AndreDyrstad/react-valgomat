@@ -1,0 +1,44 @@
+{
+  "questions": [
+    {
+      "label": "Inntak gruppevis for personer med MS?",
+      "value": "gruppevis"
+    },
+    {
+      "label": "Informasjonsopphold",
+      "value": "informasjon"
+    },
+    {
+      "label": "Vurderingsopphold",
+      "value": "vurdering"
+    },
+    {
+      "label": "Rehabilitering etter raskt funksjonstap",
+      "value": "rehabiliteringRaskt"
+    },
+    {
+      "label": "Rehabilitering etter gradvis funksjonstap",
+      "value": "rehabiliteringGradvis"
+    },
+    {
+      "label": "Tilbud til voksne pårørende i tilknytning til rehabiliteringsoppholdet",
+      "value": "voksnePårørende"
+    },
+    {
+      "label": "Tilbud til barn pårørende i tilknytning til rehabiliteringsoppholdet",
+      "value": "barnPårørende"
+    },
+    {
+      "label": "Døgnopphold",
+      "value": "døgnopphold"
+    },
+    {
+      "label": "Dagopphold",
+      "value": "dagopphold"
+    },
+    {
+      "label": "Poliklinikk",
+      "value": "poliklinikk"
+    }
+  ]
+}

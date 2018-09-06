@@ -1,0 +1,20 @@
+{
+  "questions": [
+    {
+      "label": "Helse Nord",
+      "value": "helseNord"
+    },
+    {
+      "label": "Helse Midt-Norge",
+      "value": "helseMidtNorge"
+    },
+    {
+      "label": "Helse Vest",
+      "value": "helseVest"
+    },
+    {
+      "label": "Helse Sør-Øst",
+      "value": "helseSør-Øst"
+    }
+  ]
+}

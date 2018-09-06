@@ -1,0 +1,84 @@
+{
+  "questions": [
+    {
+      "label": "Arm-/håndfunksjon",
+      "value": "arm/hånd"
+    },
+    {
+      "label": "Gange-/balansefunksjon",
+      "value": "gange/balanse"
+    },
+    {
+      "label": "Spastisitet",
+      "value": "spastisitet"
+    },
+    {
+      "label": "Smerte",
+      "value": "smerte"
+    },
+    {
+      "label": "Fatigue",
+      "value": "fatigue"
+    },
+    {
+      "label": "Blærefunksjon",
+      "value": "blære"
+    },
+    {
+      "label": "Tarmfunksjon",
+      "value": "tarm"
+    },
+    {
+      "label": "Depresjon/angst",
+      "value": "depresjon/angst"
+    },
+    {
+      "label": "Kognitiv funksjon",
+      "value": "kognitiv"
+    },
+    {
+      "label": "Søvn",
+      "value": "søvn"
+    },
+    {
+      "label": "Tale/språk/svelg",
+      "value": "tale/språk/svelg"
+    },
+    {
+      "label": "Lungefunksjon",
+      "value": "lunge"
+    },
+    {
+      "label": "Seksualfunksjon",
+      "value": "seksual"
+    },
+    {
+      "label": "Arbeidsrettet rehabilitering",
+      "value": "arbeidsrettet"
+    },
+    {
+      "label": "Behov for hjelpemidler",
+      "value": "behovHjelpemidler"
+    },
+    {
+      "label": "Daglige aktiviteter",
+      "value": "aktiviteter"
+    },
+    {
+      "label": "Utforskning av nye former for fysisk aktivitet",
+      "value": "nyFysiskAktivitet"
+    },
+    {
+      "label": "Kost/ernæring",
+      "value": "kost"
+    },
+    {
+      "label": "Stressmestring/\"Å leve med MS\"",
+      "value": "stressmestring"
+    },
+    {
+      "label": "Røykeslutt",
+      "value": "røykeslutt"
+    }
+  ]
+}

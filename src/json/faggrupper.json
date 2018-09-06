@@ -1,0 +1,52 @@
+{
+  "questions": [
+    {
+      "label": "Lege",
+      "value": "lege"
+    },
+    {
+      "label": "Sykepleier",
+      "value": "sykepleier"
+    },
+    {
+      "label": "Helsefagarbeider",
+      "value": "helsefagarbeider"
+    },
+    {
+      "label": "Klinisk psykolog",
+      "value": "kliniskPsykolog"
+    },
+    {
+      "label": "Nevropsykolog",
+      "value": "nevropsykolog"
+    },
+    {
+      "label": "Sosionom",
+      "value": "sosionom"
+    },    {
+      "label": "Ergoterapeut",
+      "value": "ergoterapeut"
+    },
+    {
+      "label": "Fysioterapeut",
+      "value": "fysioterapeut"
+    },
+    {
+      "label": "Ernæringsfysiolog",
+      "value": "ernæringsfysiolog"
+    },
+    {
+      "label": "Uroterapeut",
+      "value": "uroterapeut"
+    },
+    {
+      "label": "Logoped",
+      "value": "logoped"
+    },
+    {
+      "label": "Idrettspedagog",
+      "value": "idrettspedagog"
+    }
+  ]
+}
+

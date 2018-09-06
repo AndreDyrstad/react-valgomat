@@ -1,0 +1,48 @@
+{
+  "questions": [
+    {
+      "label": "Nærhet til hjemmet",
+      "value": "nærhet"
+    },
+    {
+      "label": "Døgnopphold",
+      "value": "døgnopphold"
+    },
+    {
+      "label": "Dagopphold",
+      "value": "dagopphold"
+    },
+    {
+      "label": "Poliklinikk",
+      "value": "poliklinikk"
+    },
+    {
+      "label": "Individuell rehabilitering",
+      "value": "individuell"
+    },
+    {
+      "label": "Rehabilitering i gruppe",
+      "value": "gruppe"
+    },
+    {
+      "label": "Tilbud om basseng",
+      "value": "basseng"
+    },
+    {
+      "label": "At rehabiliteringsstedet er tilrettelagt for bevegelseshemmede ute?",
+      "value": "bevegelseshemmedeUte"
+    },
+    {
+      "label": "At rehabiliteringsstedet er tilrettelagt for bevegelseshemmede inne?",
+      "value": "bevegelseshemmendeInne"
+    },
+    {
+      "label": "Er det viktig at du er sammen med andre med samme diagnose?",
+      "value": "sammeDiagnose"
+    },
+    {
+      "label": "Er du selvhjulpen i daglige aktiviteter?",
+      "value": "selvhjulpen"
+    }
+  ]
+}

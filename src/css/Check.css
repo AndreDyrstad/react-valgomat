@@ -1,0 +1,98 @@
+label{
+    display: flex;
+    width: 50%;
+}
+
+.outer-container{
+    width: 80vw;
+    margin-left: 10%;
+    margin-top: 3%;
+}
+
+.inner-container{
+
+}
+
+h1{
+    padding-bottom: 20px;
+}
+
+
+#back{
+    margin-right: 30px;
+    width: 100px;
+    height: 40px;
+}
+
+#forward{
+    width: 100px;
+    height: 40px;
+}
+
+.opp{
+    display: flex;
+    flex-direction: row;
+}
+
+ul,h3,h4 {
+    padding-right: 70px;
+}
+
+.displayFullScreen{
+    width: 100%;
+}
+
+.displayHalfScreen{
+    width: 50%;
+}
+
+@media only screen and (min-height: 550px) {
+
+    .buttons {
+        position: fixed;
+        margin: auto;
+        width: 75%;
+        padding: 30px;
+        text-align: center;
+        bottom: 0;
+
+    }
+}
+@media only screen and (max-width: 550px) {
+
+    .buttons {
+        position: relative;
+        margin: auto;
+        width: 100%;
+        text-align: center;
+
+    }
+
+    #back {
+        margin-right: 0;
+        width: 100px;
+        height: 40px;
+    }
+
+    .outer-container {
+        width: 96vw;
+        margin-left: 2%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    label {
+        width: 100%;
+    }
+
+    .buttons {
+        position: relative;
+        width: 100%;
+        padding: 30px;
+        text-align: center;
+    }
+
+}
+
+
+

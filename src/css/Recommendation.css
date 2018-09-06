@@ -1,0 +1,21 @@
+.centers-container{
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+    margin-left: 10vw;
+}
+
+.place{
+    margin-right: 30px;
+}
+
+@media only screen and (max-width: 800px) {
+
+    .centers-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-left: 10vw;
+    }
+
+}

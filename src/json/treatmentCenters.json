@@ -1,0 +1,22 @@
+{
+  "centers": [
+    {
+      "name": "Beitostølen Helsesportsenter",
+      "probability": "75%",
+      "link": "https://www.bhss.no/",
+      "about": "Noe form for informasjon"
+    },
+    {
+      "name": "Kastvollen Rehabiliteringssenter",
+      "probability": "20%",
+      "link": "https://www.kastvollen.no/",
+      "about": "Noe informasjon"
+    },
+    {
+      "name": "Valnesfjord Helsesportssenter",
+      "probability": "75%",
+      "link": "https://www.vhss.no/",
+      "about": "Noe form for informasjon"
+    }
+  ]
+}

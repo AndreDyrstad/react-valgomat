@@ -1,0 +1,12 @@
+{
+  "questions": [
+    {
+      "label": "Nettadresse",
+      "value": "nettadresse"
+    },
+    {
+      "label": "Telefonnummer",
+      "value": "telefonnummer"
+    }
+  ]
+}
