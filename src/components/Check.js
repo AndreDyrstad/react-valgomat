@@ -204,6 +204,10 @@ class Check extends Component {
         return (
             <div>
                 <h2>Introduksjon</h2>
+                <h4>Denne nettsiden er fortsatt under utvikling.
+                    Resultatsiden er statisk og vil ikke bli påvirket av dine svar.
+                    Den brukes foreløpig som en mal for å vise hvordan sluttresultatet vil se ut når prduktet er ferdig.
+                </h4>
                 <p>
                     Dersom du har behov for rehabilitering i spesialisthelsetjenesten, kan denne «valgomaten»
                     hjelpe deg til å finne det tilbudet som passer best med dine behov.

@@ -7,7 +7,6 @@ import Centers from './components/Centers'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
-
 class App extends Component {
 
     onClick = () => {
@@ -32,7 +31,6 @@ class App extends Component {
           <Router>
               <Route path="/center" component={Centers}/>
           </Router>
-              {/*<Drag/>*/}
       </div>
     );
   }
