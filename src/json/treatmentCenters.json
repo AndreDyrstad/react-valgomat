@@ -1,22 +1,22 @@
 {
   "centers": [
     {
-      "name": "Beitostølen Helsesportsenter",
+      "name": "Senter 1",
       "probability": "75%",
-      "link": "https://www.bhss.no/",
+      "link": "#",
       "about": "Noe form for informasjon"
     },
     {
-      "name": "Kastvollen Rehabiliteringssenter",
-      "probability": "20%",
-      "link": "https://www.kastvollen.no/",
+      "name": "Senter 2",
+      "probability": "75%",
+      "link": "#",
       "about": "Noe informasjon"
     },
     {
-      "name": "Valnesfjord Helsesportssenter",
-      "probability": "75%",
-      "link": "https://www.vhss.no/",
-      "about": "Noe form for informasjon"
+      "name": "Senter 3",
+      "probability": "70%",
+      "link": "#",
+      "about": "Mer informasjon"
     }
   ]
 }
