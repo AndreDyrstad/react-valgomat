@@ -5,8 +5,9 @@ import '../css/Check.css';
 import viktig from '../json/viktig';
 import opphold from '../json/opphold';
 import problemstilliger from '../json/problemstilliger';
+import axios from "axios/index";
 
-class Check extends Component {
+class Patients extends Component {
 
     constructor(props) {
         super(props);
@@ -22,26 +23,41 @@ class Check extends Component {
         };
     }
 
-    print = () => {
-        console.log(this.state.viktig);
-        console.log(this.state.opphold);
-        console.log(this.state.first);
-        console.log(this.state.second);
-        console.log(this.state.third);
+    sendForm = () => {
 
+        console.log(this.state.viktig);
+
+        let list = [];
+
+        list.push(this.state.viktig, this.state.opphold, this.state.first, this.state.second, this.state.third);
+
+        let myJsonString = JSON.stringify(list);
+
+        console.log(myJsonString);
+
+        axios.post('http://localhost:5000/information', myJsonString)
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     };
+
 
     render() {
 
         //Switch between send and next button
         let nextButton;
         if (this.state.displayed[0] === 6)
-            nextButton = <Button href='/answer' bsStyle="primary" id="forward">Send</Button>;
+            nextButton = <Button onClick={() => {
+                this.sendForm();
+            }} bsStyle="primary" id="forward">Send</Button>;
         else
             nextButton = <Button bsStyle="primary" onClick={() => {
                 this.nextItem();
                 window.scrollTo(0, 0)
-            }} id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button>
+            }} id="forward"> Neste <Glyphicon glyph="chevron-right"/></Button>
 
         //Remove previous button when the first page is shown
         let prevButton;
@@ -51,7 +67,7 @@ class Check extends Component {
                 window.scrollTo(0, 0)
             }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button>;
         else
-            prevButton = <Button disabled="true" bsStyle="primary" onClick={() => {
+            prevButton = <Button disabled={true} bsStyle="primary" onClick={() => {
                 this.previousItem();
                 window.scrollTo(0, 0)
             }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button>;
@@ -65,18 +81,20 @@ class Check extends Component {
                 <div className="inner-container">
                     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
                           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-                          crossorigin="anonymous"/>
-                    <ProgressBar striped bsStyle="primary"
+                          crossOrigin="anonymous"/>
+                    <ProgressBar striped
                                  now={((this.state.displayed[0]) / (this.state.show.length - 1)) * 100}
                                  label={`${Math.round(((this.state.displayed[0]) / this.state.show.length) * 100)}%`}/>
 
-                    {this.state.show[0] ? this.showIntro() : null}
-                    {this.state.show[1] ? this.showViktig() : null}
-                    {this.state.show[2] ? this.showOpphold() : null}
-                    {this.state.show[3] ? this.showFirst() : null}
-                    {this.state.show[4] ? this.showSecond() : null}
-                    {this.state.show[5] ? this.showThird() : null}
-                    {this.state.show[6] ? this.showOppsummering() : null}
+                    <form>
+                        {this.state.show[0] ? this.showIntro() : null}
+                        {this.state.show[1] ? this.showViktig() : null}
+                        {this.state.show[2] ? this.showOpphold() : null}
+                        {this.state.show[3] ? this.showFirst() : null}
+                        {this.state.show[4] ? this.showSecond() : null}
+                        {this.state.show[5] ? this.showThird() : null}
+                        {this.state.show[6] ? this.showOppsummering() : null}
+                    </form>
 
                 </div>
 
@@ -140,13 +158,14 @@ class Check extends Component {
                     value={this.state.first}
                     onChange={this.firstChanged}>
 
-                    {problemstilliger.questions.map(
-                        item => {
-                            if (!this.state.second.includes(item.value) && !this.state.third.includes(item.value)) {
-                                return (<label><Checkbox value={item.value}/> {item.label}</label>)
+                    {problemstilliger.questions
+                        .map(
+                            item => {
+                                if (!this.state.second.includes(item.value) && !this.state.third.includes(item.value)) {
+                                    return (<label><Checkbox value={item.value}/> {item.label}</label>)
+                                }
                             }
-                        }
-                    )}
+                        )}
 
                 </CheckboxGroup>
             </div>
@@ -332,4 +351,4 @@ class Check extends Component {
     }
 }
 
-export default Check;
+export default Patients;
