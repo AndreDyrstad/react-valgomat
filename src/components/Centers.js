@@ -8,12 +8,15 @@ import regioner from '../json/regioner';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 import {FormControl, Button, Glyphicon, ProgressBar} from 'react-bootstrap';
 import '../css/Check.css';
+import axios from "axios/index";
 
 
 class Centers extends Component {
 
     constructor(props) {
         super(props);
+
+        this.test = React.createRef();
 
         this.state = {
             viktig: [],
@@ -22,12 +25,47 @@ class Centers extends Component {
         };
     }
 
+    states = (e) => {
+
+    };
+
+    sendForm = (e) => {
+        console.log(this.test);
+        console.log(this.test.current.getState());
+        e.preventDefault();
+        const data = new FormData(e.target);
+
+        console.log(e);
+        console.log(this.state.viktig);
+
+        let list = [];
+
+        //list.push(this.state.viktig, this.state.opphold, this.state.first, this.state.second, this.state.third);
+
+        list.push(this.state.viktig);
+
+        let myJsonString = JSON.stringify(list);
+
+        console.log(myJsonString);
+
+        axios.post('http://localhost:5000/information', myJsonString)
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+
     render() {
 
         //Switch between send and next button
         let nextButton;
-        if (this.state.displayed[0] === this.state.show.length-1)
-            nextButton = <Button href='/answer' bsStyle="primary" id="forward">Send</Button>;
+        if (this.state.displayed[0] === this.state.show.length - 1)
+            nextButton = <Button onClick={() => {
+                this.sendForm();
+            }} bsStyle="primary" id="forward">Send</Button>;
         else
             nextButton = <Button bsStyle="primary" onClick={() => {
                 this.nextItem();
@@ -55,24 +93,21 @@ class Centers extends Component {
                 <h1>Overskrift</h1>
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
                       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-                      crossorigin="anonymous"/>
+                      crossOrigin="anonymous"/>
                 <div className="inner-container">
-                    <ProgressBar striped bsStyle="primary"
+                    <ProgressBar striped
                                  now={((this.state.displayed[0]) / (this.state.show.length - 1)) * 100}
                                  label={`${Math.round(((this.state.displayed[0]) / this.state.show.length) * 100)}%`}/>
-
-
-                    {this.state.show[0] ? this.showAbout() : null}
-                    {this.state.show[1] ? this.showRegions() : null}
-                    {this.state.show[2] ? this.showOpphold() : null}
-                    {this.state.show[3] ? this.showFaggrupper() : null}
-                    {this.state.show[4] ? this.showProblemstillinger() : null}
-
+                    <form>
+                        {this.state.show[0] ? this.showAbout() : null}
+                        {this.state.show[1] ? this.showRegions() : null}
+                        {this.state.show[2] ? this.showOpphold() : null}
+                        {this.state.show[3] ? this.showFaggrupper() : null}
+                        {this.state.show[4] ? this.showProblemstillinger() : null}
+                    </form>
                     <div>
-
                         {prevButton}
                         {nextButton}
-                        {/*<button onClick={() => this.print()}>Print</button>*/}
                     </div>
                 </div>
             </div>
@@ -83,8 +118,8 @@ class Centers extends Component {
         return (
             <div>
                 <h2>Informasjon om dere</h2>
-                {about.questions.map(item => <label className="displayFullScreen">{item.label}<FormControl id={item.value} type="text"
-                                                                             placeholder="Enter text"/></label>)}
+                {about.questions.map(item => <label className="displayFullScreen">{item.label}<FormControl
+                    id={item.value} type="text" placeholder="Svar"/></label>)}
             </div>
         )
     };
@@ -101,17 +136,18 @@ class Centers extends Component {
                     value={this.state.viktig}
                     onChange={this.viktigChanged}>
 
-                    {regioner.questions.map(item => <label className="displayFullScreen"><Checkbox value={item.value}/>{item.label}</label>)}
+                    {regioner.questions.map(item => <label className="displayFullScreen"><Checkbox
+                        value={item.value}/>{item.label}</label>)}
 
                 </CheckboxGroup>
 
-                <YesNo name="Individuell rehabilitering?" value="individuellRehabilitering"/>
-                <YesNo name="Rehabilitering i grupper?" value="individuellRehabilitering"/>
-                <YesNo name="Tilbud om basseng?" value="individuellRehabilitering"/>
-                <YesNo name="Må pasienten være selvhjulpen i daglige aktiviteter?" value="individuellRehabilitering"/>
-                <YesNo name="Tilrettelagt for bevegelseshemmede?" value="individuellRehabilitering"/>
-                <YesNo name="Har dere noen øvre aldersgrense?" value="individuellRehabilitering"/>
-                <YesNo name="Har dere noen nedre aldersgrense?" value="individuellRehabilitering"/>
+                <YesNo name="Individuell rehabilitering?" value="individuellRehabilitering" ref={this.test}/>
+                <YesNo name="Rehabilitering i grupper?" value="rehabiliteringGruppe"/>
+                <YesNo name="Tilbud om basseng?" value="basseng"/>
+                <YesNo name="Må pasienten være selvhjulpen i daglige aktiviteter?" value="selvhjulpen"/>
+                <YesNo name="Tilrettelagt for bevegelseshemmede?" value="tilrettelegtBevegelseshemmede"/>
+                <YesNo name="Har dere noen øvre aldersgrense?" value="øvreAldersgrense"/>
+                <YesNo name="Har dere noen nedre aldersgrense?" value="nedreAldersgrense"/>
             </div>
         )
     };
@@ -140,8 +176,7 @@ class Centers extends Component {
 
 
                     <h2>Generelle kommentarer/merknader/tilleggs- opplysninger?</h2>
-                    <FormControl componentClass="textarea" placeholder="textarea" style={{ height: 200 }} />
-
+                    <FormControl componentClass="textarea" placeholder="textarea" style={{height: 200}}/>
 
                 </CheckboxGroup>
             </div>

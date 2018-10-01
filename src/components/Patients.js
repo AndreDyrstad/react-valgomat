@@ -27,9 +27,11 @@ class Patients extends Component {
 
         console.log(this.state.viktig);
 
+        const {viktig, opphold, first, second, third} = this.state;
+
         let list = [];
 
-        list.push(this.state.viktig, this.state.opphold, this.state.first, this.state.second, this.state.third);
+        list.push(viktig, opphold, first, second, third);
 
         let myJsonString = JSON.stringify(list);
 
@@ -87,8 +89,8 @@ class Patients extends Component {
                                  label={`${Math.round(((this.state.displayed[0]) / this.state.show.length) * 100)}%`}/>
 
                     <form>
-                        {this.state.show[0] ? this.showIntro() : null}
-                        {this.state.show[1] ? this.showViktig() : null}
+                        {this.state.show[0] && this.showIntro()}
+                        {this.state.show[1] && this.showViktig()}
                         {this.state.show[2] ? this.showOpphold() : null}
                         {this.state.show[3] ? this.showFirst() : null}
                         {this.state.show[4] ? this.showSecond() : null}
