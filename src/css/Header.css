@@ -1,0 +1,11 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+    background-color: cornflowerblue;
+}
+
+.link-buttons{
+    margin-left: 100px;
+    margin-top: 20px;
+}

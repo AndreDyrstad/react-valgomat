@@ -3,9 +3,11 @@ import Centers from './components/Forms'
 import Patients from './components/Forms2'
 import oldCenters from './oldFiles/components/Centers'
 import oldPatients from './oldFiles/components/Patients'
-import FrontPage from './components/FrontPage'
+import Header from './components/Header'
+import './css/Header.css';
 
-import {Link, Switch, BrowserRouter as Router, Route} from "react-router-dom";
+
+import {BrowserRouter as Router, Route} from "react-router-dom";
 
 
 
@@ -16,6 +18,9 @@ class App extends Component {
 
     return (
       <div className="App">
+
+          <Header/>
+
           <Router>
              <Route exact path="/" component={oldPatients} />
           </Router>

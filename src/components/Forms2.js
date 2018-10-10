@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
+import {Button} from 'react-bootstrap'
+
 
 class Forms extends Component {
 
@@ -111,6 +113,11 @@ class Forms extends Component {
         return(
 
             <div>
+
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+                      crossOrigin="anonymous"/>
+
                 <Form
                     onSubmit={this.onSubmit}
                     initialValues={{}}
@@ -121,16 +128,17 @@ class Forms extends Component {
                             {this.state.files === undefined ? false : this.getForm()}
 
                             <div className="buttons">
-                                <button type="submit" disabled={submitting || pristine}>
-                                    Submit
-                                </button>
-                                <button
+                                <Button type="submit" bsStyle="primary" disabled={submitting || pristine}>
+                                    Send
+                                </Button>
+                                <Button
                                     type="button"
                                     onClick={form.reset}
                                     disabled={submitting || pristine}
+                                    bsStyle="danger"
                                 >
-                                    Reset
-                                </button>
+                                    Tilbakestill
+                                </Button>
                             </div>
                             <pre>{JSON.stringify(values, 0, 2)}</pre>
                         </form>
