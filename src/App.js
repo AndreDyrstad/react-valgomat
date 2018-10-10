@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Patients from "./components/Test";
 import Recommendation from "./components/Recommendation"
 import Centers from './components/Centers'
-import Test2 from './components/Test2'
+import Forms from './components/Forms'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
@@ -19,7 +19,7 @@ class App extends Component {
               <Route path="/answer" component={Recommendation}/>
           </Router>
           <Router>
-              <Route path="/center" component={Test2}/>
+              <Route path="/center" component={Forms}/>
           </Router>
       </div>
     );

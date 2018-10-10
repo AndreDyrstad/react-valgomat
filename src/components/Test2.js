@@ -1,15 +1,10 @@
 import React from 'react'
 import {render} from 'react-dom'
-import regioner from '../json/regioner';
-import about from '../json/about';
-import typeOpphold from '../json/typeOpphold'
-import faggrupper from '../json/faggrupper'
-import problemstillinger from '../json/problemstilliger'
+import testing from '../json/test2';
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
 
 const onSubmit = async values => {
-
     axios.post('http://localhost:5000/information', values)
         .then(function (response) {
             console.log(response.data);
@@ -18,6 +13,91 @@ const onSubmit = async values => {
             console.log(error);
         });
 };
+
+const getForm = () => (
+
+    <div>
+        {Object.keys(testing.questions).map((zone, index) => {
+                let a = getForm2(zone);
+                return (
+                    <div>
+                        <h2>{zone}</h2>
+                        <div>{a}</div>
+                    </div>
+                )
+            }
+        )}
+    </div>
+
+);
+
+const getForm2 = (zone) => (
+
+    testing.questions[zone].map((obj, idx) => {
+        if(obj.type === "text"){
+            return(
+
+                <div>
+                    <label>
+                        {obj.label}
+                        <Field
+                            name={obj.value}
+                            component="input"
+                            type={obj.type}
+                            value={obj.value}
+                        />{' '}
+                    </label>
+                </div>
+
+            )
+        }
+
+
+        if(obj.type === "radio"){
+            return(
+
+                <div>
+                    <h3>{obj.label}</h3>
+                    <label>
+                        <Field
+                            name={obj.value}
+                            component="input"
+                            type={obj.type}
+                            value="true"
+                        />{' '}
+                        Ja
+                    </label>
+
+                    <label>
+                        <Field
+                            name={obj.value}
+                            component="input"
+                            type={obj.type}
+                            value="false"
+                        />{' '}
+                        Nei
+                    </label>
+                </div>
+
+            )
+        }
+
+
+            return(
+            <div>
+                <label>
+                    <Field
+                        name={zone}
+                        component="input"
+                        type={obj.type}
+                        value={obj.value}
+                    />{' '}
+                    {obj.label}
+                </label>
+            </div>
+        )}
+    )
+);
 
 const Test = () => (
     <div>
@@ -28,126 +108,7 @@ const Test = () => (
 
                 <form onSubmit={handleSubmit}>
 
-
-                    <div>
-                        <h2>Informasjon om dere</h2>
-                        {about.questions.map(item =>
-
-                            <div>
-                                <label>{item.label}</label>
-                                <Field
-                                    name={item.value}
-                                    component="input"
-                                    type="text"
-                                    placeholder={item.label}
-                                />
-                            </div>
-                        )}
-
-
-                        <label>Regioner</label>
-                        {regioner.questions.map(item =>
-                            <label>
-                                <Field
-                                    name="regioner"
-                                    component="input"
-                                    type="checkbox"
-                                    value={item.value}
-                                />{' '}
-                                {item.label}
-                            </label>
-                        )}
-                    </div>
-                    <h2>Generelt om tilbud og innhold</h2>
-                    <div>
-                        {typeOpphold.questions.map(item =>
-
-                            <div>
-                                <label>{item.label}</label>
-                                <label>
-                                    <Field
-                                        name={item.value}
-                                        component="input"
-                                        type="radio"
-                                        value="true"
-                                    />{' '}
-                                    Ja
-                                </label>
-
-                                <label>
-                                    <Field
-                                        name={item.value}
-                                        component="input"
-                                        type="radio"
-                                        value="false"
-                                    />{' '}
-                                    Nei
-                                </label>
-                            </div>
-                        )}
-                    </div>
-                    <h1>Tilbud til personer med MS</h1>
-                    <div>
-                        {typeOpphold.questions.map(item =>
-
-                            <div>
-                                <label>{item.label}</label>
-                                <label>
-                                    <Field
-                                        name={item.value}
-                                        component="input"
-                                        type="radio"
-                                        value="true"
-                                    />{' '}
-                                    Ja
-                                </label>
-
-                                <label>
-                                    <Field
-                                        name={item.value}
-                                        component="input"
-                                        type="radio"
-                                        value="false"
-                                    />{' '}
-                                    Nei
-                                </label>
-                            </div>
-                        )}
-                    </div>
-
-
-
-                    <label>Faggrupper/profesjoner som er tilknyttet MS-rehabiliteringen</label>
-                    {faggrupper.questions.map(item =>
-                        <label>
-                            <Field
-                                name="regioner"
-                                component="input"
-                                type="checkbox"
-                                value={item.value}
-                            />{' '}
-                            {item.label}
-                        </label>
-                    )}
-
-
-
-                    <h2>Tilbud omfatter rehabilitering for</h2>
-                    {problemstillinger.questions.map(item =>
-                        <label>
-                            <Field
-                                name="regioner"
-                                component="input"
-                                type="checkbox"
-                                value={item.value}
-                            />{' '}
-                            {item.label}
-                        </label>
-                    )}
-
-
-                    <h2>Notes</h2>
-                    <Field name="notes" component="textarea" placeholder="Notes" />
+                    {getForm()}
 
                     <div className="buttons">
                         <button type="submit" disabled={submitting || pristine}>

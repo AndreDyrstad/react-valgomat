@@ -1,6 +1,6 @@
 {
   "questions": {
-    "viktig": [
+    "Viktig": [
       {
         "label": "Nærhet til hjemmet",
         "value": "nærhet",
@@ -57,7 +57,7 @@
         "type": "checkbox"
       }
     ],
-    "opphold": [
+    "Opphold": [
       {
         "label": "Informasjonsopphold",
         "value": "informasjon",
@@ -94,7 +94,7 @@
         "type": "checkbox"
       }
     ],
-    "problemstilliger": [
+    "Problemstilliger": [
       {
         "label": "Arm-/håndfunksjon",
         "value": "arm/hånd",
