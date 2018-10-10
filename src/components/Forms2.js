@@ -6,7 +6,7 @@ class Forms extends Component {
 
     constructor(props) {
         super(props);
-        axios.get('http://localhost:5000/centers').then(res => this.setState({files: res.data}));
+        axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data}));
         this.state = {
 
         }

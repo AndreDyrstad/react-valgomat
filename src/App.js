@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
-import Patients from "./components/Test";
-import Recommendation from "./components/Recommendation"
-import Centers from './components/Centers'
-import Forms from './components/Forms'
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import Centers from './components/Forms'
+import Patients from './components/Forms2'
+import oldCenters from './oldFiles/components/Centers'
+import oldPatients from './oldFiles/components/Patients'
+import FrontPage from './components/FrontPage'
+
+import {Link, Switch, BrowserRouter as Router, Route} from "react-router-dom";
+
 
 
 class App extends Component {
+
 
   render() {
 
     return (
       <div className="App">
           <Router>
-             <Route exact path="/" component={Patients} />
+             <Route exact path="/" component={oldPatients} />
           </Router>
           <Router>
-              <Route path="/answer" component={Recommendation}/>
+              <Route path="/beta/patient" component={Patients}/>
           </Router>
           <Router>
-              <Route path="/center" component={Forms}/>
+              <Route path="/beta/center" component={Centers}/>
+          </Router>
+          <Router>
+              <Route path="/center" component={oldCenters}/>
+          </Router>
+          <Router>
+              <Route path="/patient" component={oldPatients}/>
           </Router>
       </div>
     );

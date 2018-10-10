@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 import {ProgressBar, Glyphicon, Button} from 'react-bootstrap';
-import '../css/Check.css';
+import '../../css/Check.css';
 import viktig from '../json/viktig';
 import opphold from '../json/opphold';
 import problemstilliger from '../json/problemstilliger';

@@ -7,7 +7,7 @@ import typeOpphold from '../json/typeOpphold';
 import regioner from '../json/regioner';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 import {FormControl, Button, Glyphicon, ProgressBar} from 'react-bootstrap';
-import '../css/Check.css';
+import '../../css/Check.css';
 import axios from "axios/index";
 
 

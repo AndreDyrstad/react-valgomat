@@ -1,6 +1,6 @@
 import React from 'react'
 import {render} from 'react-dom'
-import testing from '../json/test';
+import testing from '../../json/patients';
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
 
