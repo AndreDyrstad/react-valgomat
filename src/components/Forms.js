@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
+import {Alert} from 'react-bootstrap'
 
 class Forms extends Component {
 
@@ -13,7 +14,7 @@ class Forms extends Component {
     }
 
     onSubmit = async values => {
-        axios.post('http://localhost:5000/information', values)
+        axios.post('http://localhost:5000/train', values)
             .then(function (response) {
                 console.log(response.data);
             })
@@ -24,6 +25,8 @@ class Forms extends Component {
 
     getForm = () => (
         <div>
+            <h1>{this.state.files.introduction.header}</h1>
+            <p>{this.state.files.introduction.description}</p>
             {Object.keys(this.state.files.questions).map((zone, index) => {
                     let a = this.getForm2(zone);
                     return (
@@ -51,6 +54,8 @@ class Forms extends Component {
                                 component="input"
                                 type={obj.type}
                                 value={obj.value}
+                                required
+
                             />{' '}
                         </label>
                     </div>
@@ -70,6 +75,7 @@ class Forms extends Component {
                                 component="input"
                                 type={obj.type}
                                 value="true"
+                                required
                             />{' '}
                             Ja
                         </label>
@@ -80,6 +86,7 @@ class Forms extends Component {
                                 component="input"
                                 type={obj.type}
                                 value="false"
+                                required
                             />{' '}
                             Nei
                         </label>

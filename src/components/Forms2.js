@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
-import {Button} from 'react-bootstrap'
+import {Button, Popover, OverlayTrigger} from 'react-bootstrap'
 
 
 class Forms extends Component {
@@ -10,12 +10,12 @@ class Forms extends Component {
         super(props);
         axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data}));
         this.state = {
-
+            isHovering: false,
         }
     }
 
     onSubmit = async values => {
-        axios.post('http://localhost:5000/information', values)
+        axios.post('http://localhost:5000/classify', values)
             .then(function (response) {
                 console.log(response.data);
             })
@@ -26,6 +26,13 @@ class Forms extends Component {
 
     getForm = () => (
         <div>
+
+            <div>
+                <h1>{this.state.files.introduction.header}</h1>
+                <p> {this.state.files.introduction.description}</p>
+            </div>
+
+
             {Object.keys(this.state.files.questions).map((zone, index) => {
                     let a = this.getForm2(zone);
                     return (
@@ -53,6 +60,7 @@ class Forms extends Component {
                                 component="input"
                                 type={obj.type}
                                 value={obj.value}
+                                required
                             />{' '}
                         </label>
                     </div>
@@ -72,6 +80,7 @@ class Forms extends Component {
                                 component="input"
                                 type={obj.type}
                                 value="true"
+                                required
                             />{' '}
                             Ja
                         </label>
@@ -82,6 +91,7 @@ class Forms extends Component {
                                 component="input"
                                 type={obj.type}
                                 value="false"
+                                required
                             />{' '}
                             Nei
                         </label>
@@ -131,6 +141,7 @@ class Forms extends Component {
                                 <Button type="submit" bsStyle="primary" disabled={submitting || pristine}>
                                     Send
                                 </Button>
+
                                 <Button
                                     type="button"
                                     onClick={form.reset}
@@ -144,6 +155,7 @@ class Forms extends Component {
                         </form>
                     )}
                 />
+
             </div>
         )};
 
