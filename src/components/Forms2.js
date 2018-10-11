@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
-import {Button, Popover, OverlayTrigger} from 'react-bootstrap'
+import {Button, Popover, OverlayTrigger, Glyphicon} from 'react-bootstrap'
 
 
 class Forms extends Component {
@@ -39,6 +39,7 @@ class Forms extends Component {
                         <div key={zone}>
                             <h2>{zone}</h2>
                             <div>{a}</div>
+
                         </div>
                     )
                 }
@@ -46,81 +47,96 @@ class Forms extends Component {
         </div>
     );
 
+    infoBox = (header, text) => (
+        <div>
+            <OverlayTrigger
+                trigger={['hover', 'focus']}
+                placement="right"
+                overlay={<Popover id="popover-trigger-hover-focus" title={header}>{text}</Popover>}
+            >
+                <Glyphicon glyph="glyphicon glyphicon-info-sign"/>
+            </OverlayTrigger>
+        </div>
+
+    );
+
     getForm2 = (zone) => (
 
         this.state.files.questions[zone].map((obj, idx) => {
-            if(obj.type === "text"){
-                return(
+                if (obj.type === "text") {
+                    return (
 
+                        <div key={obj.label}>
+                            <label>
+                                {obj.label}
+                                <Field
+                                    name={obj.value}
+                                    component="input"
+                                    type={obj.type}
+                                    value={obj.value}
+                                    required
+                                />{' '}
+                            </label>
+                        </div>
+
+                    )
+                }
+
+
+                if (obj.type === "radio") {
+                    return (
+
+                        <div key={obj.label}>
+                            <h3>{obj.label}</h3>
+                            <label>
+                                <Field
+                                    name={obj.value}
+                                    component="input"
+                                    type={obj.type}
+                                    value="true"
+                                    required
+                                />{' '}
+                                Ja
+                            </label>
+
+                            <label>
+                                <Field
+                                    name={obj.value}
+                                    component="input"
+                                    type={obj.type}
+                                    value="false"
+                                    required
+                                />{' '}
+                                Nei
+                            </label>
+                        </div>
+
+                    )
+                }
+
+
+                return (
                     <div key={obj.label}>
                         <label>
-                            {obj.label}
                             <Field
-                                name={obj.value}
+                                name={zone}
                                 component="input"
                                 type={obj.type}
                                 value={obj.value}
-                                required
                             />{' '}
+                            {obj.label}
                         </label>
+                        {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                     </div>
-
                 )
             }
-
-
-            if(obj.type === "radio"){
-                return(
-
-                    <div key={obj.label}>
-                        <h3>{obj.label}</h3>
-                        <label>
-                            <Field
-                                name={obj.value}
-                                component="input"
-                                type={obj.type}
-                                value="true"
-                                required
-                            />{' '}
-                            Ja
-                        </label>
-
-                        <label>
-                            <Field
-                                name={obj.value}
-                                component="input"
-                                type={obj.type}
-                                value="false"
-                                required
-                            />{' '}
-                            Nei
-                        </label>
-                    </div>
-
-                )
-            }
-
-
-            return(
-                <div key={obj.label}>
-                    <label>
-                        <Field
-                            name={zone}
-                            component="input"
-                            type={obj.type}
-                            value={obj.value}
-                        />{' '}
-                        {obj.label}
-                    </label>
-                </div>
-            )}
         )
     );
 
 
     render() {
 
-        return(
+        return (
 
             <div>
 
@@ -157,7 +173,8 @@ class Forms extends Component {
                 />
 
             </div>
-        )};
+        )
+    };
 
 
 }
