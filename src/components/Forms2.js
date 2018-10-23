@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
-import {Button, Popover, OverlayTrigger, Glyphicon} from 'react-bootstrap'
+import {Button, Popover, OverlayTrigger, Glyphicon, Alert} from 'react-bootstrap'
 import {withRouter} from 'react-router-dom';
 
 
@@ -12,23 +12,16 @@ class Forms extends Component {
         axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data}));
         this.state = {
             isHovering: false,
+            hasResponse: false,
         }
     }
 
     onSubmit = async values => {
-        axios.post('http://localhost:5000/classify', values)
-            .then(function (response) {
-                console.log(response.data);
-            })
-            .then
-            .catch(function (error) {
-                console.log(error);
-            });
+        axios.post('http://localhost:5000/classify', values).then(res => this.setState({hasResponse: true, response: res.data}))
     };
 
     getForm = () => (
         <div>
-
             <div>
                 <h1>{this.state.files.introduction.header}</h1>
                 <p> {this.state.files.introduction.description}</p>
@@ -61,6 +54,17 @@ class Forms extends Component {
         </div>
 
     );
+
+    getError = () => {
+        return (
+            <div className="stick">
+                <Alert bsStyle="danger">
+                    <strong>Obs!</strong>
+                    <p>Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere.</p>
+                </Alert>
+            </div>
+        )
+    };
 
     getForm2 = (zone) => (
 
@@ -140,46 +144,51 @@ class Forms extends Component {
 
     render() {
 
-        return (
+        if (!this.state.hasResponse) {
+            return (
 
-            <div>
+                <div>
 
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-                      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-                      crossOrigin="anonymous"/>
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+                          crossOrigin="anonymous"/>
 
-                <Form
-                    onSubmit={this.onSubmit}
-                    initialValues={{}}
-                    render={({handleSubmit, form, submitting, pristine, values}) => (
+                    <Form
+                        onSubmit={this.onSubmit}
+                        initialValues={{}}
+                        render={({handleSubmit, form, submitting, pristine, values}) => (
 
-                        <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit}>
 
-                            {this.state.files === undefined ? false : this.getForm()}
+                                {this.state.files === undefined ? this.getError() : this.getForm()}
 
-                            <div className="buttons">
-                                <Button type="submit" bsStyle="primary" disabled={submitting || pristine}>
-                                    Send
-                                </Button>
+                                <div className="buttons">
+                                    <Button type="submit" bsStyle="primary" disabled={submitting || pristine}>
+                                        Send
+                                    </Button>
 
-                                <Button
-                                    type="button"
-                                    onClick={form.reset}
-                                    disabled={submitting || pristine}
-                                    bsStyle="danger"
-                                >
-                                    Tilbakestill
-                                </Button>
-                            </div>
-                            <pre>{JSON.stringify(values, 0, 2)}</pre>
-                        </form>
-                    )}
-                />
+                                    <Button
+                                        type="button"
+                                        onClick={form.reset}
+                                        disabled={submitting || pristine}
+                                        bsStyle="danger"
+                                    >
+                                        Tilbakestill
+                                    </Button>
+                                </div>
+                                <pre>{JSON.stringify(values, 0, 2)}</pre>
+                            </form>
+                        )}
+                    />
 
-            </div>
-        )
-    };
-
+                </div>
+            )
+        } else {
+            return(
+                <p>{this.state.response.center}</p>
+            )
+        }
+    }
 
 }
 

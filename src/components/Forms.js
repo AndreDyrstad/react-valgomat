@@ -65,8 +65,8 @@ class Forms extends Component {
             return (
                 <div className="stick">
                     <Alert bsStyle="danger">
-                        <strong>Feil!</strong> Det ser ut som at serverene våre har gått ned.
-                        Vennligst prøv igjen senere.
+                        <strong>Obs!</strong>
+                        <p>Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere.</p>
                     </Alert>
                 </div>
             )
@@ -81,6 +81,17 @@ class Forms extends Component {
                 </div>
             )
         }
+    };
+
+    getError = () => {
+        return (
+            <div className="stick">
+                <Alert bsStyle="danger">
+                    <strong>Obs!</strong>
+                    <p>Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere.</p>
+                </Alert>
+            </div>
+        )
     };
 
     getForm2 = (zone) => (
@@ -175,7 +186,7 @@ class Forms extends Component {
 
                         <form onSubmit={handleSubmit}>
 
-                            {this.state.files === undefined ? false : this.getForm()}
+                            {this.state.files === undefined ? this.getError() : this.getForm()}
 
                             {this.state.submitted && this.getDone()}
 
