@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
 import {Button, Popover, OverlayTrigger, Glyphicon} from 'react-bootstrap'
+import {withRouter} from 'react-router-dom';
 
 
 class Forms extends Component {
@@ -19,6 +20,7 @@ class Forms extends Component {
             .then(function (response) {
                 console.log(response.data);
             })
+            .then
             .catch(function (error) {
                 console.log(error);
             });
@@ -77,6 +79,7 @@ class Forms extends Component {
                                     required
                                 />{' '}
                             </label>
+                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                         </div>
 
                     )
@@ -109,6 +112,7 @@ class Forms extends Component {
                                 />{' '}
                                 Nei
                             </label>
+                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                         </div>
 
                     )
