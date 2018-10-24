@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
 import {Button, Popover, OverlayTrigger, Glyphicon, Alert} from 'react-bootstrap'
-import {withRouter} from 'react-router-dom';
+import Recommendation from "./Recommendation";
 
 
 class Forms extends Component {
@@ -185,7 +185,10 @@ class Forms extends Component {
             )
         } else {
             return(
-                <p>{this.state.response.center}</p>
+                <div>
+                    <p>{this.state.response.center}</p>
+                    <Recommendation data={this.state.response}/>
+                </div>
             )
         }
     }
