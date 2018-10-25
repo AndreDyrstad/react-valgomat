@@ -10,7 +10,7 @@ class Forms extends Component {
     constructor(props) {
         super(props);
         //axios.get('http://localhost:5000/centers').then(res => this.setState({files: res.data}));
-        axios.get('http://modelling.hvl.no:5000/centers').then(res => this.setState({files: res.data}));
+        axios.get('http://modelling.hvl.no:8020/centers').then(res => this.setState({files: res.data}));
         this.state = {
             isHovering: false,
             submitted: false,
@@ -19,7 +19,7 @@ class Forms extends Component {
     }
 
     onSubmit = async values => {
-        axios.post('http://localhost:5000/train', values)
+        axios.post('http://modelling.hvl.no:8020//train', values)
             .then(res => this.setState({submitted: true, error: false}))
             .catch(err => this.setState({submitted: true, error: true}))
 
