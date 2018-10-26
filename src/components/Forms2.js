@@ -63,7 +63,7 @@ class Forms extends Component {
                 <Alert bsStyle="danger">
                     <strong>Obs!</strong>
                     <p>Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere.</p>
-                    <Link to="http://valgomat.herokuapp.com/patient">Klikk her for å bytte til http (kan kanskje fikse problemet)</Link>
+                    <a href="http://valgomat.herokuapp.com/patient">Klikk her for å bytte til http (kan kanskje fikse problemet)</a>
 
                 </Alert>
             </div>
