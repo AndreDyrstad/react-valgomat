@@ -3,6 +3,8 @@ import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
 import '../css/Header.css'
 import {Button, Popover, OverlayTrigger, Glyphicon, Alert} from 'react-bootstrap'
+import { Link } from 'react-router-dom';
+
 
 
 class Forms extends Component {
@@ -91,6 +93,8 @@ class Forms extends Component {
                 <Alert bsStyle="danger">
                     <strong>Obs!</strong>
                     <p>Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere.</p>
+                    <Link to="http://valgomat.herokuapp.com/patient">Klikk her for å bytte til http (kan kanskje fikse problemet)</Link>
+
                 </Alert>
             </div>
         )
