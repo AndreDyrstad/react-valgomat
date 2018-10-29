@@ -5,3 +5,19 @@
 .quest:nth-child(odd) {
 
 }
+
+.test{
+    display: flex;
+    flex-direction: row;
+}
+
+.screen{
+    width: 65vw;
+}
+pre{
+    width: 35vw;
+}
+
+span{
+    padding-left: 10px;
+}

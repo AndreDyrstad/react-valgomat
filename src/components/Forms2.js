@@ -4,6 +4,7 @@ import axios from "axios/index";
 import {Button, Popover, OverlayTrigger, Glyphicon, Alert} from 'react-bootstrap'
 import Recommendation from "./Recommendation";
 import patients from '../json/patients';
+
 class Forms extends Component {
 
     constructor(props) {
@@ -17,7 +18,7 @@ class Forms extends Component {
             displayValue: 0,
         };
 
-        for(let k in patients.questions) this.state.display.push("none");
+        for (let k in patients.questions) this.state.display.push("none");
         this.state.display[0] = "block"
     }
 
@@ -28,14 +29,14 @@ class Forms extends Component {
         let index = this.state.displayValue;
 
         //Forward
-        if(value > 0 && index < item.length-1){
+        if (value > 0 && index < item.length - 1) {
             item[index] = "none";
             index++;
             item[index] = "block";
             this.setState({display: item, displayValue: index})
         }
         //Backward
-        else if(value < 0 && index > 0){
+        else if (value < 0 && index > 0) {
             item[index] = "none";
             index--;
             item[index] = "block";
@@ -46,7 +47,10 @@ class Forms extends Component {
 
     onSubmit = async values => {
         //axios.post('http://localhost:5000/classify', values).then(res => this.setState({hasResponse: true, response: res.data}))
-        axios.post('http://modelling.hvl.no:8020/classify', values).then(res => this.setState({hasResponse: true, response: res.data}))
+        axios.post('http://modelling.hvl.no:8020/classify', values).then(res => this.setState({
+            hasResponse: true,
+            response: res.data
+        }))
     };
 
     getForm = () => (
@@ -60,7 +64,7 @@ class Forms extends Component {
             {Object.keys(patients.questions).map((zone, index) => {
                     let a = this.getForm2(zone);
                     return (
-                        <div className={"quest"} style={{display: this.state.display[index]}}  key={zone}>
+                        <div className={"quest"} style={{display: this.state.display[index]}} key={zone}>
                             <h2>{zone}</h2>
                             <div>{a}</div>
 
@@ -72,15 +76,13 @@ class Forms extends Component {
     );
 
     infoBox = (header, text) => (
-        <div>
-            <OverlayTrigger
-                trigger={['hover', 'focus']}
-                placement="right"
-                overlay={<Popover id="popover-trigger-hover-focus" title={header}>{text}</Popover>}
-            >
-                <Glyphicon glyph="glyphicon glyphicon-info-sign"/>
-            </OverlayTrigger>
-        </div>
+        <OverlayTrigger
+            trigger={['hover', 'focus']}
+            placement="right"
+            overlay={<Popover id="popover-trigger-hover-focus" title={header}>{text}</Popover>}
+        >
+            <Glyphicon glyph="glyphicon glyphicon-info-sign"/>
+        </OverlayTrigger>
 
     );
 
@@ -90,7 +92,8 @@ class Forms extends Component {
                 <Alert bsStyle="danger">
                     <strong>Obs!</strong>
                     <p>Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere.</p>
-                    <a href="http://valgomat.herokuapp.com/patient">Klikk her for å bytte til http (kan kanskje fikse problemet)</a>
+                    <a href="http://valgomat.herokuapp.com/patient">Klikk her for å bytte til http (kan kanskje fikse
+                        problemet)</a>
 
                 </Alert>
             </div>
@@ -99,11 +102,11 @@ class Forms extends Component {
 
     getForm2 = (zone) => (
 
-       patients.questions[zone].map((obj, idx) => {
+        patients.questions[zone].map((obj, idx) => {
                 if (obj.type === "text") {
                     return (
 
-                        <div key={obj.label}>
+                        <div className={"question"} key={obj.label}>
                             <label>
                                 {obj.label}
                                 <Field
@@ -113,8 +116,8 @@ class Forms extends Component {
                                     value={obj.value}
                                     required
                                 />{' '}
+                                {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                             </label>
-                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                         </div>
 
                     )
@@ -124,7 +127,7 @@ class Forms extends Component {
                 if (obj.type === "radio") {
                     return (
 
-                        <div key={obj.label}>
+                        <div className={"question"} key={obj.label}>
                             <h3>{obj.label}</h3>
                             <label>
                                 <Field
@@ -146,8 +149,8 @@ class Forms extends Component {
                                     required
                                 />{' '}
                                 Nei
+                                {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                             </label>
-                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                         </div>
 
                     )
@@ -155,7 +158,7 @@ class Forms extends Component {
 
 
                 return (
-                    <div key={obj.label}>
+                    <div className={"question"} key={obj.label}>
                         <label>
                             <Field
                                 name={zone}
@@ -164,8 +167,8 @@ class Forms extends Component {
                                 value={obj.value}
                             />{' '}
                             {obj.label}
+                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                         </label>
-                        {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                     </div>
                 )
             }
@@ -190,17 +193,22 @@ class Forms extends Component {
                         render={({handleSubmit, form, submitting, pristine, values}) => (
 
                             <form onSubmit={handleSubmit}>
+                                <div className={"test"}>
 
-                                {this.state.files !== undefined ? this.getError() : this.getForm()}
+                                    <div className={"screen"}>
+                                        {this.state.files !== undefined ? this.getError() : this.getForm()}
+                                    </div>
+                                    <div className="buttons">
 
-                                <div className="buttons">
+                                        <Button onClick={() => this.changeDisplay(-1)}>Tilbake</Button>
+                                        <Button onClick={() => this.changeDisplay(1)}>Frem</Button>
+                                        {this.state.displayValue === this.state.display.length - 1 ?
+                                            <Button type="submit" bsStyle="primary"
+                                                    disabled={submitting || pristine}>Send</Button> : false}
 
-                                    <Button onClick={() => this.changeDisplay(-1)}>Tilbake</Button>
-                                    <Button onClick={() => this.changeDisplay(1)}>Frem</Button>
-                                    {this.state.displayValue === this.state.display.length -1 ?  <Button type="submit" bsStyle="primary" disabled={submitting || pristine}>Send</Button> : false}
-
+                                    </div>
+                                    <pre>{JSON.stringify(values, 0, 2)}</pre>
                                 </div>
-                                <pre>{JSON.stringify(values, 0, 2)}</pre>
                             </form>
                         )}
                     />
@@ -208,7 +216,7 @@ class Forms extends Component {
                 </div>
             )
         } else {
-            return(
+            return (
                 <div>
                     <p>{this.state.response.center}</p>
                     <Recommendation data={this.state.response}/>

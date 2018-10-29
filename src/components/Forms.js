@@ -22,7 +22,7 @@ class Forms extends Component {
             displayValue: 0,
         }
 
-        for(let k in center.questions) this.state.display.push("none");
+        for (let k in center.questions) this.state.display.push("none");
         this.state.display[0] = "block"
 
     }
@@ -33,14 +33,14 @@ class Forms extends Component {
         let index = this.state.displayValue;
 
         //Forward
-        if(value > 0 && index < item.length-1){
+        if (value > 0 && index < item.length - 1) {
             item[index] = "none";
             index++;
             item[index] = "block";
             this.setState({display: item, displayValue: index})
         }
         //Backward
-        else if(value < 0 && index > 0){
+        else if (value < 0 && index > 0) {
             item[index] = "none";
             index--;
             item[index] = "block";
@@ -79,20 +79,18 @@ class Forms extends Component {
     );
 
     infoBox = (header, text) => (
-        <div>
-            <OverlayTrigger
-                trigger={['hover', 'focus']}
-                placement="right"
-                overlay={<Popover id="popover-trigger-hover-focus" title={header}>{text}</Popover>}
-            >
-                <Glyphicon glyph="glyphicon glyphicon-info-sign"/>
-            </OverlayTrigger>
-        </div>
+        <OverlayTrigger
+            trigger={['hover', 'focus']}
+            placement="right"
+            overlay={<Popover id="popover-trigger-hover-focus" title={header}>{text}</Popover>}
+        >
+            <Glyphicon glyph="glyphicon glyphicon-info-sign"/>
+        </OverlayTrigger>
 
     );
 
-    getDone = () =>{
-        if(this.state.error) {
+    getDone = () => {
+        if (this.state.error) {
             return (
                 <div className="stick">
                     <Alert bsStyle="danger">
@@ -102,7 +100,7 @@ class Forms extends Component {
                 </div>
             )
         }
-        else{
+        else {
             return (
                 <div className="stick">
                     <Alert bsStyle="success">
@@ -120,7 +118,8 @@ class Forms extends Component {
                 <Alert bsStyle="danger">
                     <strong>Obs!</strong>
                     <p>Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere.</p>
-                    <a href="http://valgomat.herokuapp.com/patient">Klikk her for å bytte til http (kan kanskje fikse problemet)</a>
+                    <a href="http://valgomat.herokuapp.com/patient">Klikk her for å bytte til http (kan kanskje fikse
+                        problemet)</a>
 
                 </Alert>
             </div>
@@ -144,9 +143,8 @@ class Forms extends Component {
                                     value={obj.value}
 
                                 />{' '}
+                                {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                             </label>
-                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
-
                         </div>
 
                     )
@@ -177,8 +175,8 @@ class Forms extends Component {
                                     value="false"
                                 />{' '}
                                 Nei
+                                {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                             </label>
-                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                         </div>
 
                     )
@@ -195,8 +193,8 @@ class Forms extends Component {
                                 value={obj.value}
                             />{' '}
                             {obj.label}
+                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                         </label>
-                        {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                     </div>
                 )
             }
@@ -229,7 +227,9 @@ class Forms extends Component {
 
                                 <Button onClick={() => this.changeDisplay(-1)}>Tilbake</Button>
                                 <Button onClick={() => this.changeDisplay(1)}>Frem</Button>
-                                {this.state.displayValue === this.state.display.length -1 ?  <Button type="submit" bsStyle="primary" disabled={submitting || pristine}>Send</Button> : false}
+                                {this.state.displayValue === this.state.display.length - 1 ?
+                                    <Button type="submit" bsStyle="primary"
+                                            disabled={submitting || pristine}>Send</Button> : false}
 
                             </div>
                             <pre>{JSON.stringify(values, 0, 2)}</pre>
