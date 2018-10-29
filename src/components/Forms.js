@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
 import '../css/Header.css'
+import '../css/New.css'
 import {Button, Popover, OverlayTrigger, Glyphicon, Alert} from 'react-bootstrap'
 import center from '../json/centers'
 
@@ -12,12 +13,40 @@ class Forms extends Component {
         super(props);
         //axios.get('http://localhost:5000/centers').then(res => this.setState({files: res.data}));
         //axios.get('http://modelling.hvl.no:8020/centers').then(res => this.setState({files: res.data}));
+
         this.state = {
             isHovering: false,
             submitted: false,
             error: true,
+            display: [],
+            displayValue: 0,
         }
+
+        for(let k in center.questions) this.state.display.push("none");
+        this.state.display[0] = "block"
+
     }
+
+    changeDisplay = (value) => {
+
+        let item = this.state.display;
+        let index = this.state.displayValue;
+
+        //Forward
+        if(value > 0 && index < item.length-1){
+            item[index] = "none";
+            index++;
+            item[index] = "block";
+            this.setState({display: item, displayValue: index})
+        }
+        //Backward
+        else if(value < 0 && index > 0){
+            item[index] = "none";
+            index--;
+            item[index] = "block";
+            this.setState({display: item, displayValue: index})
+        }
+    };
 
     onSubmit = async values => {
         axios.post('http://modelling.hvl.no:8020/train', values)
@@ -29,7 +58,7 @@ class Forms extends Component {
     getForm = () => (
         <div>
 
-            <div>
+            <div style={this.divStyle}>
                 <h1>{center.introduction.header}</h1>
                 <p> {center.introduction.description}</p>
             </div>
@@ -38,7 +67,7 @@ class Forms extends Component {
             {Object.keys(center.questions).map((zone, index) => {
                     let a = this.getForm2(zone);
                     return (
-                        <div key={zone}>
+                        <div className={"quest"} style={{display: this.state.display[index]}} key={zone}>
                             <h2>{zone}</h2>
                             <div>{a}</div>
 
@@ -197,18 +226,11 @@ class Forms extends Component {
 
 
                             <div className="buttons">
-                                <Button type="submit" bsStyle="primary" disabled={submitting || pristine}>
-                                    Send
-                                </Button>
 
-                                <Button
-                                    type="button"
-                                    onClick={form.reset}
-                                    disabled={submitting || pristine}
-                                    bsStyle="danger"
-                                >
-                                    Tilbakestill
-                                </Button>
+                                <Button onClick={() => this.changeDisplay(-1)}>Tilbake</Button>
+                                <Button onClick={() => this.changeDisplay(1)}>Frem</Button>
+                                {this.state.displayValue === this.state.display.length -1 ?  <Button type="submit" bsStyle="primary" disabled={submitting || pristine}>Send</Button> : false}
+
                             </div>
                             <pre>{JSON.stringify(values, 0, 2)}</pre>
                         </form>

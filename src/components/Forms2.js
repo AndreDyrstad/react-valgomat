@@ -13,8 +13,36 @@ class Forms extends Component {
         this.state = {
             isHovering: false,
             hasResponse: false,
-        }
+            display: [],
+            displayValue: 0,
+        };
+
+        for(let k in patients.questions) this.state.display.push("none");
+        this.state.display[0] = "block"
     }
+
+
+    changeDisplay = (value) => {
+
+        let item = this.state.display;
+        let index = this.state.displayValue;
+
+        //Forward
+        if(value > 0 && index < item.length-1){
+            item[index] = "none";
+            index++;
+            item[index] = "block";
+            this.setState({display: item, displayValue: index})
+        }
+        //Backward
+        else if(value < 0 && index > 0){
+            item[index] = "none";
+            index--;
+            item[index] = "block";
+            this.setState({display: item, displayValue: index})
+        }
+    };
+
 
     onSubmit = async values => {
         //axios.post('http://localhost:5000/classify', values).then(res => this.setState({hasResponse: true, response: res.data}))
@@ -32,7 +60,7 @@ class Forms extends Component {
             {Object.keys(patients.questions).map((zone, index) => {
                     let a = this.getForm2(zone);
                     return (
-                        <div key={zone}>
+                        <div className={"quest"} style={{display: this.state.display[index]}}  key={zone}>
                             <h2>{zone}</h2>
                             <div>{a}</div>
 
@@ -166,18 +194,11 @@ class Forms extends Component {
                                 {this.state.files !== undefined ? this.getError() : this.getForm()}
 
                                 <div className="buttons">
-                                    <Button type="submit" bsStyle="primary" disabled={submitting || pristine}>
-                                        Send
-                                    </Button>
 
-                                    <Button
-                                        type="button"
-                                        onClick={form.reset}
-                                        disabled={submitting || pristine}
-                                        bsStyle="danger"
-                                    >
-                                        Tilbakestill
-                                    </Button>
+                                    <Button onClick={() => this.changeDisplay(-1)}>Tilbake</Button>
+                                    <Button onClick={() => this.changeDisplay(1)}>Frem</Button>
+                                    {this.state.displayValue === this.state.display.length -1 ?  <Button type="submit" bsStyle="primary" disabled={submitting || pristine}>Send</Button> : false}
+
                                 </div>
                                 <pre>{JSON.stringify(values, 0, 2)}</pre>
                             </form>
