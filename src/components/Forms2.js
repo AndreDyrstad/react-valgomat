@@ -18,7 +18,7 @@ class Forms extends Component {
 
     onSubmit = async values => {
         //axios.post('http://localhost:5000/classify', values).then(res => this.setState({hasResponse: true, response: res.data}))
-        axios.post('http://modelling.hvl.no:8020//classify', values).then(res => this.setState({hasResponse: true, response: res.data}))
+        axios.post('http://modelling.hvl.no:8020/classify', values).then(res => this.setState({hasResponse: true, response: res.data}))
     };
 
     getForm = () => (
