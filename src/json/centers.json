@@ -1,4 +1,8 @@
 {
+  "introduction":{
+    "header": "Spørreundersøkelse for behandlingssenter",
+    "description": "Beskrivelse av undersøkelsen"
+  },
   "questions": {
     "Om dere": [
       {
@@ -19,7 +23,8 @@
       {
         "label": "Kontaktinformasjon til den som fyller ut skjemaet (email)",
         "value": "kontaktinformasjon",
-        "type": "text"
+        "type": "text",
+        "extra": "Denne adressen brukes hvis det er noen spørsmål til deres besvarelse"
       }
     ],
     "Regioner": [
@@ -136,7 +141,9 @@
       {
         "label": "Poliklinikk",
         "value": "poliklinikk",
-        "type": "radio"
+        "type": "radio",
+        "extra": "Poliklinikk, institusjon som behandler pasienter uten innleggelse på sengepost"
+
       }
     ],
     "Faggrupper": [

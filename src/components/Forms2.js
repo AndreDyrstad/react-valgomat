@@ -3,14 +3,13 @@ import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
 import {Button, Popover, OverlayTrigger, Glyphicon, Alert} from 'react-bootstrap'
 import Recommendation from "./Recommendation";
-import { Link } from 'react-router-dom';
-
+import patients from '../json/patients';
 class Forms extends Component {
 
     constructor(props) {
         super(props);
         //axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data}));
-        axios.get('http://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data}));
+        //axios.get('http://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data}));
         this.state = {
             isHovering: false,
             hasResponse: false,
@@ -25,12 +24,12 @@ class Forms extends Component {
     getForm = () => (
         <div>
             <div>
-                <h1>{this.state.files.introduction.header}</h1>
-                <p> {this.state.files.introduction.description}</p>
+                <h1>{patients.introduction.header}</h1>
+                <p> {patients.introduction.description}</p>
             </div>
 
 
-            {Object.keys(this.state.files.questions).map((zone, index) => {
+            {Object.keys(patients.questions).map((zone, index) => {
                     let a = this.getForm2(zone);
                     return (
                         <div key={zone}>
@@ -72,7 +71,7 @@ class Forms extends Component {
 
     getForm2 = (zone) => (
 
-        this.state.files.questions[zone].map((obj, idx) => {
+       patients.questions[zone].map((obj, idx) => {
                 if (obj.type === "text") {
                     return (
 
@@ -164,7 +163,7 @@ class Forms extends Component {
 
                             <form onSubmit={handleSubmit}>
 
-                                {this.state.files === undefined ? this.getError() : this.getForm()}
+                                {this.state.files !== undefined ? this.getError() : this.getForm()}
 
                                 <div className="buttons">
                                     <Button type="submit" bsStyle="primary" disabled={submitting || pristine}>

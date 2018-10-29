@@ -1,15 +1,21 @@
 {
+  "introduction":{
+    "header": "Valgomat for pasienter",
+    "description": "Denne nettsiden skal hjelpe deg med å finne det rette behandlingsstedet for deg. Ventetider og plassering kan påvirke resultatet ditt. For ventetider, se LINK. Noe økonomigreier jeg ikke husker."
+  },
   "questions": {
     "Viktig": [
       {
         "label": "Nærhet til hjemmet",
         "value": "nærhet",
-        "type": "checkbox"
+        "type": "checkbox",
+        "extra": "Du vil bli plassert nær der du bor"
       },
       {
         "label": "Døgnopphold",
         "value": "døgnopphold",
         "type": "checkbox"
+
       },
       {
         "label": "Dagopphold",
@@ -19,7 +25,9 @@
       {
         "label": "Poliklinikk",
         "value": "poliklinikk",
-        "type": "checkbox"
+        "type": "checkbox",
+        "extra": "Poliklinikk, institusjon som behandler pasienter uten innleggelse på sengepost"
+
       },
       {
         "label": "Individuell rehabilitering",
