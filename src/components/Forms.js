@@ -50,6 +50,7 @@ class Forms extends Component {
 
     onSubmit = async values => {
         axios.post('http://modelling.hvl.no:8020/train', values)
+        //axios.post('http://localhost:5000/train', values)
             .then(res => this.setState({submitted: true, error: false}))
             .catch(err => this.setState({submitted: true, error: true}))
 
