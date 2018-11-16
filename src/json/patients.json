@@ -1,10 +1,11 @@
 {
   "introduction":{
     "header": "Valgomat for pasienter",
-    "description": "Denne nettsiden skal hjelpe deg med å finne det rette behandlingsstedet for deg. Ventetider og plassering kan påvirke resultatet ditt. For ventetider, se LINK. Noe økonomigreier jeg ikke husker."
+    "description": "Denne nettsiden skal hjelpe deg med å finne det rette behandlingsstedet for deg. Ventetider og plassering kan påvirke resultatet ditt. For ventetider, se linken under. Noe økonomigreier jeg ikke husker.",
+    "link": "https://helsenorge.no/velg-behandlingssted/ventetider-for-behandling?bid=347"
   },
   "questions": {
-    "Viktig": [
+    "Hva er viktig for deg": [
       {
         "label": "Nærhet til hjemmet",
         "value": "nærhet",
@@ -65,7 +66,7 @@
         "type": "checkbox"
       }
     ],
-    "Opphold": [
+    "Behov for type opphold": [
       {
         "label": "Informasjonsopphold",
         "value": "informasjon",
@@ -102,7 +103,7 @@
         "type": "checkbox"
       }
     ],
-    "Velg to problemstilliger som er viktigst for deg": [
+    "Hva er de to viktigste problemstillingen du ønsker rehabilitering for?": [
       {
         "label": "Arm-/håndfunksjon",
         "value": "arm/hånd",
@@ -204,7 +205,7 @@
         "type": "checkbox"
       }
     ],
-    "Nevn opp til tre mindre viktige problemstilliger": [
+    "Nevn 3 andre problemstillinger du har behov rehabilitering for?": [
       {
         "label": "Arm-/håndfunksjon",
         "value": "arm/hånd",

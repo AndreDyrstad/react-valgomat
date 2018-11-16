@@ -4,6 +4,8 @@ import axios from "axios/index";
 import {Button, Popover, OverlayTrigger, Glyphicon, Alert} from 'react-bootstrap'
 import Recommendation from "./Recommendation";
 import patients from '../json/patients';
+import '../css/Header.css'
+import '../css/New.css'
 
 class Forms extends Component {
 
@@ -52,9 +54,11 @@ class Forms extends Component {
 
     getForm = () => (
         <div>
-            <div>
+            <div className="introduction">
                 <h1>{patients.introduction.header}</h1>
                 <p> {patients.introduction.description}</p>
+                {patients.introduction.link === undefined ? false : <a href={patients.introduction.link}>Klikk her for å se ventetider</a>}
+
             </div>
 
 
@@ -195,16 +199,31 @@ class Forms extends Component {
                                     <div className={"screen"}>
                                         {this.state.files !== undefined ? this.getError() : this.getForm()}
                                     </div>
-                                    <div className="buttons">
+                                </div>
+                                <div className="buttons">
 
-                                        <Button onClick={() => this.changeDisplay(-1)}>Tilbake</Button>
-                                        <Button onClick={() => this.changeDisplay(1)}>Frem</Button>
-                                        {this.state.displayValue === this.state.display.length - 1 ?
-                                            <Button type="submit" bsStyle="primary"
-                                                    disabled={submitting || pristine}>Send</Button> : false}
+                                    {this.state.displayValue === 0 ? <Button bsStyle="primary" disabled onClick={() => {
+                                            this.changeDisplay(-1);
+                                            window.scrollTo(0, 0)
+                                        }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button> :
 
-                                    </div>
-                                    <pre>{JSON.stringify(values, 0, 2)}</pre>
+                                    <Button bsStyle="primary" onClick={() => {
+                                        this.changeDisplay(-1);
+                                        window.scrollTo(0, 0)
+                                    }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button>}
+
+
+
+                                    {this.state.displayValue === this.state.display.length - 1 ?
+                                        <Button type="submit" bsStyle="primary" id="forward"
+                                                disabled={submitting || pristine}>Send</Button> :
+
+                                        <Button bsStyle="primary" onClick={() => {
+                                            this.changeDisplay(1);
+                                            window.scrollTo(0, 0)}}
+                                                id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button>
+                                    }
+
                                 </div>
                             </form>
                         )}

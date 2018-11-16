@@ -1,9 +1,10 @@
-.quest{
-
+.buttons{
+    display: block !important;
+    position: relative !important;
 }
 
-.quest:nth-child(odd) {
-
+label{
+    width: 100% !important;
 }
 
 .test{
@@ -13,11 +14,14 @@
 
 .screen{
     width: 70vw;
-}
-pre{
-    width: 30vw;
+    margin-left: 5%;
 }
 
 span{
     padding-left: 10px;
+}
+
+.introduction{
+    border-bottom: #222222 solid 2px;
+    padding-bottom: 20px;
 }

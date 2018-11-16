@@ -135,17 +135,16 @@ class Forms extends Component {
                     return (
 
                         <div key={obj.label}>
-                            <label>
-                                {obj.label}
+                            <h4>{obj.label}</h4>
                                 <Field
                                     name={obj.value}
                                     component="input"
                                     type={obj.type}
                                     value={obj.value}
+                                    style={{"width":"50vw","height":"30px"}}
 
                                 />{' '}
                                 {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
-                            </label>
                         </div>
 
                     )
@@ -183,6 +182,21 @@ class Forms extends Component {
                     )
                 }
 
+            if (obj.type === "textarea") {
+                return (
+                    <div key={obj.label}>
+                        <h3>{obj.label}</h3>
+                            <Field
+                                name={zone}
+                                component="textarea"
+                                type={obj.type}
+                                value={obj.value}
+                                style={{"width":"90vw","height":"250px"}}
+                            />{' '}
+                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
+                    </div>
+                )
+            }
 
                 return (
                     <div key={obj.label}>
@@ -192,6 +206,7 @@ class Forms extends Component {
                                 component="input"
                                 type={obj.type}
                                 value={obj.value}
+
                             />{' '}
                             {obj.label}
                             {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
@@ -218,31 +233,46 @@ class Forms extends Component {
                     render={({handleSubmit, form, submitting, pristine, values}) => (
 
                         <form onSubmit={handleSubmit}>
+                        <div className="test">
+                            <div className={"screen"}>
 
-                            {this.state.files !== undefined ? this.getError() : this.getForm()}
+                                {this.state.files !== undefined ? this.getError() : this.getForm()}
 
-                            {this.state.submitted && this.getDone()}
+                                {this.state.submitted && this.getDone()}
+                            </div>
 
-
+                        </div>
                             <div className="buttons">
 
-                                <Button onClick={() => this.changeDisplay(-1)}>Tilbake</Button>
-                                <Button onClick={() => this.changeDisplay(1)}>Frem</Button>
+                                {this.state.displayValue === 0 ? <Button bsStyle="primary" disabled onClick={() => {
+                                        this.changeDisplay(-1);
+                                        window.scrollTo(0, 0)
+                                    }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button>
+                                    :
+                                    <Button bsStyle="primary" onClick={() => {
+                                        this.changeDisplay(-1);
+                                        window.scrollTo(0, 0)
+                                    }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button>}
+
+
+
                                 {this.state.displayValue === this.state.display.length - 1 ?
-                                    <Button type="submit" bsStyle="primary"
-                                            disabled={submitting || pristine}>Send</Button> : false}
+                                    <Button type="submit" bsStyle="primary" id="forward"
+                                            disabled={submitting || pristine}>Send</Button>
+                                    :
+                                    <Button bsStyle="primary" onClick={() => {
+                                        this.changeDisplay(1);
+                                        window.scrollTo(0, 0)}}
+                                            id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button>
+                                }
 
                             </div>
-                            <pre>{JSON.stringify(values, 0, 2)}</pre>
                         </form>
                     )}
                 />
-
             </div>
         )
     };
-
-
 }
 
 export default Forms;
