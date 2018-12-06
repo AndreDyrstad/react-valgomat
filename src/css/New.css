@@ -29,3 +29,9 @@ span{
 .rangeslider-horizontal .rangeslider__fill{
     background-color: #337ab7 !important;
 }
+
+.sliderValue{
+    margin: auto;
+    text-align: center;
+
+}

@@ -2,6 +2,23 @@ import React, { Component } from 'react';
 
 class Place extends Component{
 
+
+    unpackList = () => (
+
+        <div>
+            <ul>
+            {this.props.match.map((item, index) => {
+                    console.log(item);
+                    return (
+                        <div key={item}>
+                            <li>{item}</li>
+                        </div>
+                    )
+                })}
+            </ul>
+        </div>
+    );
+
     render(){
         return(
             <div className="place">
@@ -9,6 +26,8 @@ class Place extends Component{
                 <p>{this.props.probability}</p>
                 <a href={this.props.link}>Link til behandlingsstedet</a>
                 <p>{this.props.information}</p>
+                <strong>Du ble anbefalt dette senteret fordi de tilbyr:</strong>
+                <div>{this.unpackList()}</div>
             </div>
         )
     }
