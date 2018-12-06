@@ -64,8 +64,8 @@ class PatientSliders extends Component{
     onSubmit = async values => {
         console.log(this.state.sliders);
 
-        axios.post('http://localhost:5000/scores', this.state.sliders).then(res => this.setState({hasResponse: true, response: res.data}))
-        //axios.post('http://modelling.hvl.no:8020/classify', values).then(res => this.setState({hasResponse: true,response: res.data}))
+        //axios.post('http://localhost:5000/scores', this.state.sliders).then(res => this.setState({hasResponse: true, response: res.data}))
+        axios.post('http://modelling.hvl.no:8020/scores', this.state.sliders).then(res => this.setState({hasResponse: true,response: res.data}))
     };
 
     getForm = () => (
