@@ -155,7 +155,8 @@ class Forms extends Component {
                     return (
 
                         <div key={obj.label}>
-                            <h3>{obj.label}</h3>
+                            <b>{obj.label}</b>
+                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                             <label>
                                 <Field
                                     name={obj.value}
@@ -175,7 +176,6 @@ class Forms extends Component {
                                     value="false"
                                 />{' '}
                                 Nei
-                                {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                             </label>
                         </div>
 
@@ -243,28 +243,41 @@ class Forms extends Component {
 
                         </div>
                             <div className="buttons">
+                                <div>
+
+                                    {this.state.displayValue === this.state.display.length - 1 ?
+                                        <Button type="submit" bsStyle="primary" id="send"
+                                                disabled={submitting}>Send</Button> : false
+                                    }
+                                </div>
 
                                 {this.state.displayValue === 0 ? <Button bsStyle="primary" disabled onClick={() => {
                                         this.changeDisplay(-1);
                                         window.scrollTo(0, 0)
-                                    }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button>
-                                    :
+                                    }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button> :
+
                                     <Button bsStyle="primary" onClick={() => {
                                         this.changeDisplay(-1);
                                         window.scrollTo(0, 0)
                                     }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button>}
 
 
+                                {this.state.displayValue !== this.state.display.length - 1 ?
 
-                                {this.state.displayValue === this.state.display.length - 1 ?
-                                    <Button type="submit" bsStyle="primary" id="forward"
-                                            disabled={submitting || pristine}>Send</Button>
-                                    :
                                     <Button bsStyle="primary" onClick={() => {
                                         this.changeDisplay(1);
-                                        window.scrollTo(0, 0)}}
+                                        window.scrollTo(0, 0)
+                                    }}
+                                            id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button> :
+
+                                    <Button bsStyle="primary" disabled onClick={() => {
+                                        this.changeDisplay(1);
+                                        window.scrollTo(0, 0)
+                                    }}
                                             id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button>
+
                                 }
+
 
                             </div>
                         </form>

@@ -18,6 +18,8 @@ class FrontPage extends Component {
                     <Button href='/center' bsStyle="primary" id="forward">Senter</Button>
                     <Button href='/beta/patient' bsStyle="primary" id="forward">Beta pasient</Button>
                     <Button href='/beta/center' bsStyle="primary" id="forward">Beta senter</Button>
+                    <Button href='/sliders' bsStyle="primary" id="forward">Pasient slider</Button>
+
                 </div>
             </div>
         )

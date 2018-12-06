@@ -3,27 +3,41 @@ import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
 import {Button, Popover, OverlayTrigger, Glyphicon, Alert} from 'react-bootstrap'
 import Recommendation from "./Recommendation";
-import patients from '../json/patients';
+import patients from '../json/patient2';
 import '../css/Header.css'
 import '../css/New.css'
+import Slider from 'react-rangeslider'
+import 'react-rangeslider/lib/index.css'
 
-class Forms extends Component {
-
+class PatientSliders extends Component{
     constructor(props) {
         super(props);
         //axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data}));
         //axios.get('http://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data}));
+        let a = {};
+
+
+        Object.keys(patients.questions).map((zone, index) => {
+            patients.questions[zone].map((obj, idx) => {
+                a[obj.value] = 5;
+            })
+        });
+
+
         this.state = {
             isHovering: false,
             hasResponse: false,
             display: [],
             displayValue: 0,
+            sliders: a
         };
 
-        for (let k in patients.questions) this.state.display.push("none");
-        this.state.display[0] = "block"
-    }
 
+        for (let k in patients.questions) this.state.display.push("none");
+        this.state.display[0] = "block";
+
+
+    }
 
     changeDisplay = (value) => {
 
@@ -48,7 +62,9 @@ class Forms extends Component {
 
 
     onSubmit = async values => {
-        axios.post('http://localhost:5000/classify', values).then(res => this.setState({hasResponse: true, response: res.data}))
+        console.log(this.state.sliders);
+
+        axios.post('http://localhost:5000/scores', this.state.sliders).then(res => this.setState({hasResponse: true, response: res.data}))
         //axios.post('http://modelling.hvl.no:8020/classify', values).then(res => this.setState({hasResponse: true,response: res.data}))
     };
 
@@ -58,6 +74,7 @@ class Forms extends Component {
                 <h1>{patients.introduction.header}</h1>
                 <p> {patients.introduction.description}</p>
                 {patients.introduction.link === undefined ? false : <a href={patients.introduction.link}>Klikk her for å se ventetider</a>}
+
             </div>
 
 
@@ -100,73 +117,29 @@ class Forms extends Component {
         )
     };
 
+    handleOnChange = (obj, value) => {
+        let a = this.state.sliders;
+        a[obj] = value;
+        this.setState({
+            sliders: a
+        })
+    };
+
     getForm2 = (zone) => (
-
         patients.questions[zone].map((obj, idx) => {
-                if (obj.type === "text") {
-                    return (
 
-                        <div className={"question"} key={obj.label}>
-                            <label>
-                                {obj.label}
-                                <Field
-                                    name={obj.value}
-                                    component="input"
-                                    type={obj.type}
-                                    value={obj.value}
-                                    required
-                                />{' '}
-                                {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
-                            </label>
-                        </div>
-
-                    )
-                }
-
-
-                if (obj.type === "radio") {
-                    return (
-
-                        <div className={"question"} key={obj.label}>
-                            <h3>{obj.label}</h3>
-                            <label>
-                                <Field
-                                    name={obj.value}
-                                    component="input"
-                                    type={obj.type}
-                                    value="true"
-                                    required
-                                />{' '}
-                                Ja
-                            </label>
-
-                            <label>
-                                <Field
-                                    name={obj.value}
-                                    component="input"
-                                    type={obj.type}
-                                    value="false"
-                                    required
-                                />{' '}
-                                Nei
-                                {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
-                            </label>
-                        </div>
-
-                    )
-                }
-
-                return (
+            return (
                     <div className={"question"} key={obj.label}>
                         <label>
-                            <Field
-                                name={zone}
-                                component="input"
-                                type={obj.type}
-                                value={obj.value}
-                            />{' '}
                             {obj.label}
                             {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
+
+                            <Slider
+                                value={this.state.sliders[obj.value]}
+                                orientation="horizontal"
+                                max={10}
+                                onChange={(e) => this.handleOnChange(obj.value, e)}
+                            />
                         </label>
                     </div>
                 )
@@ -201,10 +174,10 @@ class Forms extends Component {
                                 <div className="buttons">
                                     <div>
 
-                                        {this.state.displayValue === this.state.display.length - 1 ?
-                                            <Button type="submit" bsStyle="primary" id="send"
-                                                    disabled={submitting}>Send</Button> : false
-                                        }
+                                    {this.state.displayValue === this.state.display.length - 1 ?
+                                        <Button type="submit" bsStyle="primary" id="send"
+                                                disabled={submitting}>Send</Button> : false
+                                    }
                                     </div>
 
                                     {this.state.displayValue === 0 ? <Button bsStyle="primary" disabled onClick={() => {
@@ -254,4 +227,4 @@ class Forms extends Component {
 
 }
 
-export default Forms;
+export default PatientSliders

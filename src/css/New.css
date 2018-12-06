@@ -25,3 +25,7 @@ span{
     border-bottom: #222222 solid 2px;
     padding-bottom: 20px;
 }
+
+.rangeslider-horizontal .rangeslider__fill{
+    background-color: #337ab7 !important;
+}

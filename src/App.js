@@ -4,7 +4,7 @@ import Patients from './components/Forms2'
 import oldCenters from './oldFiles/components/Centers'
 import oldPatients from './oldFiles/components/Patients'
 import Header from './components/Header'
-import FormMaker from './components/FormMaker'
+import PatientSliders from './components/PatientSliders'
 import './css/Header.css';
 
 import {BrowserRouter as Router, Route} from "react-router-dom";
@@ -15,7 +15,7 @@ class App extends Component {
 
   render() {
 
-    return (
+      return (
       <div className="App">
 
           <Header/>
@@ -36,9 +36,10 @@ class App extends Component {
               <Route path="/patient" component={oldPatients}/>
           </Router>
           <Router>
-              <Route path="/admin" component={FormMaker}/>
+              <Route path="/sliders" component={PatientSliders}/>
           </Router>
       </div>
+
     );
   }
 }
