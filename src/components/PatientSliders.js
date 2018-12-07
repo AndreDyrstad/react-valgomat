@@ -16,7 +16,6 @@ class PatientSliders extends Component{
         //axios.get('http://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data}));
         let a = {};
 
-
         Object.keys(patients.questions).map((zone, index) => {
             patients.questions[zone].map((obj, idx) => {
                 a[obj.value] = 5;
@@ -135,6 +134,7 @@ class PatientSliders extends Component{
                             {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
 
                             <Slider
+                                className="slider"
                                 value={this.state.sliders[obj.value]}
                                 orientation="horizontal"
                                 max={10}

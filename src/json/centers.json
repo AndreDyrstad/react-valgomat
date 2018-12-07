@@ -63,12 +63,17 @@
       },
       {
         "label": "Må pasienten være selvhjulpen i daglige aktiviteter?",
-        "value": "selfhjulpen",
+        "value": "selvhjulpen",
         "type": "radio"
       },
       {
-        "label": "Tilrettelagt for bevegelseshemmede",
-        "value": "tilrettelagt_bevegelseshemmede",
+        "label": "Tilrettelagt for bevegelseshemmede inne?",
+        "value": "tilrettelagt_bevegelseshemmede_inne",
+        "type": "radio"
+      },
+      {
+        "label": "Tilrettelagt for bevegelseshemmede ute?",
+        "value": "tilrettelagt_bevegelseshemmede_ute",
         "type": "radio"
       },
       {

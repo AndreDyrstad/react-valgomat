@@ -16,7 +16,6 @@
         "label": "Døgnopphold",
         "value": "døgnopphold",
         "type": "checkbox"
-
       },
       {
         "label": "Dagopphold",
@@ -32,12 +31,12 @@
       },
       {
         "label": "Individuell rehabilitering",
-        "value": "individuell",
+        "value": "individuell_rehabilitering",
         "type": "checkbox"
       },
       {
         "label": "Rehabilitering i gruppe",
-        "value": "gruppe",
+        "value": "reabilitering_grupper",
         "type": "checkbox"
       },
       {
@@ -47,12 +46,12 @@
       },
       {
         "label": "At rehabiliteringsstedet er tilrettelagt for bevegelseshemmede ute?",
-        "value": "bevegelseshemmedeUte",
+        "value": "tilrettelagt_bevegelseshemmede_ute",
         "type": "checkbox"
       },
       {
         "label": "At rehabiliteringsstedet er tilrettelagt for bevegelseshemmede inne?",
-        "value": "bevegelseshemmendeInne",
+        "value": "tilrettelagt_bevegelseshemmede_inne",
         "type": "checkbox"
       },
       {
@@ -103,7 +102,7 @@
         "type": "checkbox"
       }
     ],
-    "Hva er de to viktigste problemstillingene du ønsker rehabilitering for?": [
+    "Hva er de viktigste problemstillingene du ønsker rehabilitering for?": [
       {
         "label": "Arm-/håndfunksjon",
         "value": "arm/hånd",
