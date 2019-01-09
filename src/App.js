@@ -5,6 +5,7 @@ import oldCenters from './oldFiles/components/Centers'
 import oldPatients from './oldFiles/components/Patients'
 import Header from './components/Header'
 import PatientSliders from './components/PatientSliders'
+import Feedback from './components/Feedback'
 import './css/Header.css';
 
 import {BrowserRouter as Router, Route} from "react-router-dom";
@@ -24,7 +25,7 @@ class App extends Component {
              <Route exact path="/" component={oldPatients} />
           </Router>
           <Router>
-              <Route path="/beta/patient" component={Patients}/>
+              <Route path="/patient" component={Patients}/>
           </Router>
           <Router>
               <Route path="/beta/center" component={Centers}/>
@@ -33,7 +34,7 @@ class App extends Component {
               <Route path="/center" component={oldCenters}/>
           </Router>
           <Router>
-              <Route path="/patient" component={oldPatients}/>
+              <Route path="/feedback" component={Feedback}/>
           </Router>
           <Router>
               <Route path="/sliders" component={PatientSliders}/>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Button} from 'react-bootstrap'
+import axios from 'axios'
 
 class FrontPage extends Component {
 
@@ -16,7 +17,7 @@ class FrontPage extends Component {
                 <div className="link-buttons">
                     <Button href='/patient' bsStyle="primary" id="forward">Pasient</Button>
                     <Button href='/center' bsStyle="primary" id="forward">Senter</Button>
-                    <Button href='/beta/patient' bsStyle="primary" id="forward">Beta pasient</Button>
+                    <Button href='/feedback' bsStyle="primary" id="forward">Feedback</Button>
                     <Button href='/beta/center' bsStyle="primary" id="forward">Beta senter</Button>
                     <Button href='/sliders' bsStyle="primary" id="forward">Pasient slider</Button>
 
