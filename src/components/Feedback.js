@@ -31,8 +31,8 @@ class Feedback extends Component{
     };
 
     submitPatientId = () => {
-        console.log(this.patientId.value);
-        axios.post('http://localhost:5000/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
+        if(this.patientId.value.length === 10)
+            axios.post('http://localhost:5000/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
 
     };
 
@@ -46,8 +46,7 @@ class Feedback extends Component{
 
     showIdSelection = () => (
         <div>
-            <input type="text" ref = {(input)=> this.patientId = input} placeholder="Id"/>
-            <button onClick={this.submitPatientId}>Button</button>
+            <input onChange={this.submitPatientId} type="text" ref = {(input)=> this.patientId = input} placeholder="Id"/>
         </div>
     );
 
@@ -84,11 +83,12 @@ class Feedback extends Component{
 
             return(
                 <div>
+                    <strong>Skriv inn din bruker-id for å få tilgang til undersøkelsen</strong>
                     {this.showIdSelection()}
                     <select ref = {(input)=> this.menu = input}>
                         {this.state.files === undefined ? null : this.showCenters()}}
                     </select>
-                    {this.state.files === undefined ? <p>Skriv inn din bruker-id for å få tilgang til undersøkelsen</p> : this.showQuestions()}
+                    {this.state.files === undefined ? null : this.showQuestions()}
                     <button onClick={this.submitForm}>Button</button>
                 </div>
             )

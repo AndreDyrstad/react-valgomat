@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Form, Field} from 'react-final-form'
+import {Form} from 'react-final-form'
 import axios from "axios/index";
 import {Button, Popover, OverlayTrigger, Glyphicon, Alert} from 'react-bootstrap'
 import Recommendation from "./Recommendation";
