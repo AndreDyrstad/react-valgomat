@@ -25,14 +25,16 @@ class Feedback extends Component{
         sliders['center'] = this.menu.value;
         sliders['patient'] = this.patientId.value;
 
+        //axios.post('http://localhost:5000/sendFeedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
+        axios.post('http://modelling.hvl.no:8020/sendFeedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
 
-        console.log(this.menu.value);
-        axios.post('http://localhost:5000/sendFeedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
     };
 
     submitPatientId = () => {
-        if(this.patientId.value.length === 10)
-            axios.post('http://localhost:5000/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
+        if(this.patientId.value.length === 10) {
+            //axios.post('http://localhost:5000/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
+            axios.post('http://modelling.hvl.no:8020/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
+        }
 
     };
 
