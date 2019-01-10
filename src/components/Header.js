@@ -18,7 +18,7 @@ class FrontPage extends Component {
                     <Button href='/patient' bsStyle="primary" id="forward">Pasient</Button>
                     <Button href='/center' bsStyle="primary" id="forward">Senter</Button>
                     <Button href='/feedback' bsStyle="primary" id="forward">Feedback</Button>
-                    <Button href='/beta/center' bsStyle="primary" id="forward">Beta senter</Button>
+                    <Button href='/admin' bsStyle="primary" id="forward">Admin</Button>
                     <Button href='/sliders' bsStyle="primary" id="forward">Pasient slider</Button>
 
                 </div>

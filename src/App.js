@@ -1,48 +1,47 @@
 import React, { Component } from 'react';
 import Centers from './components/Forms'
 import Patients from './components/Forms2'
-import oldCenters from './oldFiles/components/Centers'
-import oldPatients from './oldFiles/components/Patients'
+import oldCenters from './oldFiles/components/Centers' // Must be here for css to work (no idea why)
 import Header from './components/Header'
 import PatientSliders from './components/PatientSliders'
 import Feedback from './components/Feedback'
 import './css/Header.css';
 
 import {BrowserRouter as Router, Route} from "react-router-dom";
-
+import Admin from "./components/Admin";
 
 
 class App extends Component {
 
-  render() {
+    render() {
 
-      return (
-      <div className="App">
+        return (
+            <div className="App">
 
-          <Header/>
+                <Header/>
 
-          <Router>
-             <Route exact path="/" component={oldPatients} />
-          </Router>
-          <Router>
-              <Route path="/patient" component={Patients}/>
-          </Router>
-          <Router>
-              <Route path="/beta/center" component={Centers}/>
-          </Router>
-          <Router>
-              <Route path="/center" component={oldCenters}/>
-          </Router>
-          <Router>
-              <Route path="/feedback" component={Feedback}/>
-          </Router>
-          <Router>
-              <Route path="/sliders" component={PatientSliders}/>
-          </Router>
-      </div>
+                <Router>
+                    <Route exact path="/" component={Patients} />
+                </Router>
+                <Router>
+                    <Route path="/patient" component={Patients}/>
+                </Router>
+                <Router>
+                    <Route path="/center" component={Centers}/>
+                </Router>
+                <Router>
+                    <Route path="/admin" component={Admin}/>
+                </Router>
+                <Router>
+                    <Route path="/feedback" component={Feedback}/>
+                </Router>
+                <Router>
+                    <Route path="/sliders" component={PatientSliders}/>
+                </Router>
+            </div>
 
-    );
-  }
+        );
+    }
 }
 
 export default App;

@@ -5,12 +5,8 @@ import 'react-rangeslider/lib/index.css'
 
 class Feedback extends Component{
 
-
-
     constructor(props) {
         super(props);
-
-        axios.get('http://localhost:5000/feedback').then(res => this.setState({files: res.data}));
 
         let a = {};
 
@@ -24,10 +20,20 @@ class Feedback extends Component{
 
     }
 
-    submit = () => {
-        console.log("shkjdflkdsf");
-        console.log(this.menu.value)
-        //axios.post('http://localhost:5000/scores', this.state.sliders).then(res => this.setState({hasResponse: true, response: res.data}))
+    submitForm = () => {
+        let sliders = this.state.sliders;
+        sliders['center'] = this.menu.value;
+        sliders['patient'] = this.patientId.value;
+
+
+        console.log(this.menu.value);
+        axios.post('http://localhost:5000/sendFeedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
+    };
+
+    submitPatientId = () => {
+        console.log(this.patientId.value);
+        axios.post('http://localhost:5000/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
+
     };
 
     handleOnChange = (obj, value) => {
@@ -38,12 +44,12 @@ class Feedback extends Component{
         })
     };
 
-    handleChange = (value) => {
-        console.log(value);
-        this.setState({
-            selectValue: value
-        })
-    };
+    showIdSelection = () => (
+        <div>
+            <input type="text" ref = {(input)=> this.patientId = input} placeholder="Id"/>
+            <button onClick={this.submitPatientId}>Button</button>
+        </div>
+    );
 
     showQuestions = () => (
         Object.keys(this.state.files.questions).map((zone, index) => {
@@ -78,11 +84,12 @@ class Feedback extends Component{
 
             return(
                 <div>
+                    {this.showIdSelection()}
                     <select ref = {(input)=> this.menu = input}>
                         {this.state.files === undefined ? null : this.showCenters()}}
                     </select>
-                    {this.state.files === undefined ? <h1>Wut</h1> : this.showQuestions()}
-                    <button onClick={this.submit}>Button</button>
+                    {this.state.files === undefined ? <p>Skriv inn din bruker-id for å få tilgang til undersøkelsen</p> : this.showQuestions()}
+                    <button onClick={this.submitForm}>Button</button>
                 </div>
             )
     }
