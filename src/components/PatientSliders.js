@@ -3,7 +3,6 @@ import {Form} from 'react-final-form'
 import axios from "axios/index";
 import {Button, Popover, OverlayTrigger, Glyphicon, Alert} from 'react-bootstrap'
 import Recommendation from "./Recommendation";
-import patients from '../json/patient2';
 import '../css/Header.css'
 import '../css/New.css'
 import Slider from 'react-rangeslider'
@@ -15,17 +14,17 @@ class PatientSliders extends Component {
         axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data},
             function stateComplete(){
 
-                console.log("helloooooooo");
                 Object.keys(this.state.files.questions).map((zone, index) => {
                     this.state.files.questions[zone].map((obj, idx) => {
-                        a[obj.value] = 5;
+                        a[obj.id] = 5;
                     })
                 });
 
                 for (let k in this.state.files.questions) this.state.display.push("none");
                 this.state.display[0] = "block";
 
-                this.forceUpdate()
+                this.forceUpdate();
+                this.setState({isLoading: false})
 
             }.bind(this)));
         //axios.get('http://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data}));
@@ -36,11 +35,9 @@ class PatientSliders extends Component {
             hasResponse: false,
             display: [],
             displayValue: 0,
-            sliders: a
+            sliders: a,
+            isLoading: true
         };
-
-
-
 
     }
 
@@ -68,8 +65,10 @@ class PatientSliders extends Component {
 
     onSubmit = async values => {
 
-        //axios.post('http://localhost:5000/scores', this.state.sliders).then(res => this.setState({hasResponse: true, response: res.data}))
-        axios.post('http://modelling.hvl.no:8020/scores', this.state.sliders).then(res => this.setState({
+        console.log(this.state.sliders);
+
+        //axios.post('http://modelling.hvl.no:8020/scores', this.state.sliders).then(res => this.setState({hasResponse: true, response: res.data}))
+        axios.post('http://localhost:5000/scores', this.state.sliders).then(res => this.setState({
             hasResponse: true,
             response: res.data
         }))
@@ -144,12 +143,12 @@ class PatientSliders extends Component {
 
                             <Slider
                                 className="slider"
-                                value={this.state.sliders[obj.value]}
+                                value={this.state.sliders[obj.id]}
                                 orientation="horizontal"
                                 max={10}
-                                onChange={(e) => this.handleOnChange(obj.value, e)}
+                                onChange={(e) => this.handleOnChange(obj.id, e)}
                             />
-                            <div className='sliderValue'>{this.state.sliders[obj.value]}</div>
+                            <div className='sliderValue'>{this.state.sliders[obj.id]}</div>
 
                         </label>
                     </div>
@@ -179,7 +178,7 @@ class PatientSliders extends Component {
                                 <div className={"test"}>
 
                                     <div className={"screen"}>
-                                        {this.state.files === undefined ? this.getError() : this.getForm()}
+                                        {this.state.isLoading ? <div className="loader"/> : this.getForm()}
                                     </div>
                                 </div>
                                 <div className="buttons">
@@ -230,6 +229,8 @@ class PatientSliders extends Component {
             return (
                 <div>
                     <p>{this.state.response.center}</p>
+                    <p>Under finner du din id. Denne er tilfeldig generert og kan brukes for å gi tilbakemeling om din behandling</p>
+                    <p>{this.state.response.patient_id}</p>
                     <Recommendation data={this.state.response}/>
                 </div>
             )
