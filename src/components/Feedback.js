@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios/index";
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'
+import {Alert} from 'react-bootstrap'
 
 class Feedback extends Component{
 
@@ -20,20 +21,53 @@ class Feedback extends Component{
 
     }
 
+
+    getDone = () => {
+
+        if (this.state.response.message !== "ok") {
+            return (
+                <div className="stick">
+                    <Alert bsStyle="danger">
+                        <strong>Obs!</strong>
+                        <p>Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere.</p>
+                    </Alert>
+                </div>
+            )
+        }
+        else {
+            console.log("yup");
+            return (
+                <div className="stick">
+                    <Alert bsStyle="success">
+                        <strong>Godkjent!</strong>
+                        <p>Tusen takk for ditt svar.</p>
+                    </Alert>
+                </div>
+            )
+        }
+    };
+
+
     submitForm = () => {
         let sliders = this.state.sliders;
         sliders['center'] = this.menu.value;
         sliders['patient'] = this.patientId.value;
 
-        //axios.post('http://localhost:5000/sendFeedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
-        axios.post('http://modelling.hvl.no:8020/sendFeedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
+        this.setState({submitted : true});
+
+        axios.post('http://localhost:5000/sendFeedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
+        //axios.post('http://modelling.hvl.no:8020/sendFeedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
+
+
 
     };
 
     submitPatientId = () => {
         if(this.patientId.value.length === 10) {
-            //axios.post('http://localhost:5000/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
-            axios.post('http://modelling.hvl.no:8020/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
+            axios.post('http://localhost:5000/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
+            //axios.post('http://modelling.hvl.no:8020/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
+        }else{
+            this.setState({files: undefined})
         }
 
     };
@@ -48,7 +82,7 @@ class Feedback extends Component{
 
     showIdSelection = () => (
         <div>
-            <input onChange={this.submitPatientId} type="text" ref = {(input)=> this.patientId = input} placeholder="Id"/>
+            <input maxLength="10" onChange={this.submitPatientId} type="text" ref = {(input)=> this.patientId = input} placeholder="Id"/>
         </div>
     );
 
@@ -90,8 +124,9 @@ class Feedback extends Component{
                     <select ref = {(input)=> this.menu = input}>
                         {this.state.files === undefined ? null : this.showCenters()}}
                     </select>
-                    {this.state.files === undefined ? null : this.showQuestions()}
-                    <button onClick={this.submitForm}>Button</button>
+                    {this.state.files !== undefined ? this.showQuestions() : null}
+                    {this.state.files !== undefined ? <button onClick={this.submitForm}>Button</button> : null}
+                    {this.state.response !== undefined ? this.getDone() : null}
                 </div>
             )
     }

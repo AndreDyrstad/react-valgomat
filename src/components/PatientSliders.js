@@ -9,19 +9,27 @@ import '../css/New.css'
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'
 
-class PatientSliders extends Component{
+class PatientSliders extends Component {
     constructor(props) {
         super(props);
-        //axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data}));
+        axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data},
+            function stateComplete(){
+
+                console.log("helloooooooo");
+                Object.keys(this.state.files.questions).map((zone, index) => {
+                    this.state.files.questions[zone].map((obj, idx) => {
+                        a[obj.value] = 5;
+                    })
+                });
+
+                for (let k in this.state.files.questions) this.state.display.push("none");
+                this.state.display[0] = "block";
+
+                this.forceUpdate()
+
+            }.bind(this)));
         //axios.get('http://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data}));
         let a = {};
-
-        Object.keys(patients.questions).map((zone, index) => {
-            patients.questions[zone].map((obj, idx) => {
-                a[obj.value] = 5;
-            })
-        });
-
 
         this.state = {
             isHovering: false,
@@ -32,8 +40,6 @@ class PatientSliders extends Component{
         };
 
 
-        for (let k in patients.questions) this.state.display.push("none");
-        this.state.display[0] = "block";
 
 
     }
@@ -63,20 +69,24 @@ class PatientSliders extends Component{
     onSubmit = async values => {
 
         //axios.post('http://localhost:5000/scores', this.state.sliders).then(res => this.setState({hasResponse: true, response: res.data}))
-        axios.post('http://modelling.hvl.no:8020/scores', this.state.sliders).then(res => this.setState({hasResponse: true,response: res.data}))
+        axios.post('http://modelling.hvl.no:8020/scores', this.state.sliders).then(res => this.setState({
+            hasResponse: true,
+            response: res.data
+        }))
     };
 
     getForm = () => (
         <div>
             <div className="introduction">
-                <h1>{patients.introduction.header}</h1>
-                <p> {patients.introduction.description}</p>
-                {patients.introduction.link === undefined ? false : <a href={patients.introduction.link}>Klikk her for å se ventetider</a>}
+                <h1>{this.state.files.introduction.header}</h1>
+                <p> {this.state.files.introduction.description}</p>
+                {this.state.files.introduction.link === undefined ? false :
+                    <a href={this.state.files.introduction.link}>Klikk her for å se ventetider</a>}
 
             </div>
 
 
-            {Object.keys(patients.questions).map((zone, index) => {
+            {Object.keys(this.state.files.questions).map((zone, index) => {
                     let a = this.getForm2(zone);
                     return (
                         <div className={"quest"} style={{display: this.state.display[index]}} key={zone}>
@@ -124,9 +134,9 @@ class PatientSliders extends Component{
     };
 
     getForm2 = (zone) => (
-        patients.questions[zone].map((obj, idx) => {
+        this.state.files.questions[zone].map((obj, idx) => {
 
-            return (
+                return (
                     <div className={"question"} key={obj.label}>
                         <label>
                             {obj.label}
@@ -169,16 +179,16 @@ class PatientSliders extends Component{
                                 <div className={"test"}>
 
                                     <div className={"screen"}>
-                                        {this.state.files !== undefined ? this.getError() : this.getForm()}
+                                        {this.state.files === undefined ? this.getError() : this.getForm()}
                                     </div>
                                 </div>
                                 <div className="buttons">
                                     <div>
 
-                                    {this.state.displayValue === this.state.display.length - 1 ?
-                                        <Button type="submit" bsStyle="primary" id="send"
-                                                disabled={submitting}>Send</Button> : false
-                                    }
+                                        {this.state.displayValue === this.state.display.length - 1 ?
+                                            <Button type="submit" bsStyle="primary" id="send"
+                                                    disabled={submitting}>Send</Button> : false
+                                        }
                                     </div>
 
                                     {this.state.displayValue === 0 ? <Button bsStyle="primary" disabled onClick={() => {
