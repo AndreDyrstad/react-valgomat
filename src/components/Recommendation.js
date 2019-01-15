@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import Place from './Place';
 import '../css/Recommendation.css';
-import center from '../json/treatmentCenters';
 
 class Recommendation extends Component {
 

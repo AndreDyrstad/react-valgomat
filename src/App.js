@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Centers from './components/Forms'
 import Patients from './components/Forms2'
-import oldCenters from './oldFiles/components/Centers' // Must be there for css to work (no idea why)
 import Header from './components/Header'
 import PatientSliders from './components/PatientSliders'
 import Feedback from './components/Feedback'
 import './css/Header.css';
+import './css/Check.css';
+
 
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Admin from "./components/Admin";

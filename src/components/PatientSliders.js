@@ -11,11 +11,13 @@ import 'react-rangeslider/lib/index.css'
 class PatientSliders extends Component {
     constructor(props) {
         super(props);
+        //'http://modelling.hvl.no:8020/patients'
+        //'http://localhost:5000/patients'
         axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data},
             function stateComplete(){
 
-                Object.keys(this.state.files.questions).map((zone, index) => {
-                    this.state.files.questions[zone].map((obj, idx) => {
+                Object.keys(this.state.files.questions).forEach((zone, index) => {
+                    this.state.files.questions[zone].forEach((obj, idx) => {
                         a[obj.id] = 5;
                     })
                 });
@@ -27,7 +29,6 @@ class PatientSliders extends Component {
                 this.setState({isLoading: false})
 
             }.bind(this)));
-        //axios.get('http://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data}));
         let a = {};
 
         this.state = {
@@ -157,7 +158,6 @@ class PatientSliders extends Component {
         )
     );
 
-
     render() {
 
         if (!this.state.hasResponse) {
@@ -222,7 +222,6 @@ class PatientSliders extends Component {
                             </form>
                         )}
                     />
-
                 </div>
             )
         } else {

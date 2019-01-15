@@ -1,5 +1,6 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import NewQuestion from './NewQuestion'
+import ManageQuestions from './ManageQuestions'
 
 
 class Admin extends Component {
@@ -17,6 +18,7 @@ class Admin extends Component {
             <div>
                 <h1>Admin</h1>
                 <NewQuestion/>
+                <ManageQuestions/>
             </div>
         )
     }
