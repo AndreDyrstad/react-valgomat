@@ -8,7 +8,9 @@ class ManageQuestions extends Component {
     constructor(props) {
         super(props);
 
-        axios.get('http://localhost:5000/allQuestions').then(res => this.setState({files: res.data, isLoading: false})).then(res => console.log(this.state.files));
+        axios.get('http://localhost:5000/allQuestions')
+            .then(res => this.setState({files: res.data, isLoading: false}))
+            .then(res => this.readConfigFile());
 
         this.state = {
             isLoading: true,
@@ -17,30 +19,42 @@ class ManageQuestions extends Component {
         }
     }
 
+    readConfigFile = () => {
+        let jsonObj = this.state.files.config.questions;
+        console.log(jsonObj);
+        let keys = Object.keys(jsonObj);
+        console.log(keys);
+
+
+        this.setState({categories: keys, selectedQuestions: jsonObj})
+    };
+
     addToList = (obj) => {
-        let newState = this.state.selectedQuestions;
+        if(this.state.categories.length > 1) {
 
-        let current = this.state.files.questions;
+            let newState = this.state.selectedQuestions;
+
+            let current = this.state.files.questions;
 
 
-        for(let i in current) {
-            for(let j in obj.questions)
-            if (current[i].label === obj.questions[j])
-                newState[this.selectedCategory.value].push(current[i])
+            for (let i in current) {
+                for (let j in obj.questions)
+                    if (current[i].label === obj.questions[j])
+                        newState[this.selectedCategory.value].push(current[i])
+            }
+
+            this.setState({selectedQuestions: newState});
         }
 
-        this.setState({selectedQuestions: newState});
-
-        console.log(this.state.selectedQuestions)
     };
 
     removeFromList = (obj) => {
-        console.log(obj.questions);
         let newState = this.state.selectedQuestions;
-        for(let i in newState){
+
+        for(let i in newState[this.selectedCategory.value]){
             for(let j in obj.questions) {
-                if (newState[i] === obj.questions[j]){
-                    newState.splice(i,1)
+                if (newState[this.selectedCategory.value][i].label === obj.questions[j]){
+                    newState[this.selectedCategory.value].splice(i,1)
                 }
 
             }
@@ -115,7 +129,7 @@ class ManageQuestions extends Component {
                                         </label>
                                 <div className="buttons">
                                     <button type="submit" disabled={submitting || pristine}>
-                                        Submit
+                                        Legg til kategori
                                     </button>
                                 </div>
                             </form>
@@ -133,7 +147,7 @@ class ManageQuestions extends Component {
                             </Field>
                             <div className="buttons">
                                 <button type="submit" disabled={submitting || pristine}>
-                                    Submit
+                                    Legg til spørsmål i listen
                                 </button>
                             </div>
                         </form>
@@ -142,6 +156,7 @@ class ManageQuestions extends Component {
                 </div>
                 <div>
                     <select onChange={() => this.forceUpdate()} ref = {(input)=> this.selectedCategory = input}>
+                        <option selected disabled>Velg kategori</option>
                         {this.showCategories()}
                     </select>
                 </div>
@@ -152,11 +167,11 @@ class ManageQuestions extends Component {
                         render={({handleSubmit, form, submitting, pristine, values}) => (
                             <form onSubmit={handleSubmit}>
                                 <Field name="questions" component="select" type="select" multiple>
-                                    {this.state.isLoading || this.selectedCategory.value === "" ? null : this.showSelectedQuestions()}
+                                    {this.state.isLoading || this.selectedCategory.value === "Velg kategori" ? null : this.showSelectedQuestions()}
                                 </Field>
                                 <div className="buttons">
                                     <button type="submit" disabled={submitting || pristine}>
-                                        Submit
+                                        Fjern spørsmål fra listen
                                     </button>
                                 </div>
                             </form>
@@ -164,8 +179,9 @@ class ManageQuestions extends Component {
                     />
                 </div>
 
-
-                <button onClick={this.submit}>Oppdater spørsmålslisten</button>
+                <div>
+                    <button onClick={this.submit}>Oppdater spørsmålslisten</button>
+                </div>
             </div>
 
         )
