@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import NewQuestion from './NewQuestion'
 import ManageQuestions from './ManageQuestions'
+import ReviewFeedback from './ReviewFeedback'
 
 
 class Admin extends Component {
@@ -19,6 +20,7 @@ class Admin extends Component {
                 <h1>Admin</h1>
                 <NewQuestion/>
                 <ManageQuestions/>
+                <ReviewFeedback/>
             </div>
         )
     }

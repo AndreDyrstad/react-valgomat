@@ -19,6 +19,8 @@ class Feedback extends Component{
             sliders: a,
         };
 
+
+
     }
 
 
@@ -64,12 +66,24 @@ class Feedback extends Component{
 
     submitPatientId = () => {
         if(this.patientId.value.length === 10) {
-            axios.post('http://localhost:5000/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
+            axios.post('http://localhost:5000/feedbackQuestions', {'patient_id': this.patientId.value})
+                .then(res => this.setState({files: res.data}))
+                .then(this.setDefaultValues())
             //axios.post('http://modelling.hvl.no:8020/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
+
         }else{
             this.setState({files: undefined})
         }
 
+    };
+
+    setDefaultValues = () => {
+        let defaultSliderValues = {};
+
+        for(let i in this.state.files.questions){
+            defaultSliderValues[this.state.files.questions[i].value] = 5;
+            this.setState({sliders: defaultSliderValues})
+        }
     };
 
     handleOnChange = (obj, value) => {
@@ -88,6 +102,7 @@ class Feedback extends Component{
 
     showQuestions = () => (
         Object.keys(this.state.files.questions).map((zone, index) => {
+
             return (
                 <div key={this.state.files.questions[index].id}>
                     <p>{this.state.files.questions[index].label}</p>

@@ -8,7 +8,6 @@ class Place extends Component{
         <div>
             <ul>
             {this.props.match.map((item, index) => {
-                    console.log(item);
                     return (
                         <div key={item}>
                             <li>{item}</li>

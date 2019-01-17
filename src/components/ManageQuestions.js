@@ -30,17 +30,18 @@ class ManageQuestions extends Component {
     };
 
     addToList = (obj) => {
-        if(this.state.categories.length > 1) {
+        if(this.state.categories.length > 1 && this.selectedCategory.value !== "Velg kategori") {
 
             let newState = this.state.selectedQuestions;
 
             let current = this.state.files.questions;
 
-
             for (let i in current) {
                 for (let j in obj.questions)
-                    if (current[i].label === obj.questions[j])
-                        newState[this.selectedCategory.value].push(current[i])
+                    if (current[i].label === obj.questions[j]) {
+                        current[i]["displayAs"] = this.selectedDisplayType.value;
+                        newState[this.selectedCategory.value].push(current[i]);
+                    }
             }
 
             this.setState({selectedQuestions: newState});
@@ -53,7 +54,10 @@ class ManageQuestions extends Component {
 
         for(let i in newState[this.selectedCategory.value]){
             for(let j in obj.questions) {
-                if (newState[this.selectedCategory.value][i].label === obj.questions[j]){
+                let substring = obj.questions[j].substring(0, obj.questions[j].indexOf(" -"));
+                console.log(substring);
+
+                if (newState[this.selectedCategory.value][i].label === substring){
                     newState[this.selectedCategory.value].splice(i,1)
                 }
 
@@ -93,7 +97,7 @@ class ManageQuestions extends Component {
     showSelectedQuestions = () => (
         this.state.selectedQuestions[this.selectedCategory.value]).map((obj, index) => {
         return (
-            <option key={obj.id}>{obj.label}</option>
+            <option key={obj.id}>{obj.label} - {obj.displayAs}</option>
         )
 
     });
@@ -158,6 +162,15 @@ class ManageQuestions extends Component {
                     <select onChange={() => this.forceUpdate()} ref = {(input)=> this.selectedCategory = input}>
                         <option selected disabled>Velg kategori</option>
                         {this.showCategories()}
+                    </select>
+                </div>
+                <div>
+                    <select ref = {(input)=> this.selectedDisplayType = input}>
+                        <option selected disabled>Velg spørsmålstype</option>
+                        <option value="checkbox">Checkbox</option>
+                        <option value="radio">Ja/Nei</option>
+                        <option value="slider">Slider</option>
+                        <option value="text">Tekstfelt</option>
                     </select>
                 </div>
                 <h1>Valgte spørsmål</h1>

@@ -7,6 +7,7 @@ import '../css/Header.css'
 import '../css/New.css'
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'
+import { Field } from 'react-final-form'
 
 class PatientSliders extends Component {
     constructor(props) {
@@ -136,25 +137,28 @@ class PatientSliders extends Component {
     getForm2 = (zone) => (
         this.state.files.questions[zone].map((obj, idx) => {
 
-                return (
-                    <div className={"question"} key={obj.label}>
-                        <label>
-                            {obj.label}
-                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
+                if (obj.displayAs === "slider") {
+                    return (
+                        <div className={"question"} key={obj.label}>
+                            <label>
+                                {obj.label}
+                                {obj.info === null ? false : this.infoBox(obj.label, obj.info)}
 
-                            <Slider
-                                className="slider"
-                                value={this.state.sliders[obj.id]}
-                                orientation="horizontal"
-                                max={10}
-                                onChange={(e) => this.handleOnChange(obj.id, e)}
-                            />
-                            <div className='sliderValue'>{this.state.sliders[obj.id]}</div>
+                                <Slider
+                                    className="slider"
+                                    value={this.state.sliders[obj.id]}
+                                    orientation="horizontal"
+                                    max={10}
+                                    onChange={(e) => this.handleOnChange(obj.id, e)}
+                                />
+                                <div className='sliderValue'>{this.state.sliders[obj.id]}</div>
 
-                        </label>
-                    </div>
-                )
+                            </label>
+                        </div>
+                    )
+                }
             }
+
         )
     );
 
@@ -219,6 +223,7 @@ class PatientSliders extends Component {
 
 
                                 </div>
+                                <pre>{JSON.stringify(values, 0, 2)}</pre>
                             </form>
                         )}
                     />
