@@ -11,7 +11,7 @@ class Forms extends Component {
 
     constructor(props) {
         super(props);
-        //axios.get('http://localhost:5000/centers').then(res => this.setState({files: res.data}));
+        axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data, isLoading: false})).then(res => console.log(this.state.files));
         //axios.get('http://modelling.hvl.no:8020/centers').then(res => this.setState({files: res.data}));
 
         this.state = {
@@ -20,6 +20,7 @@ class Forms extends Component {
             error: true,
             display: [],
             displayValue: 0,
+            isLoading: true
         };
 
         for (let k in center.questions) this.state.display.push("none");
@@ -60,12 +61,12 @@ class Forms extends Component {
         <div>
 
             <div style={this.divStyle}>
-                <h1>{center.introduction.header}</h1>
-                <p> {center.introduction.description}</p>
+                <h1>{this.state.files.introduction.header}</h1>
+                <p> {this.state.files.introduction.description}</p>
             </div>
 
 
-            {Object.keys(center.questions).map((zone, index) => {
+            {Object.keys(this.state.files.questions).map((zone, index) => {
                     let a = this.getForm2(zone);
                     return (
                         <div className={"quest"} style={{display: this.state.display[index]}} key={zone}>
@@ -130,8 +131,8 @@ class Forms extends Component {
     getForm2 = (zone) => (
 
         //this.state.files.questions[zone].map((obj, idx) => {
-        center.questions[zone].map((obj, idx) => {
-                if (obj.type === "text") {
+        this.state.files.questions[zone].map((obj, idx) => {
+                if (obj.displayAs === "text") {
                     return (
 
                         <div key={obj.label}>
@@ -139,8 +140,8 @@ class Forms extends Component {
                                 <Field
                                     name={obj.value}
                                     component="input"
-                                    type={obj.type}
-                                    value={obj.value}
+                                    type={obj.displayAs}
+                                    value={obj.id}
                                     style={{"width":"50vw","height":"30px"}}
 
                                 />{' '}
@@ -151,7 +152,7 @@ class Forms extends Component {
                 }
 
 
-                if (obj.type === "radio") {
+                if (obj.displayAs === "radio") {
                     return (
 
                         <div key={obj.label}>
@@ -159,9 +160,9 @@ class Forms extends Component {
                             {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                             <label>
                                 <Field
-                                    name={obj.value}
+                                    name={"id"+obj.id}
                                     component="input"
-                                    type={obj.type}
+                                    type={obj.displayAs}
                                     value="true"
 
                                 />{' '}
@@ -170,9 +171,9 @@ class Forms extends Component {
 
                             <label>
                                 <Field
-                                    name={obj.value}
+                                    name={"id"+obj.id}
                                     component="input"
-                                    type={obj.type}
+                                    type={obj.displayAs}
                                     value="false"
                                 />{' '}
                                 Nei
@@ -182,15 +183,15 @@ class Forms extends Component {
                     )
                 }
 
-            if (obj.type === "textarea") {
+            if (obj.displayAs === "textarea") {
                 return (
                     <div key={obj.label}>
                         <h3>{obj.label}</h3>
                             <Field
-                                name={zone}
+                                name={obj.value}
                                 component="textarea"
-                                type={obj.type}
-                                value={obj.value}
+                                type={obj.displayAs}
+                                value={obj.id}
                                 style={{"width":"90vw","height":"250px"}}
                             />{' '}
                             {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
@@ -202,10 +203,10 @@ class Forms extends Component {
                     <div key={obj.label}>
                         <label>
                             <Field
-                                name={zone}
+                                name={"id"+obj.id}
                                 component="input"
-                                type={obj.type}
-                                value={obj.value}
+                                type={obj.displayAs}
+                                value={obj.id}
 
                             />{' '}
                             {obj.label}
@@ -236,7 +237,7 @@ class Forms extends Component {
                         <div className="test">
                             <div className={"screen"}>
 
-                                {this.state.files !== undefined ? this.getError() : this.getForm()}
+                                {this.state.files === undefined ? this.getError() : this.getForm()}
 
                                 {this.state.submitted && this.getDone()}
                             </div>
@@ -280,6 +281,8 @@ class Forms extends Component {
 
 
                             </div>
+                            <pre>{JSON.stringify(values, 0, 2)}</pre>
+
                         </form>
                     )}
                 />

@@ -20,7 +20,7 @@ class ReviewFeedback extends Component{
 
         this.state.files.feedback).map((obj, index) => {
             return(
-                <tr key={obj.center + obj.question}>
+                <tr key={obj.center + obj.question +  Math.floor((Math.random() * 1000) + 1)}>
                     <td>{obj.center}</td>
                     <td>{obj.question}</td>
                     <td>{obj.score}</td>
