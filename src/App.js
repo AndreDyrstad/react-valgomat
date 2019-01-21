@@ -23,31 +23,32 @@ class App extends Component {
         return (
             <div className="App">
                 <Header/>
-
-                <Router>
-                    <Route exact path="/" component={FrontPage} />
-                </Router>
-                <Router>
-                    <Route path="/patient" component={PatientSliders}/>
-                </Router>
-                <Router>
-                    <Route path="/center" component={Centers}/>
-                </Router>
-                <Router>
-                    <Route path="/feedback" component={Feedback}/>
-                </Router>
-                <Router>
-                    <Route path="/admin/add" component={NewQuestion}/>
-                </Router>
-                <Router>
-                    <Route path="/admin/manage" component={ManageQuestions}/>
-                </Router>
-                <Router>
-                    <Route path="/admin/connection" component={AddConnection}/>
-                </Router>
-                <Router>
-                    <Route path="/admin/feedback" component={ReviewFeedback}/>
-                </Router>
+                <div className="outer_container">
+                    <Router>
+                        <Route exact path="/" component={FrontPage} />
+                    </Router>
+                    <Router>
+                        <Route path="/patient" component={PatientSliders}/>
+                    </Router>
+                    <Router>
+                        <Route path="/center" component={Centers}/>
+                    </Router>
+                    <Router>
+                        <Route path="/feedback" component={Feedback}/>
+                    </Router>
+                    <Router>
+                        <Route path="/admin/add" component={NewQuestion}/>
+                    </Router>
+                    <Router>
+                        <Route path="/admin/manage" component={ManageQuestions}/>
+                    </Router>
+                    <Router>
+                        <Route path="/admin/connection" component={AddConnection}/>
+                    </Router>
+                    <Router>
+                        <Route path="/admin/feedback" component={ReviewFeedback}/>
+                    </Router>
+                </div>
             </div>
 
         );

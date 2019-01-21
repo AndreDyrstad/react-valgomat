@@ -11,7 +11,7 @@ class Forms extends Component {
 
     constructor(props) {
         super(props);
-        axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data, isLoading: false})).then(res => console.log(this.state.files));
+        axios.get('http://localhost:5000/centers').then(res => this.setState({files: res.data, isLoading: false})).then(res => console.log(this.state.files));
         //axios.get('http://modelling.hvl.no:8020/centers').then(res => this.setState({files: res.data}));
 
         this.state = {
@@ -192,7 +192,7 @@ class Forms extends Component {
                                 component="textarea"
                                 type={obj.displayAs}
                                 value={obj.id}
-                                style={{"width":"90vw","height":"250px"}}
+                                style={{"width":"70vw","height":"250px"}}
                             />{' '}
                             {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                     </div>
