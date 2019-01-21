@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import Centers from './components/Forms'
-import Patients from './components/Forms2'
 import Header from './components/Header'
 import PatientSliders from './components/PatientSliders'
 import Feedback from './components/Feedback'
+import NewQuestion from './components/AddQuestion'
+import AddConnection from './components/AddConnection'
+import ManageQuestions from './components/ManageQuestions'
+import ReviewFeedback from './components/ReviewFeedback'
+import FrontPage from './components/FrontPage'
 import './css/Header.css';
 import './css/Check.css';
+import './css/Admin.css';
 
 
 import {BrowserRouter as Router, Route} from "react-router-dom";
-import Admin from "./components/Admin";
 
 
 class App extends Component {
@@ -18,26 +22,31 @@ class App extends Component {
 
         return (
             <div className="App">
-
                 <Header/>
 
                 <Router>
-                    <Route exact path="/" component={Patients} />
+                    <Route exact path="/" component={FrontPage} />
                 </Router>
                 <Router>
-                    <Route path="/patient" component={Patients}/>
+                    <Route path="/patient" component={PatientSliders}/>
                 </Router>
                 <Router>
                     <Route path="/center" component={Centers}/>
                 </Router>
                 <Router>
-                    <Route path="/admin" component={Admin}/>
-                </Router>
-                <Router>
                     <Route path="/feedback" component={Feedback}/>
                 </Router>
                 <Router>
-                    <Route path="/sliders" component={PatientSliders}/>
+                    <Route path="/admin/add" component={NewQuestion}/>
+                </Router>
+                <Router>
+                    <Route path="/admin/manage" component={ManageQuestions}/>
+                </Router>
+                <Router>
+                    <Route path="/admin/connection" component={AddConnection}/>
+                </Router>
+                <Router>
+                    <Route path="/admin/feedback" component={ReviewFeedback}/>
                 </Router>
             </div>
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 
 class ReviewFeedback extends Component{
 
@@ -15,34 +16,38 @@ class ReviewFeedback extends Component{
 
     }
 
+    testTable = () => (
+        <div>
+            <ReactTable
+                data={this.state.files.feedback}
+                columns={[
+                    {
+                        Header: "Senter",
+                        accessor: "center"
+                    },
 
-    showFeedbackList = () => (
-
-        this.state.files.feedback).map((obj, index) => {
-            return(
-                <tr key={obj.center + obj.question +  Math.floor((Math.random() * 1000) + 1)}>
-                    <td>{obj.center}</td>
-                    <td>{obj.question}</td>
-                    <td>{obj.score}</td>
-                </tr>
-            )
-        }
+                    {
+                        Header: "Spørsmål",
+                        accessor: "question"
+                    },
+                    {
+                        Header: "Poengsum",
+                        accessor: "score"
+                    }
+                ]}
+                defaultPageSize={10}
+                className="-striped -highlight"
+            />
+            <br />
+        </div>
     );
 
     render(){
         return(
             <div>
                 <h1>Oversikt over tilbakemeldinger</h1>
-                <table>
-                    <tbody>
-                    <tr>
-                        <th>Senter</th>
-                        <th>Spørsmål</th>
-                        <th>Score</th>
-                    </tr>
-                    {this.state.isLoading ? null : this.showFeedbackList()}
-                    </tbody>
-                </table>
+
+                {this.state.isLoading ? null : this.testTable()}
             </div>
 
         )

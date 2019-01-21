@@ -30,7 +30,7 @@ class ManageQuestions extends Component {
     };
 
     addToList = (obj) => {
-        if(this.state.categories.length > 1 && this.selectedCategory.value !== "Velg kategori") {
+        if (this.state.categories.length > 1 && this.selectedCategory.value !== "Velg kategori" && this.selectedDisplayType.value !== "Velg spørsmålstype") {
 
             let newState = this.state.selectedQuestions;
 
@@ -52,13 +52,13 @@ class ManageQuestions extends Component {
     removeFromList = (obj) => {
         let newState = this.state.selectedQuestions;
 
-        for(let i in newState[this.selectedCategory.value]){
-            for(let j in obj.questions) {
+        for (let i in newState[this.selectedCategory.value]) {
+            for (let j in obj.questions) {
                 let substring = obj.questions[j].substring(0, obj.questions[j].indexOf(" -"));
                 console.log(substring);
 
-                if (newState[this.selectedCategory.value][i].label === substring){
-                    newState[this.selectedCategory.value].splice(i,1)
+                if (newState[this.selectedCategory.value][i].label === substring) {
+                    newState[this.selectedCategory.value].splice(i, 1)
                 }
 
             }
@@ -116,21 +116,20 @@ class ManageQuestions extends Component {
     render() {
         return (
             <div>
-                <h1>Legg til kategori</h1>
                 <div>
                     <Form
                         onSubmit={this.addCategory}
                         render={({handleSubmit, form, submitting, pristine, values}) => (
                             <form onSubmit={handleSubmit}>
-                                        <label>
-                                            Legg til en ny kategori
-                                            <Field
-                                                name="category"
-                                                component="input"
-                                                type="text"
-                                                value="category"
-                                            />{' '}
-                                        </label>
+                                <label>
+                                    Legg til en ny kategori
+                                    <Field
+                                        name="category"
+                                        component="input"
+                                        type="text"
+                                        value="category"
+                                    />{' '}
+                                </label>
                                 <div className="buttons">
                                     <button type="submit" disabled={submitting || pristine}>
                                         Legg til kategori
@@ -140,60 +139,66 @@ class ManageQuestions extends Component {
                         )}
                     />
                 </div>
-                <h1>Alle spørsmål</h1>
-                <div>
-                <Form
-                    onSubmit={this.addToList}
-                    render={({handleSubmit, form, submitting, pristine, values}) => (
-                        <form onSubmit={handleSubmit}>
-                            <Field name="questions" component="select" type="select" multiple>
-                                {this.state.isLoading ? null : this.showAllQuestions()}
-                            </Field>
-                            <div className="buttons">
-                                <button type="submit" disabled={submitting || pristine}>
-                                    Legg til spørsmål i listen
-                                </button>
-                            </div>
-                        </form>
-                    )}
-                />
-                </div>
-                <div>
-                    <select onChange={() => this.forceUpdate()} ref = {(input)=> this.selectedCategory = input}>
-                        <option selected disabled>Velg kategori</option>
-                        {this.showCategories()}
-                    </select>
-                </div>
-                <div>
-                    <select ref = {(input)=> this.selectedDisplayType = input}>
-                        <option selected disabled>Velg spørsmålstype</option>
-                        <option value="checkbox">Checkbox</option>
-                        <option value="radio">Ja/Nei</option>
-                        <option value="slider">Slider</option>
-                        <option value="text">Tekstfelt</option>
-                    </select>
-                </div>
-                <h1>Valgte spørsmål</h1>
-                <div>
-                    <Form
-                        onSubmit={this.removeFromList}
-                        render={({handleSubmit, form, submitting, pristine, values}) => (
-                            <form onSubmit={handleSubmit}>
-                                <Field name="questions" component="select" type="select" multiple>
-                                    {this.state.isLoading || this.selectedCategory.value === "Velg kategori" ? null : this.showSelectedQuestions()}
-                                </Field>
-                                <div className="buttons">
-                                    <button type="submit" disabled={submitting || pristine}>
-                                        Fjern spørsmål fra listen
-                                    </button>
-                                </div>
-                            </form>
-                        )}
-                    />
+                <div className="manage_outer_container">
+                    <div className="select_module">
+                        <strong>Alle spørsmål</strong>
+                        <Form
+                            onSubmit={this.addToList}
+                            render={({handleSubmit, form, submitting, pristine, values}) => (
+                                <form onSubmit={handleSubmit}>
+                                    <Field className="select-window" name="questions" component="select" type="select"
+                                           multiple>
+                                        {this.state.isLoading ? null : this.showAllQuestions()}
+                                    </Field>
+                                    <div>
+                                        <select onChange={() => this.forceUpdate()}
+                                                ref={(input) => this.selectedCategory = input}>
+                                            <option selected disabled>Velg kategori</option>
+                                            {this.showCategories()}
+                                        </select>
+                                    </div>
+                                    <div className="buttons">
+                                        <button type="submit" disabled={submitting || pristine}>
+                                            Legg til spørsmål i listen
+                                        </button>
+                                    </div>
+                                </form>
+                            )}
+                        />
+                    </div>
+                    <div className="select_module">
+                        <strong>Valgte spørsmål</strong>
+                        <Form
+                            onSubmit={this.removeFromList}
+                            render={({handleSubmit, form, submitting, pristine, values}) => (
+                                <form onSubmit={handleSubmit}>
+                                    <Field className="select-window" name="questions" component="select" type="select"
+                                           multiple>
+                                        {this.state.isLoading || this.selectedCategory.value === "Velg kategori" ? null : this.showSelectedQuestions()}
+                                    </Field>
+                                    <div>
+                                        <select ref={(input) => this.selectedDisplayType = input}>
+                                            <option selected disabled>Velg spørsmålstype</option>
+                                            <option value="checkbox">Checkbox</option>
+                                            <option value="radio">Ja/Nei</option>
+                                            <option value="slider">Slider</option>
+                                            <option value="text">Tekstfelt</option>
+                                        </select>
+                                    </div>
+                                    <div className="buttons">
+                                        <button type="submit" disabled={submitting || pristine}>
+                                            Fjern spørsmål fra listen
+                                        </button>
+                                    </div>
+                                </form>
+                            )}
+                        />
+                    </div>
+
                 </div>
 
                 <div>
-                    <button onClick={this.submit}>Oppdater spørsmålslisten</button>
+                    <button className="submit_questions" onClick={this.submit}>Oppdater spørsmålslisten</button>
                 </div>
             </div>
 
