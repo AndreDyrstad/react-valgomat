@@ -18,11 +18,7 @@ class Feedback extends Component{
             displayValue: 0,
             sliders: a,
         };
-
-
-
     }
-
 
     getDone = () => {
 
@@ -68,7 +64,7 @@ class Feedback extends Component{
         if(this.patientId.value.length === 10) {
             axios.post('http://localhost:5000/feedbackQuestions', {'patient_id': this.patientId.value})
                 .then(res => this.setState({files: res.data}))
-                .then(this.state.files === undefined ? null : this.setDefaultValues())
+                .then(res => this.setDefaultValues())
             //axios.post('http://modelling.hvl.no:8020/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
 
         }else{
@@ -80,6 +76,7 @@ class Feedback extends Component{
     setDefaultValues = () => {
         let defaultSliderValues = {};
 
+        console.log("hei");
         for(let i in this.state.files.questions){
             defaultSliderValues[this.state.files.questions[i].value] = 5;
             this.setState({sliders: defaultSliderValues})
@@ -114,6 +111,7 @@ class Feedback extends Component{
                         max={10}
                         onChange={(e) => this.handleOnChange(this.state.files.questions[index].value, e)}
                     />
+                    <div className='sliderValue'>{this.state.sliders[this.state.files.questions[index].value]}</div>
 
                 </div>
 
@@ -134,6 +132,15 @@ class Feedback extends Component{
 
             return(
                 <div>
+                    <h1>Tilbakemelding fra pasienter</h1>
+                    <p>
+                        På denne iden kan du som pasient gi en tilbakemelding på ditt siste opphold.
+                        Etter du har skrevet inn din unike id (som ble gitt når du fikk anbefalt et behandlingssted),
+                        vil du få tilgang til alle spørsmålene hvor du ga mer enn 5 poeng.
+                        <br/>
+                        På tilbakemeldingen velger du hvor fornøyd du var med ditt siste opphold.
+                        Hvis senteret ikke hadde et slikt tilbud, gir du 0 poeng. Hvis oppholder var perfekt, gir du 10.
+                    </p>
                     <strong>Skriv inn din bruker-id for å få tilgang til undersøkelsen</strong>
                     {this.showIdSelection()}
                     <select ref = {(input)=> this.menu = input}>

@@ -7,8 +7,8 @@ import { Button } from 'react-bootstrap'
 class NewQuestion extends Component {
 
     onSubmit = (values) => {
-        axios.post('http://modelling.hvl.no:8020/newQuestion', values)
-        //axios.post('http://localhost:5000/newQuestion', values)
+        //axios.post('http://modelling.hvl.no:8020/newQuestion', values)
+        axios.post('http://localhost:5000/newQuestion', values)
     };
 
     render(){

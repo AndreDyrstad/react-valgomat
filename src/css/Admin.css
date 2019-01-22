@@ -29,3 +29,8 @@ select{
 select[multiple], select[size]{
     min-height: 300px;
 }
+
+.add_category{
+    display: flex;
+    flex-direction: row;
+}

@@ -8,23 +8,28 @@ class ManageQuestions extends Component {
     constructor(props) {
         super(props);
 
-        axios.get('http://localhost:5000/allQuestions')
+        axios.post('http://localhost:5000/allQuestions',{"entity":"patient"})
             .then(res => this.setState({files: res.data, isLoading: false}))
             .then(res => this.readConfigFile());
 
         this.state = {
             isLoading: true,
-            selectedQuestions: {},
+            selectedQuestions: {"Velg kategori":"Velg kategori for å se spørsmål"},
             categories: []
         }
     }
 
+    getQuestions = () => {
+        axios.post('http://localhost:5000/allQuestions',{"entity":this.selectedEntity.value})
+            .then(res => this.setState({files: res.data, isLoading: true, selectedQuestions: {}}))
+            .then(res => this.readConfigFile())
+            .then(res => this.setState({isLoading: false}))
+
+    };
+
     readConfigFile = () => {
         let jsonObj = this.state.files.config.questions;
-        console.log(jsonObj);
         let keys = Object.keys(jsonObj);
-        console.log(keys);
-
 
         this.setState({categories: keys, selectedQuestions: jsonObj})
     };
@@ -117,24 +122,29 @@ class ManageQuestions extends Component {
         return (
             <div>
                 <div>
+                    <strong>Velg hvilke spørsmål du vil forandre på</strong>
+                    <select ref={(input) => this.selectedEntity = input} onChange={() => this.getQuestions()}>
+                        <option value="patient">Pasient</option>
+                        <option value="center">Senter</option>
+                    </select>
+                </div>
+                <div className="add_category">
                     <Form
                         onSubmit={this.addCategory}
                         render={({handleSubmit, form, submitting, pristine, values}) => (
                             <form onSubmit={handleSubmit}>
-                                <label>
-                                    Legg til en ny kategori
-                                    <Field
-                                        name="category"
-                                        component="input"
-                                        type="text"
-                                        value="category"
-                                    />{' '}
-                                </label>
-                                <div className="buttons">
+                                    <label>
+                                        Legg til en ny kategori
+                                        <Field
+                                            name="category"
+                                            component="input"
+                                            type="text"
+                                            value="category"
+                                        />{' '}
+                                    </label>
                                     <button type="submit" disabled={submitting || pristine}>
                                         Legg til kategori
                                     </button>
-                                </div>
                             </form>
                         )}
                     />

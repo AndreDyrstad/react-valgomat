@@ -202,6 +202,7 @@ class Forms extends Component {
                 return (
                     <div key={obj.label}>
                         <label>
+                            {obj.label}
                             <Field
                                 name={"id"+obj.id}
                                 component="input"
@@ -209,7 +210,6 @@ class Forms extends Component {
                                 value={obj.id}
 
                             />{' '}
-                            {obj.label}
                             {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                         </label>
                     </div>
@@ -237,7 +237,7 @@ class Forms extends Component {
                         <div className="test">
                             <div className={"screen"}>
 
-                                {this.state.files === undefined ? this.getError() : this.getForm()}
+                                {this.state.files === undefined ? <div className="loader"/> : this.getForm()}
 
                                 {this.state.submitted && this.getDone()}
                             </div>

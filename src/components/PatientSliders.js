@@ -14,7 +14,7 @@ class PatientSliders extends Component {
         super(props);
         //'http://modelling.hvl.no:8020/patients'
         //'http://localhost:5000/patients'
-        axios.get('https://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data},
+        axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data},
             function stateComplete(){
 
                 Object.keys(this.state.files.questions).forEach((zone, index) => {
@@ -67,10 +67,11 @@ class PatientSliders extends Component {
 
     onSubmit = async values => {
 
+        this.state.sliders[Object.keys(values)[0]] = values[Object.keys(values)[0]];
         console.log(this.state.sliders);
 
         //axios.post('http://modelling.hvl.no:8020/scores', this.state.sliders).then(res => this.setState({hasResponse: true, response: res.data}))
-        axios.post('https://modelling.hvl.no:8020/scores', this.state.sliders).then(res => this.setState({
+        axios.post('http://localhost:5000/scores', this.state.sliders).then(res => this.setState({
             hasResponse: true,
             response: res.data
         }))
@@ -153,6 +154,24 @@ class PatientSliders extends Component {
                                 />
                                 <div className='sliderValue'>{this.state.sliders[obj.id]}</div>
 
+                            </label>
+                        </div>
+                    )
+                }
+                else
+                {
+                    return (
+                        <div key={obj.label}>
+                            <label>
+                                {obj.label}
+                                <Field
+                                    name={"id"+obj.id}
+                                    component="input"
+                                    type={obj.displayAs}
+                                    value={obj.id}
+
+                                />{' '}
+                                {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
                             </label>
                         </div>
                     )
