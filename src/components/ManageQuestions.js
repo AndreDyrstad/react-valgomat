@@ -87,7 +87,9 @@ class ManageQuestions extends Component {
 
     submit = () => {
 
-        axios.post('http://modelling.hvl.no:8020/updateQuestions', this.state.selectedQuestions)
+        let response = {"response": this.state.selectedQuestions, "entity": this.selectedEntity.value};
+
+        axios.post('http://modelling.hvl.no:8020/updateQuestions', response)
     };
 
     showAllQuestions = () => (

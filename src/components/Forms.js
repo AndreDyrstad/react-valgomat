@@ -145,7 +145,7 @@ class Forms extends Component {
                                     style={{"width":"50vw","height":"30px"}}
 
                                 />{' '}
-                                {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
+                                {obj.info === null ? false : this.infoBox(obj.label, obj.info)}
                         </div>
 
                     )
@@ -157,7 +157,7 @@ class Forms extends Component {
 
                         <div key={obj.label}>
                             <b>{obj.label}</b>
-                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
+                            {obj.info === null ? false : this.infoBox(obj.label, obj.info)}
                             <label>
                                 <Field
                                     name={"id"+obj.id}
@@ -194,7 +194,7 @@ class Forms extends Component {
                                 value={obj.id}
                                 style={{"width":"70vw","height":"250px"}}
                             />{' '}
-                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
+                            {obj.info === null ? false : this.infoBox(obj.label, obj.info)}
                     </div>
                 )
             }
@@ -202,7 +202,6 @@ class Forms extends Component {
                 return (
                     <div key={obj.label}>
                         <label>
-                            {obj.label}
                             <Field
                                 name={"id"+obj.id}
                                 component="input"
@@ -210,7 +209,8 @@ class Forms extends Component {
                                 value={obj.id}
 
                             />{' '}
-                            {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
+                            {obj.label}
+                            {obj.info === null ? false : this.infoBox(obj.label, obj.info)}
                         </label>
                     </div>
                 )
