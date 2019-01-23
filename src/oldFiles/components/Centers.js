@@ -48,7 +48,7 @@ class Centers extends Component {
 
         console.log(myJsonString);
 
-        axios.post('http://localhost:5000/information', myJsonString)
+        axios.post('http://modelling.hvl.no:8020/information', myJsonString)
             .then(function (response) {
                 console.log(response.data);
             })

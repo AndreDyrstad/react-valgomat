@@ -8,9 +8,9 @@ class AddConnection extends Component{
     constructor(props){
         super(props);
 
-        axios.get('http://localhost:5000/allQuestions')
+        axios.post('http://modelling.hvl.no:8020/allQuestions',{"entity":"patient"})
             .then(res => this.setState({files: res.data}))
-            .then(res => axios.get('http://localhost:5000/connections'))
+            .then(res => axios.get('http://modelling.hvl.no:8020/connections'))
             .then(res => this.setState({connections: res.data,isLoading:false}));
 
         this.state = {
@@ -31,8 +31,8 @@ class AddConnection extends Component{
     onSubmit = () => {
         console.log(this.connection1.value);
         console.log(this.connection2.value);
-        axios.post('http://localhost:5000/makeConnection', {"connection":[this.connection1.value, this.connection2.value]})
-            .then(res => axios.get('http://localhost:5000/connections'))
+        axios.post('http://modelling.hvl.no:8020/makeConnection', {"connection":[this.connection1.value, this.connection2.value]})
+            .then(res => axios.get('http://modelling.hvl.no:8020/connections'))
             .then(res => this.setState({connections:res.data}))
     };
 
