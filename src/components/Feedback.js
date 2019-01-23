@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios/index";
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'
-import {Alert} from 'react-bootstrap'
+import { Alert, Button } from 'react-bootstrap'
 
 class Feedback extends Component{
 
@@ -147,7 +147,7 @@ class Feedback extends Component{
                         {this.state.files === undefined ? null : this.showCenters()}}
                     </select>
                     {this.state.files !== undefined ? this.showQuestions() : null}
-                    {this.state.files !== undefined ? <button onClick={this.submitForm}>Button</button> : null}
+                    {this.state.files !== undefined ? <Button bsStyle="primary" onClick={this.submitForm}>Send</Button> : null}
                     {this.state.response !== undefined ? this.getDone() : null}
                 </div>
             )

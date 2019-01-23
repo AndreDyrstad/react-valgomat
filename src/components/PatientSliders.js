@@ -242,7 +242,6 @@ class PatientSliders extends Component {
 
 
                                 </div>
-                                <pre>{JSON.stringify(values, 0, 2)}</pre>
                             </form>
                         )}
                     />
