@@ -8,7 +8,7 @@ class ManageQuestions extends Component {
     constructor(props) {
         super(props);
 
-        axios.post('http://modelling.hvl.no:8020/allQuestions',{"entity":"patient"})
+        axios.post('http://localhost:5000/allQuestions',{"entity":"patient"})
             .then(res => this.setState({files: res.data, isLoading: false}))
             .then(res => this.readConfigFile());
 
@@ -20,7 +20,7 @@ class ManageQuestions extends Component {
     }
 
     getQuestions = () => {
-        axios.post('http://modelling.hvl.no:8020/allQuestions',{"entity":this.selectedEntity.value})
+        axios.post('http://localhost:5000/allQuestions',{"entity":this.selectedEntity.value})
             .then(res => this.setState({files: res.data, isLoading: true, selectedQuestions: {}}))
             .then(res => this.readConfigFile())
             .then(res => this.setState({isLoading: false}))
@@ -55,21 +55,30 @@ class ManageQuestions extends Component {
     };
 
     removeFromList = (obj) => {
+        this.setState({isLoading:true});
         let newState = this.state.selectedQuestions;
+        let newCategory = this.state.categories
 
         for (let i in newState[this.selectedCategory.value]) {
             for (let j in obj.questions) {
                 let substring = obj.questions[j].substring(0, obj.questions[j].indexOf(" -"));
-                console.log(substring);
 
                 if (newState[this.selectedCategory.value][i].label === substring) {
-                    newState[this.selectedCategory.value].splice(i, 1)
+                    newState[this.selectedCategory.value].splice(i, 1);
+                    obj = newState[this.selectedCategory.value];
+                    if(Object.keys(obj).length === 0) {
+                        delete newState[this.selectedCategory.value];
+                        for(let category in newCategory){
+                            if(newCategory[category] === this.selectedCategory.value)
+                            newCategory.splice(category,1);
+                        }
+                        this.selectedCategory.value = Object.keys(newState)[0];
+                    }
                 }
-
             }
         }
-
-        this.setState({selectedQuestions: newState})
+        console.log(newCategory);
+        this.setState({selectedQuestions: newState, category: newCategory, isLoading:false})
 
     };
 
@@ -89,7 +98,7 @@ class ManageQuestions extends Component {
 
         let response = {"response": this.state.selectedQuestions, "entity": this.selectedEntity.value};
 
-        axios.post('http://modelling.hvl.no:8020/updateQuestions', response)
+        axios.post('http://localhost:5000/updateQuestions', response)
     };
 
     showAllQuestions = () => (

@@ -78,10 +78,10 @@ class Feedback extends Component{
 
         console.log("hei");
         for(let i in this.state.files.questions){
-            defaultSliderValues[this.state.files.questions[i].value] = 5;
+            defaultSliderValues[this.state.files.questions[i].value] = 0;
             this.setState({sliders: defaultSliderValues})
         }
-    };
+    }
 
     handleOnChange = (obj, value) => {
         let a = this.state.sliders;
@@ -108,7 +108,7 @@ class Feedback extends Component{
                         className="slider"
                         value={this.state.sliders[this.state.files.questions[index].value]}
                         orientation="horizontal"
-                        max={10}
+                        max={5}
                         onChange={(e) => this.handleOnChange(this.state.files.questions[index].value, e)}
                     />
                     <div className='sliderValue'>{this.state.sliders[this.state.files.questions[index].value]}</div>

@@ -14,12 +14,12 @@ class PatientSliders extends Component {
         super(props);
         //'http://modelling.hvl.no:8020/patients'
         //'http://modelling.hvl.no:8020/patients'
-        axios.get('http://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data},
+        axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data},
             function stateComplete(){
 
                 Object.keys(this.state.files.questions).forEach((zone, index) => {
                     this.state.files.questions[zone].forEach((obj, idx) => {
-                        a[obj.id] = 5;
+                        a[obj.id] = 0;
                     })
                 });
 
@@ -71,7 +71,7 @@ class PatientSliders extends Component {
         console.log(this.state.sliders);
 
         //axios.post('http://modelling.hvl.no:8020/scores', this.state.sliders).then(res => this.setState({hasResponse: true, response: res.data}))
-        axios.post('http://modelling.hvl.no:8020/scores', this.state.sliders).then(res => this.setState({
+        axios.post('http://localhost:5000/scores', this.state.sliders).then(res => this.setState({
             hasResponse: true,
             response: res.data
         }))
@@ -149,7 +149,7 @@ class PatientSliders extends Component {
                                     className="slider"
                                     value={this.state.sliders[obj.id]}
                                     orientation="horizontal"
-                                    max={10}
+                                    max={5}
                                     onChange={(e) => this.handleOnChange(obj.id, e)}
                                 />
                                 <div className='sliderValue'>{this.state.sliders[obj.id]}</div>
@@ -251,9 +251,10 @@ class PatientSliders extends Component {
             return (
                 <div>
                     <p>{this.state.response.center}</p>
-                    <p>Under finner du din id. Denne er tilfeldig generert og kan brukes for å gi tilbakemeling om din behandling</p>
-                    <p>{this.state.response.patient_id}</p>
+                    {/*<p>Under finner du din id. Denne er tilfeldig generert og kan brukes for å gi tilbakemeling om din behandling</p>
+                    <p>{this.state.response.patient_id}</p>*/}
                     <Recommendation data={this.state.response}/>
+                    <Button className="back_to_form" bsStyle="primary" onClick={() => this.setState({hasResponse:false})}>{<Glyphicon glyph="chevron-left"/>}Tilbake til undersøkelsen</Button>
                 </div>
             )
         }
