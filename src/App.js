@@ -8,6 +8,7 @@ import AddConnection from './components/AddConnection'
 import ManageQuestions from './components/ManageQuestions'
 import ReviewFeedback from './components/ReviewFeedback'
 import FrontPage from './components/FrontPage'
+import CenterInformation from './components/CenterInformation'
 import './css/Header.css';
 import './css/Check.css';
 import './css/Admin.css';
@@ -47,6 +48,9 @@ class App extends Component {
                     </Router>
                     <Router>
                         <Route path="/admin/feedback" component={ReviewFeedback}/>
+                    </Router>
+                    <Router>
+                        <Route path="/admin/center" component={CenterInformation}/>
                     </Router>
                 </div>
             </div>

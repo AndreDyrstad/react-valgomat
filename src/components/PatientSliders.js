@@ -14,7 +14,7 @@ class PatientSliders extends Component {
         super(props);
         //'http://modelling.hvl.no:8020/patients'
         //'http://modelling.hvl.no:8020/patients'
-        axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data},
+        axios.get('http://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data},
             function stateComplete(){
 
                 Object.keys(this.state.files.questions).forEach((zone, index) => {
@@ -71,7 +71,7 @@ class PatientSliders extends Component {
         console.log(this.state.sliders);
 
         //axios.post('http://modelling.hvl.no:8020/scores', this.state.sliders).then(res => this.setState({hasResponse: true, response: res.data}))
-        axios.post('http://localhost:5000/scores', this.state.sliders).then(res => this.setState({
+        axios.post('http://modelling.hvl.no:8020/scores', this.state.sliders).then(res => this.setState({
             hasResponse: true,
             response: res.data
         }))

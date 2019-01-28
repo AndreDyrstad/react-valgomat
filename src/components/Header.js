@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Button,Nav, NavDropdown, NavItem, MenuItem, Navbar } from 'react-bootstrap'
+import {Nav, NavDropdown, NavItem, MenuItem, Navbar } from 'react-bootstrap'
 
 
 class FrontPage extends Component {
@@ -34,6 +34,8 @@ class FrontPage extends Component {
                                 <MenuItem href="/admin/manage" eventKey={4.2}>Administrer spørsmål</MenuItem>
                                 <MenuItem href="/admin/connection" eventKey={4.3}>Administrer koblinger</MenuItem>
                                 <MenuItem href="/admin/feedback" eventKey={4.4}>Tilbakemeldinger fra pasienter</MenuItem>
+                                <MenuItem href="/admin/center" eventKey={4.5}>Oversikt over behandlingssteder</MenuItem>
+
                             </NavDropdown>
                         </Nav>
                     </Navbar>

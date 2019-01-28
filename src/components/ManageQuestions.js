@@ -8,7 +8,7 @@ class ManageQuestions extends Component {
     constructor(props) {
         super(props);
 
-        axios.post('http://localhost:5000/allQuestions',{"entity":"patient"})
+        axios.post('http://modelling.hvl.no:8020/allQuestions',{"entity":"patient"})
             .then(res => this.setState({files: res.data, isLoading: false}))
             .then(res => this.readConfigFile());
 
@@ -20,7 +20,7 @@ class ManageQuestions extends Component {
     }
 
     getQuestions = () => {
-        axios.post('http://localhost:5000/allQuestions',{"entity":this.selectedEntity.value})
+        axios.post('http://modelling.hvl.no:8020/allQuestions',{"entity":this.selectedEntity.value})
             .then(res => this.setState({files: res.data, isLoading: true, selectedQuestions: {}}))
             .then(res => this.readConfigFile())
             .then(res => this.setState({isLoading: false}))
@@ -98,7 +98,7 @@ class ManageQuestions extends Component {
 
         let response = {"response": this.state.selectedQuestions, "entity": this.selectedEntity.value};
 
-        axios.post('http://localhost:5000/updateQuestions', response)
+        axios.post('http://modelling.hvl.no:8020/updateQuestions', response)
     };
 
     showAllQuestions = () => (
