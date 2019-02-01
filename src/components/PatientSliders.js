@@ -81,7 +81,25 @@ class PatientSliders extends Component {
         <div>
             <div className="introduction">
                 <h1>{this.state.files.introduction.header}</h1>
-                <p> {this.state.files.introduction.description}</p>
+                {/*<p> {this.state.files.introduction.description}</p>*/}
+                <p>
+
+                    Denne nettsiden er en pilot som er laget i samarbeid med Høgskolen på Vestlandet og Haukeland Sykehus.
+                    Målet med nettsiden er å lage en digital plattform som kan brukes til fritt behandlingsvalg i spesialisthelsetjenesten.
+                    Ved å svare på en rekke spørsmål, får du forslag om hvilke(t) behandlingssted(er) som synes å passe best med dine behov.
+                    Dette kan være til hjelp når din behandler skal søke om rehabilitering for deg.
+                    <br/>
+                    <br/>
+                    Hvert spørsmål har en ‘markør’ som  du kan dra langs linjen. Ved hjelp av dette verktøyet, kan du vekte hvert spørsmål med en tallverdi mellom 0 og 5, som antyder hvor viktig de ulike punktene er for deg (5 betyr høyest vektlegging).
+                        Hvis du benytter deg av Fritt behandlingsvalg (FBV), får du høyere egenandel på reise.
+                        Egenandel ved reise er inntil kr. 149,- hver vei uten FBV, og inntil kr. 400,- per vei med FBV.
+                        Egenandel for opphold kan variere mellom de ulike institusjonene så det anbefales å kontakte institusjonen direkte for mer informasjon.
+                    <br/>
+                    <br/>
+                        For ventetider, se linken under.
+
+
+                </p>
                 {this.state.files.introduction.link === undefined ? false :
                     <a href={this.state.files.introduction.link}>Klikk her for å se ventetider</a>}
 

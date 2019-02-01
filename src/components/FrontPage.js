@@ -7,12 +7,12 @@ class FrontPage extends Component{
         <div>
             <h1>Introduksjon</h1>
             <p style={{"width":"50%"}}>
-                Denne nettsiden er en pilot som er laget i samarbeid med Høyskolen på Vestlandet og Haukeland Sykehus.
-                Målet med nettsiden er å lage en digital platform som kan brukes til fritt behandlingsvalg.
-                Pasienter skal kunne svare på en rekke spørsmål og få anbefalinger på hvilke behandlingssteder som passer best.
-                Siden inneholder også moduler for å samle data fra behandlingssteder samt muligheter til å administrere platformen.
+                Denne nettsiden er en pilot som er laget i samarbeid med Høgskolen på Vestlandet og Haukeland universitetssjukehus.
+                Målet med nettsiden er å lage en digital plattform som kan brukes til fritt behandlingsvalg i spesialisthelsetjenesten.
+                Ved å svare på en rekke spørsmål, får en forslag om behandlingssted som synes å passe best med den enkeltes behov.
+                Nettsiden inneholder også moduler for å samle data fra behandlingssteder samt muligheter til å administrere plattformen.
             </p>
-            <strong>Nettsiden inneholder bare fiktiv data!</strong>
+            <strong>Nettsiden inneholder bare fiktive data!</strong>
         </div>
         )
     }
