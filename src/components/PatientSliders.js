@@ -271,6 +271,7 @@ class PatientSliders extends Component {
                     <p>{this.state.response.center}</p>
                     {/*<p>Under finner du din id. Denne er tilfeldig generert og kan brukes for å gi tilbakemeling om din behandling</p>
                     <p>{this.state.response.patient_id}</p>*/}
+                    <p>For å skrive ut denne siden, kan du holde inne "ctrl" og samtidig som du trykker på "p". (Command + p for mac) </p>
                     <Recommendation data={this.state.response}/>
                     <Button className="back_to_form" bsStyle="primary" onClick={() => this.setState({hasResponse:false})}>{<Glyphicon glyph="chevron-left"/>}Tilbake til undersøkelsen</Button>
                 </div>
