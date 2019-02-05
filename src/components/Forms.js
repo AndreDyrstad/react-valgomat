@@ -57,19 +57,22 @@ class Forms extends Component {
 
     };
 
+    showIntro = () => (
+        <div style={this.divStyle}>
+            <h1>{this.state.files.introduction.header}</h1>
+            <p> {this.state.files.introduction.description}</p>
+        </div>
+
+    );
+
     getForm = () => (
         <div>
-
-            <div style={this.divStyle}>
-                <h1>{this.state.files.introduction.header}</h1>
-                <p> {this.state.files.introduction.description}</p>
-            </div>
-
 
             {Object.keys(this.state.files.questions).map((zone, index) => {
                     let a = this.getForm2(zone);
                     return (
                         <div className={"quest"} style={{display: this.state.display[index]}} key={zone}>
+                        {index === 0 ? this.showIntro() : null}
                             <h2>{zone}</h2>
                             <div>{a}</div>
 

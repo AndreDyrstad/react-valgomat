@@ -77,39 +77,47 @@ class PatientSliders extends Component {
         }))
     };
 
+
+    showIntro = () => (
+        <div className="introduction">
+        {console.log("hei")}
+            <h1>{this.state.files.introduction.header}</h1>
+            {/*<p> {this.state.files.introduction.description}</p>*/}
+            <p>
+
+                Denne nettsiden er en pilot som er laget i et samarbeid mellom Høgskolen på Vestlandet og Haukeland Sykehus.
+                Målet med nettsiden er å lage en digital plattform som kan brukes til fritt rehabiliteringsvalg i spesialisthelsetjenesten.
+                Ved å svare på en rekke spørsmål, får du forslag om hvilke(t) behandlingssted(er) som synes å passe best med dine behov.
+                Dette kan være til hjelp når din behandler skal søke om rehabilitering for deg.
+                <br/>
+                <br/>
+                Hvert spørsmål har en ‘markør’ som  du kan dra langs linjen. Ved hjelp av dette verktøyet, kan du vekte hvert spørsmål med en tallverdi mellom 0 og 5, som antyder hvor viktig de ulike punktene er for deg (5 betyr høyest vektlegging).
+                Hvis du benytter deg av Fritt behandlingsvalg (FBV), får du høyere egenandel på reise.
+                Egenandel ved reise er inntil kr. 149,- hver vei uten FBV, og inntil kr. 400,- per vei med FBV.
+                Egenandel for opphold kan variere mellom de ulike institusjonene så det anbefales å kontakte institusjonen direkte for mer informasjon.
+                <br/>
+                <br/>
+                For ventetider, se linken under.
+
+
+            </p>
+            {this.state.files.introduction.link === undefined ? false :
+                <a href={this.state.files.introduction.link}>Klikk her for å se ventetider</a>}
+
+        </div>
+    );
+
     getForm = () => (
         <div>
-            <div className="introduction">
-                <h1>{this.state.files.introduction.header}</h1>
-                {/*<p> {this.state.files.introduction.description}</p>*/}
-                <p>
-
-                    Denne nettsiden er en pilot som er laget i samarbeid med Høgskolen på Vestlandet og Haukeland Sykehus.
-                    Målet med nettsiden er å lage en digital plattform som kan brukes til fritt behandlingsvalg i spesialisthelsetjenesten.
-                    Ved å svare på en rekke spørsmål, får du forslag om hvilke(t) behandlingssted(er) som synes å passe best med dine behov.
-                    Dette kan være til hjelp når din behandler skal søke om rehabilitering for deg.
-                    <br/>
-                    <br/>
-                    Hvert spørsmål har en ‘markør’ som  du kan dra langs linjen. Ved hjelp av dette verktøyet, kan du vekte hvert spørsmål med en tallverdi mellom 0 og 5, som antyder hvor viktig de ulike punktene er for deg (5 betyr høyest vektlegging).
-                        Hvis du benytter deg av Fritt behandlingsvalg (FBV), får du høyere egenandel på reise.
-                        Egenandel ved reise er inntil kr. 149,- hver vei uten FBV, og inntil kr. 400,- per vei med FBV.
-                        Egenandel for opphold kan variere mellom de ulike institusjonene så det anbefales å kontakte institusjonen direkte for mer informasjon.
-                    <br/>
-                    <br/>
-                        For ventetider, se linken under.
-
-
-                </p>
-                {this.state.files.introduction.link === undefined ? false :
-                    <a href={this.state.files.introduction.link}>Klikk her for å se ventetider</a>}
-
-            </div>
 
 
             {Object.keys(this.state.files.questions).map((zone, index) => {
-                    let a = this.getForm2(zone);
+
+
+                let a = this.getForm2(zone);
                     return (
                         <div className={"quest"} style={{display: this.state.display[index]}} key={zone}>
+                            {index === 0 ? this.showIntro() : null}
                             <h2>{zone}</h2>
                             <div>{a}</div>
 
@@ -167,7 +175,7 @@ class PatientSliders extends Component {
                                     className="slider"
                                     value={this.state.sliders[obj.id]}
                                     orientation="horizontal"
-                                    max={5}
+                                    max={10}
                                     onChange={(e) => this.handleOnChange(obj.id, e)}
                                 />
                                 <div className='sliderValue'>{this.state.sliders[obj.id]}</div>
