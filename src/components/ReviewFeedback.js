@@ -9,7 +9,7 @@ class ReviewFeedback extends Component{
     constructor(props){
         super(props);
 
-        axios.get('http://modelling.hvl.no:8020/getFeedback').then(res => this.setState({files:res.data, isLoading:false}));
+        axios.get('http://modelling.hvl.no:8020/feedback').then(res => this.setState({files:res.data, isLoading:false}));
         this.state = {
             isLoading: true
         }

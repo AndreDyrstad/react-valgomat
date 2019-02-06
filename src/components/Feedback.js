@@ -53,7 +53,7 @@ class Feedback extends Component{
 
         this.setState({submitted : true});
 
-        axios.post('http://modelling.hvl.no:8020/sendFeedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
+        axios.post('http://modelling.hvl.no:8020/feedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
         //axios.post('http://modelling.hvl.no:8020/sendFeedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
 
 

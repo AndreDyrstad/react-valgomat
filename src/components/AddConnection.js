@@ -31,7 +31,7 @@ class AddConnection extends Component{
     onSubmit = () => {
         console.log(this.connection1.value);
         console.log(this.connection2.value);
-        axios.post('http://modelling.hvl.no:8020/makeConnection', {"connection":[this.connection1.value, this.connection2.value]})
+        axios.post('http://modelling.hvl.no:8020/connections', {"connection":[this.connection1.value, this.connection2.value]})
             .then(res => axios.get('http://modelling.hvl.no:8020/connections'))
             .then(res => this.setState({connections:res.data}))
     };
