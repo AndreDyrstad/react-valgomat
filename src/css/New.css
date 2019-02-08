@@ -54,7 +54,7 @@ span{
     100% { transform: rotate(360deg); }
 }
 
-.back_to_form{
+#back_to_form{
     margin-left: 40%;
     top: 0;
 }

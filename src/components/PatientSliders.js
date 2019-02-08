@@ -12,7 +12,7 @@ import { Field } from 'react-final-form'
 class PatientSliders extends Component {
     constructor(props) {
         super(props);
-        axios.get('http://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data},
+        axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data},
             function stateComplete(){
 
                 Object.keys(this.state.files.questions).forEach((zone, index) => {
@@ -272,13 +272,19 @@ class PatientSliders extends Component {
             )
         } else {
             return (
+
+
+
                 <div>
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+                          crossOrigin="anonymous"/>
                     <p>{this.state.response.center}</p>
                     {/*<p>Under finner du din id. Denne er tilfeldig generert og kan brukes for å gi tilbakemeling om din behandling</p>
                     <p>{this.state.response.patient_id}</p>*/}
                     <p>For å skrive ut denne siden, kan du holde inne "ctrl" og samtidig som du trykker på "p". (Command + p for mac) </p>
                     <Recommendation data={this.state.response}/>
-                    <Button className="back_to_form" bsStyle="primary" onClick={() => this.setState({hasResponse:false})}>{<Glyphicon glyph="chevron-left"/>}Tilbake til undersøkelsen</Button>
+                    <Button bsStyle="primary" id="back_to_form" onClick={() => this.setState({hasResponse:false})}>{<Glyphicon glyph="chevron-left"/>}Tilbake til undersøkelsen</Button>
                 </div>
             )
         }
