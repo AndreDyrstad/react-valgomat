@@ -102,7 +102,7 @@ class PatientSliders extends Component {
                     <Glyphicon glyph="glyphicon glyphicon-info-sign"/>
                 </OverlayTrigger>
                 -ikon ved siden av seg.
-                Ved å holde musepekeren over dette ikonet, kan du få tilgang til mer informasjon om spørsmålet.
+                Ved å holde musepekeren over dette ikonet, kan du få tilgang til mer informasjon om dette spørsmålet.
                 <br/>
                 <br/>
                 Hvis du benytter deg av Fritt behandlingsvalg (FBV), får du høyere egenandel på reise.
@@ -297,14 +297,13 @@ class PatientSliders extends Component {
                           crossOrigin="anonymous"/>
                     {/*<p>Under finner du din id. Denne er tilfeldig generert og kan brukes for å gi tilbakemeling om din behandling</p>
                     <p>{this.state.response.patient_id}</p>*/}
+                    <Button bsStyle="primary" id="print" onClick={() => window.print()}>Skriv ut denne siden</Button>
                     <p>{this.state.response.center}</p>
                     <Recommendation data={this.state.response}/>
                     <div>
                         <Button bsStyle="primary" id="back_to_form"
                                 onClick={() => this.setState({hasResponse: false})}>{<Glyphicon glyph="chevron-left"/>}Tilbake
                             til undersøkelsen</Button>
-                        <Button bsStyle="primary" id="back_to_form" onClick={() => window.print()}>Skriv ut denne
-                            siden</Button>
                     </div>
                 </div>
             )
