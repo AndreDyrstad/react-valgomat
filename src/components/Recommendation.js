@@ -15,7 +15,7 @@ class Recommendation extends Component {
         return(
             <div>
                 <div className="centers-container">
-                    {this.props.data.centers.map(item => <div key={item.name}><Place name={item.name} probability={item.probability} match={item.match} link={item.link} information={item.about}/></div>)}
+                    {this.props.data.centers.map(item => <div key={item.name} className="center"><Place name={item.name} probability={item.probability} match={item.match} link={item.link} information={item.about}/></div>)}
                 </div>
             </div>
         )

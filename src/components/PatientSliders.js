@@ -7,13 +7,13 @@ import '../css/Header.css'
 import '../css/New.css'
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'
-import { Field } from 'react-final-form'
+import {Field} from 'react-final-form'
 
 class PatientSliders extends Component {
     constructor(props) {
         super(props);
-        axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data},
-            function stateComplete(){
+        axios.get('http://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data},
+            function stateComplete() {
 
                 Object.keys(this.state.files.questions).forEach((zone, index) => {
                     this.state.files.questions[zone].forEach((obj, idx) => {
@@ -77,21 +77,39 @@ class PatientSliders extends Component {
 
     showIntro = () => (
         <div className="introduction">
-        {console.log("hei")}
+            {console.log("hei")}
             <h1>{this.state.files.introduction.header}</h1>
             {/*<p> {this.state.files.introduction.description}</p>*/}
             <p>
 
-                Denne nettsiden er en pilot som er laget i et samarbeid mellom Høgskolen på Vestlandet og Haukeland Sykehus.
-                Målet med nettsiden er å lage en digital plattform som kan brukes til fritt rehabiliteringsvalg i spesialisthelsetjenesten.
-                Ved å svare på en rekke spørsmål, får du forslag om hvilke(t) behandlingssted(er) som synes å passe best med dine behov.
+                Denne nettsiden er en pilot som er laget i et samarbeid mellom Høgskolen på Vestlandet og Haukeland
+                universitetssjukehus.
+                Målet med nettsiden er å lage en digital plattform som kan brukes til fritt rehabiliteringsvalg i
+                spesialisthelsetjenesten.
+                Ved å svare på en rekke spørsmål, får du forslag om hvilke(t) behandlingssted(er) som synes å passe best
+                med dine behov.
                 Dette kan være til hjelp når din behandler skal søke om rehabilitering for deg.
                 <br/>
                 <br/>
-                Hvert spørsmål har en ‘markør’ som  du kan dra langs linjen. Ved hjelp av dette verktøyet, kan du vekte hvert spørsmål med en tallverdi mellom 0 og 5, som antyder hvor viktig de ulike punktene er for deg (5 betyr høyest vektlegging).
+                Hvert spørsmål har en ‘markør’ som du kan dra langs linjen.
+                Ved hjelp av dette verktøyet, kan du vekte hvert spørsmål med en tallverdi mellom 0 og 10, som antyder
+                hvor viktig de ulike punktene er for deg (10 betyr høyest vektlegging).
+                Noen av spørsmålene har et
+                <OverlayTrigger
+                    trigger={['hover', 'focus']}
+                    placement="right"
+                    overlay={<Popover id="popover-trigger-hover-focus" title="Ekstra informasjon">Mer informasjon</Popover>}>
+                    <Glyphicon glyph="glyphicon glyphicon-info-sign"/>
+                </OverlayTrigger>
+                -ikon ved siden av seg.
+                Ved å holde musepekeren over dette ikonet, kan du få tilgang til mer informasjon om spørsmålet.
+                <br/>
+                <br/>
                 Hvis du benytter deg av Fritt behandlingsvalg (FBV), får du høyere egenandel på reise.
                 Egenandel ved reise er inntil kr. 149,- hver vei uten FBV, og inntil kr. 400,- per vei med FBV.
-                Egenandel for opphold kan variere mellom de ulike institusjonene så det anbefales å kontakte institusjonen direkte for mer informasjon.
+                Egenandel for opphold kan variere mellom de ulike institusjonene så det anbefales å kontakte
+                institusjonen
+                direkte for mer informasjon.
                 <br/>
                 <br/>
                 For ventetider, se linken under.
@@ -102,7 +120,8 @@ class PatientSliders extends Component {
                 <a href={this.state.files.introduction.link}>Klikk her for å se ventetider</a>}
 
         </div>
-    );
+    )
+    ;
 
     getForm = () => (
         <div>
@@ -111,7 +130,7 @@ class PatientSliders extends Component {
             {Object.keys(this.state.files.questions).map((zone, index) => {
 
 
-                let a = this.getForm2(zone);
+                    let a = this.getForm2(zone);
                     return (
                         <div className={"quest"} style={{display: this.state.display[index]}} key={zone}>
                             {index === 0 ? this.showIntro() : null}
@@ -181,14 +200,13 @@ class PatientSliders extends Component {
                         </div>
                     )
                 }
-                else
-                {
+                else {
                     return (
                         <div key={obj.label}>
                             <label>
                                 {obj.label}
                                 <Field
-                                    name={"id"+obj.id}
+                                    name={"id" + obj.id}
                                     component="input"
                                     type={obj.displayAs}
                                     value={obj.id}
@@ -200,7 +218,6 @@ class PatientSliders extends Component {
                     )
                 }
             }
-
         )
     );
 
@@ -274,17 +291,21 @@ class PatientSliders extends Component {
             return (
 
 
-
                 <div>
                     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
                           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
                           crossOrigin="anonymous"/>
-                    <p>{this.state.response.center}</p>
                     {/*<p>Under finner du din id. Denne er tilfeldig generert og kan brukes for å gi tilbakemeling om din behandling</p>
                     <p>{this.state.response.patient_id}</p>*/}
-                    <p>For å skrive ut denne siden, kan du holde inne "ctrl" og samtidig som du trykker på "p". (Command + p for mac) </p>
+                    <p>{this.state.response.center}</p>
                     <Recommendation data={this.state.response}/>
-                    <Button bsStyle="primary" id="back_to_form" onClick={() => this.setState({hasResponse:false})}>{<Glyphicon glyph="chevron-left"/>}Tilbake til undersøkelsen</Button>
+                    <div>
+                        <Button bsStyle="primary" id="back_to_form"
+                                onClick={() => this.setState({hasResponse: false})}>{<Glyphicon glyph="chevron-left"/>}Tilbake
+                            til undersøkelsen</Button>
+                        <Button bsStyle="primary" id="back_to_form" onClick={() => window.print()}>Skriv ut denne
+                            siden</Button>
+                    </div>
                 </div>
             )
         }
