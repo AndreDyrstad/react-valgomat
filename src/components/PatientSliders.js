@@ -82,8 +82,7 @@ class PatientSliders extends Component {
             {/*<p> {this.state.files.introduction.description}</p>*/}
             <p>
 
-                Denne nettsiden er en pilot som er laget i et samarbeid mellom Høgskolen på Vestlandet og Haukeland
-                universitetssjukehus.
+                Denne nettsiden er en pilot som er laget i et samarbeid mellom Høgskolen på Vestlandet og Nasjonal kompetansetjeneste for multippel sklerose.
                 Målet med nettsiden er å lage en digital plattform som kan brukes til fritt rehabiliteringsvalg i
                 spesialisthelsetjenesten.
                 Ved å svare på en rekke spørsmål, får du forslag om hvilke(t) behandlingssted(er) som synes å passe best
