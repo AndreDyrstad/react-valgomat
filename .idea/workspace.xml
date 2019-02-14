@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a99829c2-8080-4b95-b1c8-c6b6a3c71779" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/components/FrontPage.js" afterPath="$PROJECT_DIR$/src/components/FrontPage.js" />
       <change beforePath="$PROJECT_DIR$/src/components/PatientSliders.js" afterPath="$PROJECT_DIR$/src/components/PatientSliders.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -38,7 +36,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FrontPage.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FrontPage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/FrontPage.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
@@ -48,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PatientSliders.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PatientSliders.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/PatientSliders.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="84" column="156" lean-forward="false" selection-start-line="84" selection-start-column="156" selection-end-line="84" selection-end-column="156" />
+            <state relative-caret-position="345">
+              <caret line="94" column="102" lean-forward="false" selection-start-line="94" selection-start-column="102" selection-end-line="94" selection-end-column="102" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -234,8 +232,8 @@
         <option value="$PROJECT_DIR$/src/css/Recommendation.css" />
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/components/Header.js" />
-        <option value="$PROJECT_DIR$/src/components/PatientSliders.js" />
         <option value="$PROJECT_DIR$/src/components/FrontPage.js" />
+        <option value="$PROJECT_DIR$/src/components/PatientSliders.js" />
       </list>
     </option>
   </component>
@@ -363,12 +361,12 @@
       <workItem from="1544007108124" duration="25296000" />
       <workItem from="1547029594196" duration="13188000" />
       <workItem from="1547218599467" duration="74122000" />
-      <workItem from="1549619816992" duration="5989000" />
+      <workItem from="1549619816992" duration="7182000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="275946000" />
+    <option name="totallyTimeSpent" value="277139000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -747,21 +745,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/PatientSliders.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="84" column="156" lean-forward="false" selection-start-line="84" selection-start-column="156" selection-end-line="84" selection-end-column="156" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/FrontPage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="124" lean-forward="false" selection-start-line="9" selection-start-column="124" selection-end-line="9" selection-end-column="124" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/PatientSliders.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="94" column="102" lean-forward="false" selection-start-line="94" selection-start-column="102" selection-end-line="94" selection-end-column="102" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -77,14 +77,12 @@ class PatientSliders extends Component {
 
     showIntro = () => (
         <div className="introduction">
-            {console.log("hei")}
             <h1>{this.state.files.introduction.header}</h1>
             {/*<p> {this.state.files.introduction.description}</p>*/}
             <p>
 
                 Denne nettsiden er en pilot som er laget i et samarbeid mellom Høgskolen på Vestlandet og Nasjonal kompetansetjeneste for multippel sklerose.
-                Målet med nettsiden er å lage en digital plattform som kan brukes til fritt rehabiliteringsvalg i
-                spesialisthelsetjenesten.
+                Målet med nettsiden er å lage en digital plattform som kan brukes til fritt rehabiliteringsvalg i spesialisthelsetjenesten.
                 Ved å svare på en rekke spørsmål, får du forslag om hvilke(t) behandlingssted(er) som synes å passe best
                 med dine behov.
                 Dette kan være til hjelp når din behandler skal søke om rehabilitering for deg.
@@ -93,6 +91,8 @@ class PatientSliders extends Component {
                 Hvert spørsmål har en ‘markør’ som du kan dra langs linjen.
                 Ved hjelp av dette verktøyet, kan du vekte hvert spørsmål med en tallverdi mellom 0 og 10, som antyder
                 hvor viktig de ulike punktene er for deg (10 betyr høyest vektlegging).
+                Alle spørsmålene som får verdien 0, vil ikke bli tatt med i betraktningen når vi anbefaler et behandlingssted.
+                Det er derfor viktig at du gir verdien 0 til alle spørsmålene som IKKE angår deg eller dine behov.
                 Noen av spørsmålene har et
                 <OverlayTrigger
                     trigger={['hover', 'focus']}
