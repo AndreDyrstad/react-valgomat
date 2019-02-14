@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a99829c2-8080-4b95-b1c8-c6b6a3c71779" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/components/PatientSliders.js" afterPath="$PROJECT_DIR$/src/components/PatientSliders.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -49,8 +50,8 @@
       <file leaf-file-name="PatientSliders.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/PatientSliders.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="94" column="102" lean-forward="false" selection-start-line="94" selection-start-column="102" selection-end-line="94" selection-end-column="102" />
+            <state relative-caret-position="210">
+              <caret line="298" column="55" lean-forward="true" selection-start-line="298" selection-start-column="55" selection-end-line="298" selection-end-column="55" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -361,12 +362,12 @@
       <workItem from="1544007108124" duration="25296000" />
       <workItem from="1547029594196" duration="13188000" />
       <workItem from="1547218599467" duration="74122000" />
-      <workItem from="1549619816992" duration="7182000" />
+      <workItem from="1549619816992" duration="7287000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="277139000" />
+    <option name="totallyTimeSpent" value="277244000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -711,14 +712,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Recommendation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/css/Recommendation.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -753,10 +746,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Recommendation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/PatientSliders.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="94" column="102" lean-forward="false" selection-start-line="94" selection-start-column="102" selection-end-line="94" selection-end-column="102" />
+        <state relative-caret-position="210">
+          <caret line="298" column="55" lean-forward="true" selection-start-line="298" selection-start-column="55" selection-end-line="298" selection-end-column="55" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>

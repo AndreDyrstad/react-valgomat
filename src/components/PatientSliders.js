@@ -296,7 +296,6 @@ class PatientSliders extends Component {
                           crossOrigin="anonymous"/>
                     {/*<p>Under finner du din id. Denne er tilfeldig generert og kan brukes for å gi tilbakemeling om din behandling</p>
                     <p>{this.state.response.patient_id}</p>*/}
-                    <Button bsStyle="primary" id="print" onClick={() => window.print()}>Skriv ut denne siden</Button>
                     <p>{this.state.response.center}</p>
                     <Recommendation data={this.state.response}/>
                     <div>
