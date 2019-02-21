@@ -12,7 +12,8 @@ import {Field} from 'react-final-form'
 class PatientSliders extends Component {
     constructor(props) {
         super(props);
-        axios.get('http://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data},
+        //modelling.hvl.no:8020
+        axios.get('http://localhost:5000/patients').then(res => this.setState({files: res.data},
             function stateComplete() {
 
                 Object.keys(this.state.files.questions).forEach((zone, index) => {
@@ -68,7 +69,7 @@ class PatientSliders extends Component {
         this.state.sliders[Object.keys(values)[0]] = values[Object.keys(values)[0]];
         console.log(this.state.sliders);
 
-        axios.post('http://modelling.hvl.no:8020/patients', this.state.sliders).then(res => this.setState({
+        axios.post('http://localhost:5000/patients', this.state.sliders).then(res => this.setState({
             hasResponse: true,
             response: res.data
         }))
@@ -307,7 +308,6 @@ class PatientSliders extends Component {
             )
         }
     }
-
 }
 
 export default PatientSliders

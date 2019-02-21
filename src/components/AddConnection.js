@@ -8,7 +8,7 @@ class AddConnection extends Component{
     constructor(props){
         super(props);
 
-        axios.post('http://modelling.hvl.no:8020/allQuestions',{"entity":"patient"})
+        axios.post('http://modelling.hvl.no:8020/question/all',{"entity":"patient"})
             .then(res => this.setState({files: res.data}))
             .then(res => axios.get('http://modelling.hvl.no:8020/connections'))
             .then(res => this.setState({connections: res.data,isLoading:false}));

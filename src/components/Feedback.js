@@ -62,7 +62,7 @@ class Feedback extends Component{
 
     submitPatientId = () => {
         if(this.patientId.value.length === 10) {
-            axios.post('http://modelling.hvl.no:8020/feedbackQuestions', {'patient_id': this.patientId.value})
+            axios.post('http://modelling.hvl.no:8020/question/feedback', {'patient_id': this.patientId.value})
                 .then(res => this.setState({files: res.data}))
                 .then(res => this.setDefaultValues())
             //axios.post('http://modelling.hvl.no:8020/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
