@@ -11,7 +11,7 @@ class Forms extends Component {
 
     constructor(props) {
         super(props);
-        axios.get('http://localhost:5000/centers').then(res => this.setState({files: res.data, isLoading: false})).then(res => console.log(this.state.files));
+        axios.get('http://modelling.hvl.no:8020/centers').then(res => this.setState({files: res.data, isLoading: false})).then(res => console.log(this.state.files));
         //axios.get('http://modelling.hvl.no:8020/centers').then(res => this.setState({files: res.data}));
 
         this.state = {
@@ -52,7 +52,7 @@ class Forms extends Component {
 
     onSubmit = async values => {
         //axios.post('http://modelling.hvl.no:8020/train', values)
-        axios.post('http://localhost:5000/centers', values)
+        axios.post('http://modelling.hvl.no:8020/centers', values)
             .then(res => this.setState({submitted: true, error: false, showForm: true}))
             .catch(err => this.setState({submitted: true, error: true}))
 
@@ -296,7 +296,7 @@ class Forms extends Component {
             return(
                 <div>
                     <p>Sett inn noe info her</p>
-                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSejA1agmxVhvC6iYvSxURlsVORxinIOU1u6SURy-I8SNCC8Ug/viewform?embedded=true" width="1000" height="788" frameBorder="0" marginHeight="0" marginWidth="200">Laster inn ...</iframe>
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSejA1agmxVhvC6iYvSxURlsVORxinIOU1u6SURy-I8SNCC8Ug/viewform?embedded=true" width="1000" height="1000" frameBorder="0" marginHeight="0" marginWidth="200">Laster inn ...</iframe>
                 </div>
             )
         }
