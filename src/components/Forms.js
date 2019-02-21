@@ -11,7 +11,7 @@ class Forms extends Component {
 
     constructor(props) {
         super(props);
-        axios.get('http://modelling.hvl.no:8020/centers').then(res => this.setState({files: res.data, isLoading: false})).then(res => console.log(this.state.files));
+        axios.get('http://localhost:5000/centers').then(res => this.setState({files: res.data, isLoading: false})).then(res => console.log(this.state.files));
         //axios.get('http://modelling.hvl.no:8020/centers').then(res => this.setState({files: res.data}));
 
         this.state = {
@@ -20,7 +20,8 @@ class Forms extends Component {
             error: true,
             display: [],
             displayValue: 0,
-            isLoading: true
+            isLoading: true,
+            showForm: false
         };
 
         for (let k in center.questions) this.state.display.push("none");
@@ -51,8 +52,8 @@ class Forms extends Component {
 
     onSubmit = async values => {
         //axios.post('http://modelling.hvl.no:8020/train', values)
-        axios.post('http://modelling.hvl.no:8020/centers', values)
-            .then(res => this.setState({submitted: true, error: false}))
+        axios.post('http://localhost:5000/centers', values)
+            .then(res => this.setState({submitted: true, error: false, showForm: true}))
             .catch(err => this.setState({submitted: true, error: true}))
 
     };
@@ -222,74 +223,83 @@ class Forms extends Component {
     );
 
     render() {
+        if(this.state.showForm === false) {
+            return (
 
-        return (
+                <div>
 
-            <div>
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+                          crossOrigin="anonymous"/>
 
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-                      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-                      crossOrigin="anonymous"/>
+                    <Form
+                        onSubmit={this.onSubmit}
+                        initialValues={{}}
+                        render={({handleSubmit, form, submitting, pristine, values}) => (
 
-                <Form
-                    onSubmit={this.onSubmit}
-                    initialValues={{}}
-                    render={({handleSubmit, form, submitting, pristine, values}) => (
+                            <form onSubmit={handleSubmit}>
+                                <div className="test">
+                                    <div className={"screen"}>
 
-                        <form onSubmit={handleSubmit}>
-                        <div className="test">
-                            <div className={"screen"}>
+                                        {this.state.files === undefined ? <div className="loader"/> : this.getForm()}
 
-                                {this.state.files === undefined ? <div className="loader"/> : this.getForm()}
+                                        {this.state.submitted && this.getDone()}
+                                    </div>
 
-                                {this.state.submitted && this.getDone()}
-                            </div>
+                                </div>
+                                <div className="buttons">
+                                    <div>
 
-                        </div>
-                            <div className="buttons">
-                                <div>
+                                        {this.state.displayValue === this.state.display.length - 1 ?
+                                            <Button type="submit" bsStyle="primary" id="send"
+                                                    disabled={submitting}>Send</Button> : false
+                                        }
+                                    </div>
 
-                                    {this.state.displayValue === this.state.display.length - 1 ?
-                                        <Button type="submit" bsStyle="primary" id="send"
-                                                disabled={submitting}>Send</Button> : false
+                                    {this.state.displayValue === 0 ? <Button bsStyle="primary" disabled onClick={() => {
+                                            this.changeDisplay(-1);
+                                            window.scrollTo(0, 0)
+                                        }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button> :
+
+                                        <Button bsStyle="primary" onClick={() => {
+                                            this.changeDisplay(-1);
+                                            window.scrollTo(0, 0)
+                                        }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button>}
+
+
+                                    {this.state.displayValue !== this.state.display.length - 1 ?
+
+                                        <Button bsStyle="primary" onClick={() => {
+                                            this.changeDisplay(1);
+                                            window.scrollTo(0, 0)
+                                        }}
+                                                id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button> :
+
+                                        <Button bsStyle="primary" disabled onClick={() => {
+                                            this.changeDisplay(1);
+                                            window.scrollTo(0, 0)
+                                        }}
+                                                id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button>
+
                                     }
+
+
                                 </div>
 
-                                {this.state.displayValue === 0 ? <Button bsStyle="primary" disabled onClick={() => {
-                                        this.changeDisplay(-1);
-                                        window.scrollTo(0, 0)
-                                    }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button> :
-
-                                    <Button bsStyle="primary" onClick={() => {
-                                        this.changeDisplay(-1);
-                                        window.scrollTo(0, 0)
-                                    }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button>}
-
-
-                                {this.state.displayValue !== this.state.display.length - 1 ?
-
-                                    <Button bsStyle="primary" onClick={() => {
-                                        this.changeDisplay(1);
-                                        window.scrollTo(0, 0)
-                                    }}
-                                            id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button> :
-
-                                    <Button bsStyle="primary" disabled onClick={() => {
-                                        this.changeDisplay(1);
-                                        window.scrollTo(0, 0)
-                                    }}
-                                            id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button>
-
-                                }
-
-
-                            </div>
-
-                        </form>
-                    )}
-                />
-            </div>
-        )
+                            </form>
+                        )}
+                    />
+                </div>
+            )
+        }
+        else{
+            return(
+                <div>
+                    <p>Sett inn noe info her</p>
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSejA1agmxVhvC6iYvSxURlsVORxinIOU1u6SURy-I8SNCC8Ug/viewform?embedded=true" width="1000" height="788" frameBorder="0" marginHeight="0" marginWidth="200">Laster inn ...</iframe>
+                </div>
+            )
+        }
     };
 }
 
