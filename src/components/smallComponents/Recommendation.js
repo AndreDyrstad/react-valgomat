@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Place from './Place';
-import '../css/Recommendation.css';
+import '../../css/Recommendation.css';
 
 class Recommendation extends Component {
 

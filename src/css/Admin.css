@@ -3,6 +3,11 @@
     margin-left: 5%;
 }
 
+.admin_outer_container_tables{
+    width: 90%;
+    margin-left: 5%;
+}
+
 .manage_outer_container{
     display: flex;
     flex-direction: row;

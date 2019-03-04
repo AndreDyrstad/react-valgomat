@@ -1,35 +1,23 @@
 import React, {Component} from 'react'
 import {Form} from 'react-final-form'
 import axios from "axios/index";
-import {Button, Popover, OverlayTrigger, Glyphicon, Alert} from 'react-bootstrap'
-import Recommendation from "./Recommendation";
-import '../css/Header.css'
-import '../css/New.css'
+import {Button, Glyphicon} from 'react-bootstrap'
+import Recommendation from "./smallComponents/Recommendation";
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'
 import {Field} from 'react-final-form'
+import InformationBox from "./smallComponents/InformationBox";
+import Response from "./smallComponents/Response"
 
 class PatientSliders extends Component {
     constructor(props) {
         super(props);
         //modelling.hvl.no:8020
-        axios.get('http://modelling.hvl.no:8020/patients').then(res => this.setState({files: res.data},
-            function stateComplete() {
-
-                Object.keys(this.state.files.questions).forEach((zone, index) => {
-                    this.state.files.questions[zone].forEach((obj, idx) => {
-                        a[obj.id] = 0;
-                    })
-                });
-
-                for (let k in this.state.files.questions) this.state.display.push("none");
-                this.state.display[0] = "block";
-
-                this.forceUpdate();
-                this.setState({isLoading: false})
-
-            }.bind(this)));
         let a = {};
+
+        axios.get('http://modelling.hvl.no:8020/patients')
+            .then(res => this.setState({files: res.data}))
+            .then(res => this.initSlidersAndPages(a));
 
         this.state = {
             isHovering: false,
@@ -37,12 +25,28 @@ class PatientSliders extends Component {
             display: [],
             displayValue: 0,
             sliders: a,
+            error: false,
             isLoading: true
         };
 
     }
 
-    changeDisplay = (value) => {
+    initSlidersAndPages = (a) => {
+
+        Object.keys(this.state.files.questions).forEach((zone, index) => {
+            this.state.files.questions[zone].forEach((obj, idx) => {
+                a[obj.id] = 0;
+            })
+        });
+
+        for (let k in this.state.files.questions) this.state.display.push("none");
+        this.state.display[0] = "block";
+
+        this.setState({isLoading: false})
+
+    };
+
+    changeDisplayedPage = (value) => {
 
         let item = this.state.display;
         let index = this.state.displayValue;
@@ -63,18 +67,17 @@ class PatientSliders extends Component {
         }
     };
 
-
     onSubmit = async values => {
 
         this.state.sliders[Object.keys(values)[0]] = values[Object.keys(values)[0]];
         console.log(this.state.sliders);
 
-        axios.post('http://modelling.hvl.no:8020/patients', this.state.sliders).then(res => this.setState({
+        axios.post('http://localhost:5000/patients', this.state.sliders).then(res => this.setState({
             hasResponse: true,
             response: res.data
         }))
+            .catch(err => this.setState({error:true}))
     };
-
 
     showIntro = () => (
         <div className="introduction">
@@ -95,12 +98,7 @@ class PatientSliders extends Component {
                 Alle spørsmålene som får verdien 0, vil ikke bli tatt med i betraktningen når vi anbefaler et behandlingssted.
                 Det er derfor viktig at du gir verdien 0 til alle spørsmålene som IKKE angår deg eller dine behov.
                 Noen av spørsmålene har et
-                <OverlayTrigger
-                    trigger={['hover', 'focus']}
-                    placement="right"
-                    overlay={<Popover id="popover-trigger-hover-focus" title="Ekstra informasjon">Mer informasjon</Popover>}>
-                    <Glyphicon glyph="glyphicon glyphicon-info-sign"/>
-                </OverlayTrigger>
+                <InformationBox header="Mer information" text="Du kan lese mer informasjon i disse boksene"/>
                 -ikon ved siden av seg.
                 Ved å holde musepekeren over dette ikonet, kan du få tilgang til mer informasjon om dette spørsmålet.
                 <br/>
@@ -123,19 +121,16 @@ class PatientSliders extends Component {
     )
     ;
 
-    getForm = () => (
+    showFullPage = () => (
         <div>
 
-
             {Object.keys(this.state.files.questions).map((zone, index) => {
-
-
-                    let a = this.getForm2(zone);
+                    let questionPage = this.showQuestionPage(zone);
                     return (
                         <div className={"quest"} style={{display: this.state.display[index]}} key={zone}>
                             {index === 0 ? this.showIntro() : null}
                             <h2>{zone}</h2>
-                            <div>{a}</div>
+                            <div>{questionPage}</div>
 
                         </div>
                     )
@@ -144,32 +139,8 @@ class PatientSliders extends Component {
         </div>
     );
 
-    infoBox = (header, text) => (
-        <OverlayTrigger
-            trigger={['hover', 'focus']}
-            placement="right"
-            overlay={<Popover id="popover-trigger-hover-focus" title={header}>{text}</Popover>}
-        >
-            <Glyphicon glyph="glyphicon glyphicon-info-sign"/>
-        </OverlayTrigger>
 
-    );
-
-    getError = () => {
-        return (
-            <div className="stick">
-                <Alert bsStyle="danger">
-                    <strong>Obs!</strong>
-                    <p>Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere.</p>
-                    <a href="http://valgomat.herokuapp.com/patient">Klikk her for å bytte til http (kan kanskje fikse
-                        problemet)</a>
-
-                </Alert>
-            </div>
-        )
-    };
-
-    handleOnChange = (obj, value) => {
+    handleSliderChange = (obj, value) => {
         let a = this.state.sliders;
         a[obj] = value;
         this.setState({
@@ -177,7 +148,7 @@ class PatientSliders extends Component {
         })
     };
 
-    getForm2 = (zone) => (
+    showQuestionPage = (zone) => (
         this.state.files.questions[zone].map((obj, idx) => {
 
                 if (obj.displayAs === "slider") {
@@ -185,14 +156,14 @@ class PatientSliders extends Component {
                         <div className={"question"} key={obj.label}>
                             <label>
                                 {obj.label}
-                                {obj.info === null ? false : this.infoBox(obj.label, obj.info)}
+                                {obj.info === null ? false : <InformationBox header={obj.label} text={obj.info}/>}
 
                                 <Slider
                                     className="slider"
                                     value={this.state.sliders[obj.id]}
                                     orientation="horizontal"
                                     max={10}
-                                    onChange={(e) => this.handleOnChange(obj.id, e)}
+                                    onChange={(e) => this.handleSliderChange(obj.id, e)}
                                 />
                                 <div className='sliderValue'>{this.state.sliders[obj.id]}</div>
 
@@ -212,7 +183,7 @@ class PatientSliders extends Component {
                                     value={obj.id}
 
                                 />{' '}
-                                {obj.extra === undefined ? false : this.infoBox(obj.label, obj.extra)}
+                                {obj.info === null ? false : <InformationBox header={obj.label} text={obj.info}/>}
                             </label>
                         </div>
                     )
@@ -238,12 +209,14 @@ class PatientSliders extends Component {
                         render={({handleSubmit, form, submitting, pristine, values}) => (
 
                             <form onSubmit={handleSubmit}>
-                                <div className={"test"}>
+                                <div className={"outer-container"}>
 
                                     <div className={"screen"}>
-                                        {this.state.isLoading ? <div className="loader"/> : this.getForm()}
+                                        {this.state.isLoading ? <div className="loader"/> : this.showFullPage()}
                                     </div>
                                 </div>
+                                {this.state.error ? <Response type="danger" header="Obs!" message="Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere."/>
+                                    : false}
                                 <div className="buttons">
                                     <div>
 
@@ -254,12 +227,12 @@ class PatientSliders extends Component {
                                     </div>
 
                                     {this.state.displayValue === 0 ? <Button bsStyle="primary" disabled onClick={() => {
-                                            this.changeDisplay(-1);
+                                            this.changeDisplayedPage(-1);
                                             window.scrollTo(0, 0)
                                         }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button> :
 
                                         <Button bsStyle="primary" onClick={() => {
-                                            this.changeDisplay(-1);
+                                            this.changeDisplayedPage(-1);
                                             window.scrollTo(0, 0)
                                         }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button>}
 
@@ -267,13 +240,13 @@ class PatientSliders extends Component {
                                     {this.state.displayValue !== this.state.display.length - 1 ?
 
                                         <Button bsStyle="primary" onClick={() => {
-                                            this.changeDisplay(1);
+                                            this.changeDisplayedPage(1);
                                             window.scrollTo(0, 0)
                                         }}
                                                 id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button> :
 
                                         <Button bsStyle="primary" disabled onClick={() => {
-                                            this.changeDisplay(1);
+                                            this.changeDisplayedPage(1);
                                             window.scrollTo(0, 0)
                                         }}
                                                 id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button>
@@ -289,8 +262,6 @@ class PatientSliders extends Component {
             )
         } else {
             return (
-
-
                 <div>
                     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
                           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"

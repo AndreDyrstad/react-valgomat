@@ -1,13 +1,10 @@
-.buttons{
-    display: block !important;
-    position: relative !important;
-}
+/*General screen and div sizes*/
 
 label{
     width: 100% !important;
 }
 
-.test{
+.outer-container{
     display: flex;
     flex-direction: row;
 }
@@ -21,10 +18,15 @@ span{
     padding-left: 10px;
 }
 
+/*Introduction div*/
+
 .introduction{
     border-bottom: #222222 solid 2px;
     padding-bottom: 20px;
 }
+
+
+/*Slider*/
 
 .rangeslider-horizontal .rangeslider__fill{
     background-color: #337ab7 !important;
@@ -40,6 +42,9 @@ span{
     width: 50%;
 }
 
+
+/*Loading wheel*/
+
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
@@ -54,7 +59,100 @@ span{
     100% { transform: rotate(360deg); }
 }
 
+/*Navigation bar
+.navbar-default{
+    background-color:#337ab7 !important;
+    border-color: black !important;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white !important;
+    border-color: red;
+}
+
+.navbar-default .navbar-brand {
+    color: white !important;
+}
+*/
+/*Buttons*/
+
+.buttons{
+    display: block !important;
+    position: relative !important;
+}
+
 #back_to_form{
     margin-left: 40%;
     margin-top: 50px;
+}
+
+#back{
+    margin-right: 30px;
+    width: 100px;
+    height: 40px;
+}
+
+#forward{
+    width: 100px;
+    height: 40px;
+}
+
+#send{
+    width: 230px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    position: fixed;
+    margin: auto;
+    width: 75%;
+    padding: 30px;
+    text-align: center;
+    bottom: 0;
+
+}
+
+/*Phone scaling CSS*/
+
+@media only screen and (max-width: 550px) {
+
+    .buttons {
+        position: relative;
+        margin: auto;
+        width: 100%;
+        text-align: center;
+
+    }
+
+    #back {
+        margin-right: 0;
+        width: 100px;
+        height: 40px;
+    }
+
+    .outer-container {
+        width: 96vw;
+        margin-left: 2%;
+    }
+
+    #send{
+        width: 200px;
+        height: 40px;
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    label {
+        width: 100%;
+    }
+
+    .buttons {
+        position: relative;
+        width: 100%;
+        padding: 30px;
+        text-align: center;
+    }
+
 }

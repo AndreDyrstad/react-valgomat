@@ -13,7 +13,7 @@ class NewQuestion extends Component {
 
     render(){
         return(
-            <div>
+            <div className="admin_outer_container">
                 <h2>Fyll ut feltene under for å legge til et nytt spørsmål</h2>
                 <Form
                     onSubmit={this.onSubmit}

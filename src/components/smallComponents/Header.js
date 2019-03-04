@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Nav, NavDropdown, NavItem, MenuItem, Navbar } from 'react-bootstrap'
+import {Nav, NavDropdown, NavItem, MenuItem, Navbar} from 'react-bootstrap'
 
 
 class FrontPage extends Component {
@@ -11,9 +11,8 @@ class FrontPage extends Component {
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
                       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
                       crossOrigin="anonymous"/>
-                <div>
 
-                    <Navbar>
+                    <Navbar bg="dark" variant="dark">
                         <Navbar.Header>
                             <Navbar.Brand>
                                 <a href="/">Valgomat for MS-pasienter</a>
@@ -40,9 +39,8 @@ class FrontPage extends Component {
                                 <MenuItem href="/admin/center" eventKey={5.5}>Oversikt over behandlingssteder</MenuItem>
                             </NavDropdown>
                         </Nav>
-                    </Navbar>
+                </Navbar>
 
-                </div>
             </div>
         )
     }

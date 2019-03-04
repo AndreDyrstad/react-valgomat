@@ -44,7 +44,7 @@ class ReviewFeedback extends Component{
 
     render(){
         return(
-            <div>
+            <div className="admin_outer_container_tables">
                 <h1>Oversikt over tilbakemeldinger</h1>
 
                 {this.state.isLoading ? null : this.testTable()}

@@ -132,7 +132,7 @@ class ManageQuestions extends Component {
 
     render() {
         return (
-            <div>
+            <div className="admin_outer_container">
                 <div>
                     <strong>Velg hvilke spørsmål du vil forandre på</strong>
                     <select ref={(input) => this.selectedEntity = input} onChange={() => this.getQuestions()}>

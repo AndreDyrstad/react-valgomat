@@ -1,18 +1,18 @@
 import React, {Component} from 'react'
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
-import '../css/Header.css'
-import '../css/New.css'
-import {Button, Popover, OverlayTrigger, Glyphicon, Alert} from 'react-bootstrap'
+import {Button, Glyphicon, Alert} from 'react-bootstrap'
 import center from '../json/centers'
+import InformationBox from "./smallComponents/InformationBox";
+import Response from "./smallComponents/Response"
 
 
 class Forms extends Component {
 
     constructor(props) {
         super(props);
-        axios.get('http://modelling.hvl.no:8020/centers').then(res => this.setState({files: res.data, isLoading: false})).then(res => console.log(this.state.files));
-        //axios.get('http://modelling.hvl.no:8020/centers').then(res => this.setState({files: res.data}));
+        axios.get('http://modelling.hvl.no:8020/centers')
+            .then(res => this.setState({files: res.data, isLoading: false}));
 
         this.state = {
             isHovering: false,
@@ -29,7 +29,7 @@ class Forms extends Component {
 
     }
 
-    changeDisplay = (value) => {
+    changeDisplayedPage = (value) => {
 
         let item = this.state.display;
         let index = this.state.displayValue;
@@ -51,8 +51,8 @@ class Forms extends Component {
     };
 
     onSubmit = async values => {
-        //axios.post('http://modelling.hvl.no:8020/train', values)
-        axios.post('http://modelling.hvl.no:8020/centers', values)
+        axios.post('http://localhost:5000/centers', values)
+        //axios.post('http://modelling.hvl.no:8020/centers', values)
             .then(res => this.setState({submitted: true, error: false, showForm: true}))
             .catch(err => this.setState({submitted: true, error: true}))
 
@@ -66,11 +66,11 @@ class Forms extends Component {
 
     );
 
-    getForm = () => (
+    showFullPage = () => (
         <div>
 
             {Object.keys(this.state.files.questions).map((zone, index) => {
-                    let a = this.getForm2(zone);
+                    let a = this.showPage(zone);
                     return (
                         <div className={"quest"} style={{display: this.state.display[index]}} key={zone}>
                         {index === 0 ? this.showIntro() : null}
@@ -84,55 +84,20 @@ class Forms extends Component {
         </div>
     );
 
-    infoBox = (header, text) => (
-        <OverlayTrigger
-            trigger={['hover', 'focus']}
-            placement="right"
-            overlay={<Popover id="popover-trigger-hover-focus" title={header}>{text}</Popover>}
-        >
-            <Glyphicon glyph="glyphicon glyphicon-info-sign"/>
-        </OverlayTrigger>
-
-    );
-
-    getDone = () => {
+    showResponse = () => {
         if (this.state.error) {
             return (
-                <div className="stick">
-                    <Alert bsStyle="danger">
-                        <strong>Obs!</strong>
-                        <p>Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere.</p>
-                    </Alert>
-                </div>
+                <Response type="danger" header="Obs!" message="Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere."/>
             )
         }
         else {
             return (
-                <div className="stick">
-                    <Alert bsStyle="success">
-                        <strong>Godkjent!</strong>
-                        <p>Tusen takk for ditt svar.</p>
-                    </Alert>
-                </div>
+                    <Response type="success" header="Godkjent!" message="Tusen takk for ditt svar!"/>
             )
         }
     };
 
-    getError = () => {
-        return (
-            <div className="stick">
-                <Alert bsStyle="danger">
-                    <strong>Obs!</strong>
-                    <p>Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere.</p>
-                    <a href="http://valgomat.herokuapp.com/patient">Klikk her for å bytte til http (kan kanskje fikse
-                        problemet)</a>
-
-                </Alert>
-            </div>
-        )
-    };
-
-    getForm2 = (zone) => (
+    showPage = (zone) => (
 
         //this.state.files.questions[zone].map((obj, idx) => {
         this.state.files.questions[zone].map((obj, idx) => {
@@ -149,7 +114,7 @@ class Forms extends Component {
                                     style={{"width":"50vw","height":"30px"}}
 
                                 />{' '}
-                                {obj.info === null ? false : this.infoBox(obj.label, obj.info)}
+                                {obj.info === null ? false : <InformationBox header={obj.label} text={obj.info}/>}
                         </div>
 
                     )
@@ -161,7 +126,7 @@ class Forms extends Component {
 
                         <div key={obj.label}>
                             <b>{obj.label}</b>
-                            {obj.info === null ? false : this.infoBox(obj.label, obj.info)}
+                            {obj.info === null ? false : <InformationBox header={obj.label} text={obj.info}/>}
                             <label>
                                 <Field
                                     name={"id"+obj.id}
@@ -198,7 +163,7 @@ class Forms extends Component {
                                 value={obj.id}
                                 style={{"width":"70vw","height":"250px"}}
                             />{' '}
-                            {obj.info === null ? false : this.infoBox(obj.label, obj.info)}
+                            {obj.info === null ? false : <InformationBox header={obj.label} text={obj.info}/>}
                     </div>
                 )
             }
@@ -214,7 +179,7 @@ class Forms extends Component {
 
                             />{' '}
                             {obj.label}
-                            {obj.info === null ? false : this.infoBox(obj.label, obj.info)}
+                            {obj.info === null ? false : <InformationBox header={obj.label} text={obj.info}/>}
                         </label>
                     </div>
                 )
@@ -238,12 +203,12 @@ class Forms extends Component {
                         render={({handleSubmit, form, submitting, pristine, values}) => (
 
                             <form onSubmit={handleSubmit}>
-                                <div className="test">
+                                <div className="outer-container">
                                     <div className={"screen"}>
 
-                                        {this.state.files === undefined ? <div className="loader"/> : this.getForm()}
+                                        {this.state.files === undefined ? <div className="loader"/> : this.showFullPage()}
 
-                                        {this.state.submitted && this.getDone()}
+                                        {this.state.submitted && this.showResponse()}
                                     </div>
 
                                 </div>
@@ -257,12 +222,12 @@ class Forms extends Component {
                                     </div>
 
                                     {this.state.displayValue === 0 ? <Button bsStyle="primary" disabled onClick={() => {
-                                            this.changeDisplay(-1);
+                                            this.changeDisplayedPage(-1);
                                             window.scrollTo(0, 0)
                                         }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button> :
 
                                         <Button bsStyle="primary" onClick={() => {
-                                            this.changeDisplay(-1);
+                                            this.changeDisplayedPage(-1);
                                             window.scrollTo(0, 0)
                                         }} id="back"> <Glyphicon glyph="chevron-left"/> Tilbake</Button>}
 
@@ -270,22 +235,19 @@ class Forms extends Component {
                                     {this.state.displayValue !== this.state.display.length - 1 ?
 
                                         <Button bsStyle="primary" onClick={() => {
-                                            this.changeDisplay(1);
+                                            this.changeDisplayedPage(1);
                                             window.scrollTo(0, 0)
                                         }}
                                                 id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button> :
 
                                         <Button bsStyle="primary" disabled onClick={() => {
-                                            this.changeDisplay(1);
+                                            this.changeDisplayedPage(1);
                                             window.scrollTo(0, 0)
                                         }}
                                                 id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button>
 
                                     }
-
-
                                 </div>
-
                             </form>
                         )}
                     />

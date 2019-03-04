@@ -77,7 +77,7 @@ function registerValidSW(swUrl) {
       };
     })
     .catch(error => {
-      console.error('Error during service worker registration:', error);
+      console.error('Response during service worker registration:', error);
     });
 }
 

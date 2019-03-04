@@ -280,7 +280,7 @@ class Patients extends Component {
     firstChanged = (newState) => {
         if (newState.length > this.state.first.length) {
             if (this.state.first.length > 1) {
-                console.log("Error")
+                console.log("Response")
             }
             else {
                 this.setState({
@@ -299,7 +299,7 @@ class Patients extends Component {
         console.log(this.state.second);
         if (newState.length > this.state.second.length) {
             if (this.state.second.length > 2) {
-                console.log("Error")
+                console.log("Response")
             }
             else {
                 this.setState({

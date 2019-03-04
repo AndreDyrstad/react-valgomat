@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Centers from './components/Forms'
-import Header from './components/Header'
+import Header from './components/smallComponents/Header'
 import PatientSliders from './components/PatientSliders'
 import Feedback from './components/Feedback'
 import NewQuestion from './components/AddQuestion'
@@ -9,9 +9,8 @@ import ManageQuestions from './components/ManageQuestions'
 import ReviewFeedback from './components/ReviewFeedback'
 import FrontPage from './components/FrontPage'
 import CenterInformation from './components/CenterInformation'
-import './css/Header.css';
-import './css/Check.css';
 import './css/Admin.css';
+import './css/New.css';
 
 
 import {BrowserRouter as Router, Route} from "react-router-dom";

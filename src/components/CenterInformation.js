@@ -45,7 +45,7 @@ class CenterInformation extends Component{
 
     render(){
         return(
-            <div>
+            <div className="admin_outer_container_tables">
                 <h1>Oversikt over behandlingssteder</h1>
 
                 {this.state.isLoading ? null : this.testTable()}

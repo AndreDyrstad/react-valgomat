@@ -22,7 +22,7 @@ class Place extends Component{
         return(
             <div className="place">
                 <h2>{this.props.name}</h2>
-                <p>{this.props.probability}/100</p>
+                <p>{this.props.probability}</p>
                 <a href={this.props.link}>Link til behandlingsstedet</a>
                 <p>{this.props.information}</p>
                 <strong>Du ble anbefalt dette senteret fordi de tilbyr:</strong>

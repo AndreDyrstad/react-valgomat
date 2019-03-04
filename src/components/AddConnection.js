@@ -62,7 +62,7 @@ class AddConnection extends Component{
 
     render(){
         return(
-            <div>
+            <div className="admin_outer_container_tables">
                 <select ref = {(input)=> this.connection1 = input}>
                     {this.state.isLoading ? null : this.showQuestions()}
                 </select>
