@@ -13,7 +13,6 @@ class ReviewFeedback extends Component{
         this.state = {
             isLoading: true
         }
-
     }
 
     testTable = () => (

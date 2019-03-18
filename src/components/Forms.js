@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
-import {Button, Glyphicon, Alert} from 'react-bootstrap'
+import {Button, Glyphicon} from 'react-bootstrap'
 import center from '../json/centers'
 import InformationBox from "./smallComponents/InformationBox";
 import Response from "./smallComponents/Response"
@@ -51,7 +51,7 @@ class Forms extends Component {
     };
 
     onSubmit = async values => {
-        axios.post('http://localhost:5000/centers', values)
+        axios.post('http://modelling.hvl.no:8020/centers', values)
         //axios.post('http://modelling.hvl.no:8020/centers', values)
             .then(res => this.setState({submitted: true, error: false, showForm: true}))
             .catch(err => this.setState({submitted: true, error: true}))

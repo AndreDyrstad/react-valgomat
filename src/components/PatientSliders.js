@@ -20,7 +20,6 @@ class PatientSliders extends Component {
             .then(res => this.initSlidersAndPages(a));
 
         this.state = {
-            isHovering: false,
             hasResponse: false,
             display: [],
             displayValue: 0,
@@ -28,7 +27,6 @@ class PatientSliders extends Component {
             error: false,
             isLoading: true
         };
-
     }
 
     initSlidersAndPages = (a) => {
@@ -72,7 +70,7 @@ class PatientSliders extends Component {
         this.state.sliders[Object.keys(values)[0]] = values[Object.keys(values)[0]];
         console.log(this.state.sliders);
 
-        axios.post('http://localhost:5000/patients', this.state.sliders).then(res => this.setState({
+        axios.post('http://modelling.hvl.no:8020/centers', this.state.sliders).then(res => this.setState({
             hasResponse: true,
             response: res.data
         }))
@@ -118,8 +116,7 @@ class PatientSliders extends Component {
                 <a href={this.state.files.introduction.link}>Klikk her for å se ventetider</a>}
 
         </div>
-    )
-    ;
+    );
 
     showFullPage = () => (
         <div>
@@ -250,10 +247,7 @@ class PatientSliders extends Component {
                                             window.scrollTo(0, 0)
                                         }}
                                                 id="forward"> Neste <Glyphicon glyph="chevron-right"/> </Button>
-
                                     }
-
-
                                 </div>
                             </form>
                         )}

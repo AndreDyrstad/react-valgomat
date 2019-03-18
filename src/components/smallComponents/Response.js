@@ -11,9 +11,9 @@ class Response extends Component{
 
         return(
             <div className="stick">
-                <Alert bsStyle="danger">
-                    <strong>Obs!</strong>
-                    <p>Det ser ut som at serverene våre har gått ned. Vennligst prøv igjen senere.</p>
+                <Alert bsStyle={this.props.type}>
+                    <strong>{this.props.header}</strong>
+                    <p>{this.props.message}</p>
                     {/*<a href="http://valgomat.herokuapp.com/patient">Klikk her for å bytte til http (kan kanskje fikse
                         problemet)</a>*/}
 

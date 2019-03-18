@@ -57,7 +57,7 @@ class ManageQuestions extends Component {
     removeFromList = (obj) => {
         this.setState({isLoading:true});
         let newState = this.state.selectedQuestions;
-        let newCategory = this.state.categories
+        let newCategory = this.state.categories;
 
         for (let i in newState[this.selectedCategory.value]) {
             for (let j in obj.questions) {

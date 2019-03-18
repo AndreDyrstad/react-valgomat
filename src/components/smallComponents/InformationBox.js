@@ -8,7 +8,6 @@ class InformationBox extends Component{
     }
 
     render(){
-
         return(
             <OverlayTrigger
                 trigger={['hover', 'focus']}
