@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {Form, Field} from 'react-final-form'
+import {Button} from 'react-bootstrap'
 
 class ManageQuestions extends Component {
 
@@ -160,9 +161,9 @@ class ManageQuestions extends Component {
                                         value="category"
                                     />{' '}
                                 </label>
-                                <button type="submit" disabled={submitting || pristine}>
+                                <Button bsStyle="primary" type="submit" disabled={submitting || pristine}>
                                     Legg til kategori
-                                </button>
+                                </Button>
                             </form>
                         )}
                     />
@@ -196,6 +197,7 @@ class ManageQuestions extends Component {
                     Du kan velge spørsmål i den ventre tabellen og deretter klikke "Legg til spørsmål i listen" for å legge de til. <br/>
                     Ved å holde "ctrl" på Windows eller "cmd" på macOS, mens du klikker på et spørsmål, kan du velge flere spørsmål på en gang. <br/>
                     Hvis du vil fjerne noen spørsmål fra spørreundersøkelsen, kan du velge spørsmål i den høyre listen og trykke "Fjern spørsmål fra listen". <br/>
+                    For å lagre endringene klikker du "Oppdater spørsmålslisten" på bunnen av siden
                     For å endre kategori/spørsmålstype, se steg 3.
                 </p>
                 <div className="manage_outer_container">
@@ -213,9 +215,9 @@ class ManageQuestions extends Component {
                                         {this.state.isLoading ? null : this.showAllQuestions()}
                                     </Field>
                                     <div className="buttons">
-                                        <button type="submit" disabled={submitting || pristine}>
+                                        <Button bsStyle="primary" type="submit" disabled={submitting || pristine}>
                                             Legg til spørsmål i listen
-                                        </button>
+                                        </Button>
                                     </div>
                                 </form>
                             )}
@@ -232,9 +234,9 @@ class ManageQuestions extends Component {
                                         {this.state.isLoading || this.selectedCategory.value === "Velg kategori" ? null : this.showSelectedQuestions()}
                                     </Field>
                                     <div className="buttons">
-                                        <button type="submit" disabled={submitting || pristine}>
+                                        <Button bsStyle="primary" type="submit" disabled={submitting || pristine}>
                                             Fjern spørsmål fra listen
-                                        </button>
+                                        </Button>
                                     </div>
                                 </form>
                             )}
@@ -243,7 +245,7 @@ class ManageQuestions extends Component {
 
                 </div>
                 <div>
-                    <button className="submit_questions" onClick={this.submit}>Oppdater spørsmålslisten</button>
+                    <Button bsStyle="primary" className="submit_questions" onClick={this.submit}>Oppdater spørsmålslisten</Button>
                 </div>
             </div>
 

@@ -11,6 +11,8 @@
 .manage_outer_container{
     display: flex;
     flex-direction: row;
+    padding-bottom: 20px;
+    padding-top: 20px;
 }
 
 .submit_questions{
@@ -40,7 +42,7 @@ select[multiple], select[size]{
     flex-direction: column;
 }
 
-.display_box, .add_category, .manage_outer_container{
+.display_box, .add_category{
     padding-bottom: 20px;
     padding-top: 20px;
     border-bottom: 1px solid black;
