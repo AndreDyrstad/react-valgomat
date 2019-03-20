@@ -272,7 +272,6 @@ class Forms extends Component {
         else{
             return(
                 <div>
-                    <p>Sett inn noe info her</p>
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSejA1agmxVhvC6iYvSxURlsVORxinIOU1u6SURy-I8SNCC8Ug/viewform?embedded=true" width="1000" height="1000" frameBorder="0" marginHeight="0" marginWidth="200">Laster inn ...</iframe>
                 </div>
             )
