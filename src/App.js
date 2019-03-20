@@ -22,7 +22,7 @@ class App extends Component {
 
         return (
             <div className="App">
-                <Header/>
+                {/*<Header/>*/}
                 <div className="outer_container">
                     <Router>
                         <Route exact path="/" component={FrontPage} />

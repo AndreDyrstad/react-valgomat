@@ -61,7 +61,22 @@ class Forms extends Component {
     showIntro = () => (
         <div style={this.divStyle}>
             <h1>{this.state.files.introduction.header}</h1>
-            <p> {this.state.files.introduction.description}</p>
+            {/*<p> {this.state.files.introduction.description}</p>*/}
+            <p>
+                Denne nettsiden er en pilot som er laget i et samarbeid mellom Høgskolen på Vestlandet og Nasjonal kompetansetjeneste for multippel sklerose.
+                Målet med nettsiden er å lage en digital plattform som kan brukes til fritt rehabiliteringsvalg i spesialisthelsetjenesten.
+                For å oppnå dette, trenger vi informasjon om alle rehabiliteringssentre i Norge som tilbyr behandling innenfor MS.
+                Vi ber dere derfor om å gjennomføre denne kartleggingen for å forbedre dette tilbudet.
+                <br/>
+                <br/>
+                Kartleggingen gjennomføres ved å svare på spørsmålene under. For å få best mulig oversikt over deres tilbud, ber vi dere om å svare på så mange spørsmål som mulig.
+                Noen av spørsmålene har et
+                <InformationBox header="Mer information" text="Du kan lese mer informasjon i disse boksene"/>
+                -ikon ved siden av seg. Ved å holde musepekeren over dette ikonet, kan du få tilgang til mer informasjon om dette spørsmålet.
+                <br/>
+                <br/>
+                Informasjonen dere gir kan kun tilgjengelig for Nasjonal kompetansetjeneste for multippel sklerose og vil bli brukt av valgomaten for anbefale behandlingssteder til pasienter.
+            </p>
         </div>
 
     );
