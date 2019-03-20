@@ -75,7 +75,7 @@ class Forms extends Component {
                 -ikon ved siden av seg. Ved å holde musepekeren over dette ikonet, kan du få tilgang til mer informasjon om dette spørsmålet.
                 <br/>
                 <br/>
-                Informasjonen dere gir kan kun tilgjengelig for Nasjonal kompetansetjeneste for multippel sklerose og vil bli brukt av valgomaten for anbefale behandlingssteder til pasienter.
+                Informasjonen dere gir er kun tilgjengelig for Nasjonal kompetansetjeneste for multippel sklerose og vil bli brukt av valgomaten for å kunne gi en indikasjon på hvilke(t) behandlingssted(er) som ser ut til å passe best for den enkelte pasient.
             </p>
         </div>
 
