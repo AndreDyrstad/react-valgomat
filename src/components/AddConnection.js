@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import { Button } from 'react-bootstrap'
 
 class AddConnection extends Component{
 
@@ -63,13 +64,19 @@ class AddConnection extends Component{
     render(){
         return(
             <div className="admin_outer_container_tables">
+                <p>Her kan du koble sammen to spørsmål.
+                    Du bestemme hvilke spørsmål du vil koble sammen ved å velge spørsmålene i hver sin dropdown-meny.
+                    <br/>
+                    Deretter klikker du Legg til kobling.
+                    Din kobling kommer automatisk opp i listen under.
+                </p>
                 <select ref = {(input)=> this.connection1 = input}>
                     {this.state.isLoading ? null : this.showQuestions()}
                 </select>
                 <select ref = {(input)=> this.connection2 = input}>
                     {this.state.isLoading ? null : this.showQuestions()}
                 </select>
-                <button onClick={() => this.onSubmit()}>Legg til kobling</button>
+                <Button bsStyle="primary" onClick={() => this.onSubmit()}>Legg til kobling</Button>
                 {this.state.isLoading ? null : this.testTable()}
 
             </div>

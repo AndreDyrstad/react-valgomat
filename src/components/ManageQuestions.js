@@ -151,7 +151,7 @@ class ManageQuestions extends Component {
 
                 {/*Module for adding a new category*/}
                 <div className="add_category">
-                    <h4>Steg 2: Legg til en ny kategori (hvis det er nødvendig)</h4>
+                    <h4>Steg 2: Legg til en ny kategori (hvis den ikke eksisterer allerede)</h4>
                     <Form
                         onSubmit={this.addCategory}
                         render={({handleSubmit, form, submitting, pristine, values}) => (

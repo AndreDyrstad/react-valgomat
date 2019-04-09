@@ -23,7 +23,7 @@ class CenterInformation extends Component{
                 data={this.state.files.data}
                 columns={[
                     {
-                        Header: "Senter",
+                        Header: "Behandlingssted",
                         accessor: "center"
                     },
 
@@ -38,6 +38,12 @@ class CenterInformation extends Component{
                 ]}
                 defaultPageSize={10}
                 className="-striped -highlight"
+                previousText={'Tilbake'}
+                nextText={'Neste'}
+                pageText={'Side'}
+                ofText={'av'}
+                rowsText={'rader'}
+
             />
             <br />
         </div>
@@ -47,6 +53,22 @@ class CenterInformation extends Component{
         return(
             <div className="admin_outer_container_tables">
                 <h1>Oversikt over behandlingssteder</h1>
+                <p>
+                    I denne tabellen kan du finne informasjon om alle behandlingsstedene som har svart på kartleggingen.
+                    <br/>
+                    <strong>Behandlingssted</strong>-kolonnen inneholder alle behandlingsstedene som har svart på kartleggingen.
+                    <br/>
+                    <strong>Spørsmål</strong>-kolonnen inneholder alle spørsmål hvor behandlingsstedet har svart ja.
+                    <br/>
+                    <strong>Poengsum</strong>-kolonnen forteller hvilke poengsum et behandlingssted har på et bestemt spørsmål (ikke i bruk enda).
+                    <br/>
+                    Ved å klikke på kolonnenavnet øverst i tabellen, kan du sortere kolonnen i alfabetisk rekkefølge.
+                    Hvis du klikker på kolonnenavnet igjen, vil den sortere kolonnen i omvendt alfabetisk rekkefølge.
+                    Ved å holde shift-tasten og deretter klikke på to kolonnenavn,
+                    vil tabellen først sorteres alfabetisk etter den første kolonnen,
+                    og deretter etter den andre kolonnen.
+                    Nederst i tabellen, kan du velge hvor mange rader som skal vises på en gang og navigere deg gjennom tabellen ved hjelp av "Neste"- og "Tilbake"-knappene.
+                </p>
 
                 {this.state.isLoading ? null : this.testTable()}
             </div>
