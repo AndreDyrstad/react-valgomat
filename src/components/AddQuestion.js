@@ -2,13 +2,25 @@ import React, {Component} from 'react'
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
 import { Button } from 'react-bootstrap'
+import Response from "./smallComponents/Response";
 
 
 class NewQuestion extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            done: false
+        }
+
+}
+
     onSubmit = (values) => {
         //axios.post('http://modelling.hvl.no:8020/newQuestion', values)
         axios.post('http://modelling.hvl.no:8020/question/new', values)
+            .catch(err => console.log(err))
+            .then(res => this.setState({done:true}))
     };
 
     render(){
@@ -55,6 +67,7 @@ class NewQuestion extends Component {
                                 >
                                     Reset
                                 </Button>
+                                {this.state.done ? <Response type="success" header="Godkjent" message="Spørsmålet er nå lagt til"/> : null}
                             </div>
                         </form>
                     )}

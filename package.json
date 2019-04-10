@@ -8,6 +8,7 @@
     "bootstrap-arrow-buttons": "^1.0.4",
     "canvas": "^2.0.1",
     "final-form": "^4.10.0",
+    "fuse.js": "^3.4.4",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-beautiful-dnd": "^9.0.1",

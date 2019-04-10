@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {Form, Field} from 'react-final-form'
 import {Button} from 'react-bootstrap'
+import Response from './smallComponents/Response'
 
 class ManageQuestions extends Component {
 
@@ -16,7 +17,8 @@ class ManageQuestions extends Component {
         this.state = {
             isLoading: true,
             selectedQuestions: {},
-            categories: []
+            categories: [],
+            status: "waiting"
         }
     }
 
@@ -97,10 +99,10 @@ class ManageQuestions extends Component {
 
     submit = () => {
         let response = {"response": this.state.selectedQuestions, "entity": this.selectedEntity.value};
-
-        console.log(response);
-
         axios.post('http://modelling.hvl.no:8020/question/update', response)
+            .catch(err => this.setState({status:"fail"}))
+            .then(res => this.setState({status:"success"}))
+            .then(res => window.scrollTo(0,document.body.scrollHeight));
     };
 
     showAllQuestions = () => (
@@ -248,7 +250,10 @@ class ManageQuestions extends Component {
 
                 </div>
                 <div>
+                    {this.state.status === "success" ? <Response type="success" header="Godkjent" message="Listen er nå oppdatert"/> : null}
+                    {this.state.status === "fail" ? <Response type="error" header="Feil" message="Det er noe feil med våre servere. Prøv igjen senere"/> : null}
                     <Button bsStyle="primary" className="submit_questions" onClick={this.submit}>Oppdater spørsmålslisten</Button>
+
                 </div>
             </div>
 

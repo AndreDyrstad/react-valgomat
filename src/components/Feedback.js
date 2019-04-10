@@ -81,7 +81,7 @@ class Feedback extends Component{
             defaultSliderValues[this.state.files.questions[i].value] = 0;
             this.setState({sliders: defaultSliderValues})
         }
-    }
+    };
 
     handleOnChange = (obj, value) => {
         let a = this.state.sliders;
