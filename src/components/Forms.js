@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
 import {Button, Glyphicon} from 'react-bootstrap'
-import center from '../json/centers'
 import InformationBox from "./smallComponents/InformationBox";
 import Response from "./smallComponents/Response"
 
@@ -12,7 +11,9 @@ class Forms extends Component {
     constructor(props) {
         super(props);
         axios.get('http://modelling.hvl.no:8020/centers')
-            .then(res => this.setState({files: res.data, isLoading: false}));
+            .then(res => this.setState({files: res.data}))
+            .then(res => this.makePages())
+            .then(res => this.setState({isLoading: false}));
 
         this.state = {
             isHovering: false,
@@ -23,11 +24,12 @@ class Forms extends Component {
             isLoading: true,
             showForm: false
         };
-
-        for (let k in center.questions) this.state.display.push("none");
-        this.state.display[0] = "block"
-
     }
+
+    makePages = () => {
+        for (let k in this.state.files.questions) this.state.display.push("none");
+        this.state.display[0] = "block"
+    };
 
     changeDisplayedPage = (value) => {
 

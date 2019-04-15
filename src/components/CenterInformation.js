@@ -122,7 +122,7 @@ class CenterInformation extends Component{
                     Du kan også bruke søkefeltet under for å søke på behandlingssteder eller spørsmål.
                 </p>
 
-                <input type="text" onChange={this.filter} ref = {(input)=> this.searchItem = input} style={{width:500+"px", fontSize:20, marginBottom:20+"px"}} placeholder="Søk her"/>
+                <input type="text" onChange={this.filter} ref = {(input)=> this.searchItem = input} style={{width:500+"px", fontSize:20, marginBottom:20+"px"}} placeholder="Søk på spørsmål eller hebandlingssted her"/>
 
                 {this.state.isLoading || this.searchItem.value !== "" ? null : this.testTable()}
                 {this.state.isLoading || this.searchItem.value === "" ? null : this.testTable2()}
