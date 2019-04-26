@@ -53,8 +53,8 @@ class Feedback extends Component{
 
         this.setState({submitted : true});
 
-        axios.post('http://modelling.hvl.no:8020/feedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
-        //axios.post('http://modelling.hvl.no:8020/sendFeedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
+        //axios.post('http://modelling.hvl.no:8020/feedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
+        axios.post('http://localhost:5000/feedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
 
 
 
@@ -62,10 +62,10 @@ class Feedback extends Component{
 
     submitPatientId = () => {
         if(this.patientId.value.length === 10) {
-            axios.post('http://modelling.hvl.no:8020/question/feedback', {'patient_id': this.patientId.value})
+            //axios.post('http://modelling.hvl.no:8020/question/feedback', {'patient_id': this.patientId.value})
+            axios.post('http://localhost:5000/question/feedback', {'patient_id': this.patientId.value})
                 .then(res => this.setState({files: res.data}))
                 .then(res => this.setDefaultValues())
-            //axios.post('http://modelling.hvl.no:8020/feedbackQuestions', {'patient_id': this.patientId.value}).then(res => this.setState({files: res.data}));
 
         }else{
             this.setState({files: undefined})
@@ -108,7 +108,7 @@ class Feedback extends Component{
                         className="slider"
                         value={this.state.sliders[this.state.files.questions[index].value]}
                         orientation="horizontal"
-                        max={5}
+                        max={10}
                         onChange={(e) => this.handleOnChange(this.state.files.questions[index].value, e)}
                     />
                     <div className='sliderValue'>{this.state.sliders[this.state.files.questions[index].value]}</div>
