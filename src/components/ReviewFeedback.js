@@ -11,7 +11,7 @@ class ReviewFeedback extends Component{
     constructor(props){
         super(props);
         //axios.get('http://modelling.hvl.no:8020/feedback').then(res => this.setState({files:res.data, isLoading:false}));
-        axios.get('http://localhost:5000/feedback')
+        axios.get('http://modelling.hvl.no:8020/feedback')
             .then(res => this.setState({files:res.data}))
             .then(res => this.filterQuestions())
             .then(res => this.setState({isLoading:false}));
@@ -22,7 +22,7 @@ class ReviewFeedback extends Component{
     }
 
     onSubmit = () => {
-        axios.put('http://localhost:5000/feedback', {"feedback":[this.center.value, this.question.value, this.score.value]})
+        axios.put('http://modelling.hvl.no:8020/feedback', {"feedback":[this.center.value, this.question.value, this.score.value]})
     };
 
     testTable = () => (

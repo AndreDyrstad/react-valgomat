@@ -17,7 +17,6 @@ class NewQuestion extends Component {
 }
 
     onSubmit = (values) => {
-        //axios.post('http://modelling.hvl.no:8020/newQuestion', values)
         axios.post('http://modelling.hvl.no:8020/question/new', values)
             .catch(err => console.log(err))
             .then(res => this.setState({done:true}))
