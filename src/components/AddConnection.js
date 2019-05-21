@@ -3,14 +3,14 @@ import axios from 'axios'
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import { Button } from 'react-bootstrap'
-import {getHvlApi} from "../global";
+import {getApiUri} from "../global";
 
 class AddConnection extends Component{
 
     constructor(props){
         super(props);
 
-        axios.post(getHvlApi() +  + '/question/all',{"entity":"patient"})
+        axios.post(getApiUri() +  + '/question/all',{"entity":"patient"})
             .then(res => this.setState({files: res.data}))
             .then(res => axios.get('http://modelling.hvl.no:8020/connections'))
             .then(res => this.setState({connections: res.data,isLoading:false}));
@@ -31,7 +31,7 @@ class AddConnection extends Component{
     );
 
     onSubmit = () => {
-        axios.post(getHvlApi() + '/connections', {"connection":[this.connection1.value, this.connection2.value]})
+        axios.post(getApiUri() + '/connections', {"connection":[this.connection1.value, this.connection2.value]})
             .then(res => axios.get('http://modelling.hvl.no:8020/connections'))
             .then(res => this.setState({connections:res.data}))
     };

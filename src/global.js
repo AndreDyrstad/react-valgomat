@@ -1,7 +1,7 @@
-export function getLocalApi() {
+/*export function getLocalApi() {
     return "localhost:5000"
-}
+}*/
 
-export function getHvlApi() {
+export function getApiUri() {
     return "http://modelling.hvl.no:8020"
 }

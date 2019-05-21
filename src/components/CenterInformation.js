@@ -3,14 +3,14 @@ import axios from 'axios'
 import ReactTable from 'react-table'
 import "react-table/react-table.css";
 import Fuse from 'fuse.js'
-import {getHvlApi} from "../global";
+import {getApiUri} from "../global";
 
 class CenterInformation extends Component{
 
     constructor(prop){
         super(prop);
 
-        axios.get(getHvlApi() + '/centerData')
+        axios.get(getApiUri() + '/centerData')
             .then(res => this.setState({files: res.data, isLoading: false}));
 
         this.state = {

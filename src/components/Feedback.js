@@ -3,7 +3,7 @@ import axios from "axios/index";
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'
 import { Alert, Button } from 'react-bootstrap'
-import {getHvlApi} from "../global";
+import {getApiUri} from "../global";
 
 class Feedback extends Component{
 
@@ -54,7 +54,7 @@ class Feedback extends Component{
 
         this.setState({submitted : true});
 
-        axios.post(getHvlApi() + '/feedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
+        axios.post(getApiUri() + '/feedback', sliders).then(res => this.setState({hasResponse: true, response: res.data}))
 
 
 
@@ -62,7 +62,7 @@ class Feedback extends Component{
 
     submitPatientId = () => {
         if(this.patientId.value.length === 20) {
-            axios.post(getHvlApi() + '/question/feedback', {'patient_id': this.patientId.value})
+            axios.post(getApiUri() + '/question/feedback', {'patient_id': this.patientId.value})
                 .then(res => this.setState({files: res.data}))
                 .then(res => this.setDefaultValues())
 

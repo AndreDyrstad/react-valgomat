@@ -9,7 +9,7 @@ import {Field} from 'react-final-form'
 import InformationBox from "./smallComponents/InformationBox";
 import Response from "./smallComponents/Response"
 
-import {getHvlApi, getLocalApi} from '../global.js';
+import {getApiUri, getLocalApi} from '../global.js';
 
 class PatientSliders extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class PatientSliders extends Component {
         //modelling.hvl.no:8020
         let a = {};
 
-        axios.get(getHvlApi() + '/patients')
+        axios.get(getApiUri() + '/patients')
             .then(res => this.setState({files: res.data}))
             .then(res => this.initSlidersAndPages(a));
 
@@ -72,7 +72,7 @@ class PatientSliders extends Component {
         this.state.sliders[Object.keys(values)[0]] = values[Object.keys(values)[0]];
         console.log(this.state.sliders);
 
-        axios.post(getHvlApi() + '/patients', this.state.sliders).then(res => this.setState({
+        axios.post(getApiUri() + '/patients', this.state.sliders).then(res => this.setState({
             hasResponse: true,
             response: res.data
         }))

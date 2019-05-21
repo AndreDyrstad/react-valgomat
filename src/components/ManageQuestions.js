@@ -3,7 +3,7 @@ import axios from 'axios'
 import {Form, Field} from 'react-final-form'
 import {Button} from 'react-bootstrap'
 import Response from './smallComponents/Response'
-import {getHvlApi} from "../global";
+import {getApiUri} from "../global";
 
 class ManageQuestions extends Component {
 
@@ -11,7 +11,7 @@ class ManageQuestions extends Component {
     constructor(props) {
         super(props);
 
-        axios.post(getHvlApi() + '/question/all', {"entity": "patient"})
+        axios.post(getApiUri() + '/question/all', {"entity": "patient"})
             .then(res => this.setState({files: res.data, isLoading: false}))
             .then(res => this.readConfigFile());
 
@@ -24,7 +24,7 @@ class ManageQuestions extends Component {
     }
 
     getQuestions = () => {
-        axios.post(getHvlApi() + '/question/all', {"entity": this.selectedEntity.value})
+        axios.post(getApiUri() + '/question/all', {"entity": this.selectedEntity.value})
             .then(res => this.setState({files: res.data, isLoading: true, selectedQuestions: {}}))
             .then(res => this.readConfigFile())
             .then(res => this.setState({isLoading: false}))
@@ -100,7 +100,7 @@ class ManageQuestions extends Component {
 
     submit = () => {
         let response = {"response": this.state.selectedQuestions, "entity": this.selectedEntity.value};
-        axios.post(getHvlApi() + '/question/update', response)
+        axios.post(getApiUri() + '/question/update', response)
             .catch(err => this.setState({status:"fail"}))
             .then(res => this.setState({status:"success"}))
             .then(res => window.scrollTo(0,document.body.scrollHeight));

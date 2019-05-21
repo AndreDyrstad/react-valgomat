@@ -4,14 +4,14 @@ import ReactTable from "react-table";
 import { Button } from 'react-bootstrap'
 import "react-table/react-table.css";
 import Fuse from 'fuse.js'
-import {getHvlApi} from "../global";
+import {getApiUri} from "../global";
 
 class ReviewFeedback extends Component{
 
 
     constructor(props){
         super(props);
-        axios.get(getHvlApi() + '/feedback')
+        axios.get(getApiUri() + '/feedback')
             .then(res => this.setState({files:res.data}))
             .then(res => this.filterQuestions())
             .then(res => this.setState({isLoading:false}));
@@ -22,7 +22,7 @@ class ReviewFeedback extends Component{
     }
 
     onSubmit = () => {
-        axios.put(getHvlApi() + '/feedback', {"feedback":[this.center.value, this.question.value, this.score.value]})
+        axios.put(getApiUri() + '/feedback', {"feedback":[this.center.value, this.question.value, this.score.value]})
     };
 
     testTable = () => (
