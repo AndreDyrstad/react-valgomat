@@ -4,13 +4,13 @@ import axios from "axios/index";
 import {Button, Glyphicon} from 'react-bootstrap'
 import InformationBox from "./smallComponents/InformationBox";
 import Response from "./smallComponents/Response"
-
+import {getHvlApi} from "../global";
 
 class Forms extends Component {
 
     constructor(props) {
         super(props);
-        axios.get('http://modelling.hvl.no:8020/centers')
+        axios.get(getHvlApi() + '/centers')
             .then(res => this.setState({files: res.data}))
             .then(res => this.makePages())
             .then(res => this.setState({isLoading: false}));
@@ -53,8 +53,7 @@ class Forms extends Component {
     };
 
     onSubmit = async values => {
-        axios.post('http://modelling.hvl.no:8020/centers', values)
-        //axios.post('http://modelling.hvl.no:8020/centers', values)
+        axios.post(getHvlApi() + '/centers', values)
             .then(res => this.setState({submitted: true, error: false, showForm: true}))
             .catch(err => this.setState({submitted: true, error: true}))
 

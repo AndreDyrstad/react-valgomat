@@ -4,14 +4,14 @@ import ReactTable from "react-table";
 import { Button } from 'react-bootstrap'
 import "react-table/react-table.css";
 import Fuse from 'fuse.js'
+import {getHvlApi} from "../global";
 
 class ReviewFeedback extends Component{
 
 
     constructor(props){
         super(props);
-        //axios.get('http://modelling.hvl.no:8020/feedback').then(res => this.setState({files:res.data, isLoading:false}));
-        axios.get('http://modelling.hvl.no:8020/feedback')
+        axios.get(getHvlApi() + '/feedback')
             .then(res => this.setState({files:res.data}))
             .then(res => this.filterQuestions())
             .then(res => this.setState({isLoading:false}));
@@ -22,7 +22,7 @@ class ReviewFeedback extends Component{
     }
 
     onSubmit = () => {
-        axios.put('http://modelling.hvl.no:8020/feedback', {"feedback":[this.center.value, this.question.value, this.score.value]})
+        axios.put(getHvlApi() + '/feedback', {"feedback":[this.center.value, this.question.value, this.score.value]})
     };
 
     testTable = () => (

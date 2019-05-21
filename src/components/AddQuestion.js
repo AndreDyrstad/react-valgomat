@@ -3,6 +3,7 @@ import {Form, Field} from 'react-final-form'
 import axios from "axios/index";
 import { Button } from 'react-bootstrap'
 import Response from "./smallComponents/Response";
+import {getHvlApi} from "../global";
 
 
 class NewQuestion extends Component {
@@ -17,7 +18,7 @@ class NewQuestion extends Component {
 }
 
     onSubmit = (values) => {
-        axios.post('http://modelling.hvl.no:8020/question/new', values)
+        axios.post(getHvlApi() + '/question/new', values)
             .catch(err => console.log(err))
             .then(res => this.setState({done:true}))
     };
